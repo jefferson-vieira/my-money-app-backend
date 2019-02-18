@@ -1,0 +1,82 @@
+buildscript {
+	ext {
+		springBootVersion = "2.0.5.RELEASE"
+	}
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	}
+}
+
+apply plugin: "java"
+apply plugin: "org.springframework.boot"
+apply plugin: "io.spring.dependency-management"
+apply plugin: "checkstyle"
+apply plugin: "pmd"
+
+group = 'com.my-money-app'
+version = "0.0.1-SNAPSHOT"
+sourceCompatibility = 8
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	compile("org.springframework.boot:spring-boot-starter-data-jpa")
+	compile("org.springframework.boot:spring-boot-starter-web")
+	compile("org.springframework.boot:spring-boot-starter-security")
+
+	compile("org.springframework.boot:spring-boot-devtools")
+
+	compile("org.springframework.cloud:spring-cloud-starter-sleuth")
+	compile("org.springframework.cloud:spring-cloud-starter-openfeign")
+
+	compile("org.mapstruct:mapstruct-jdk8:1.2.0.Final")
+	compile("org.mapstruct:mapstruct-processor:1.2.0.Final")
+
+	compile "io.jsonwebtoken:jjwt:0.7.0"
+	compile("org.springframework.security.oauth:spring-security-oauth2")
+	compile("org.springframework.cloud:spring-cloud-starter-oauth2")
+
+	compile("net.kaczmarzyk:specification-arg-resolver:1.1.1")
+
+	runtime("org.postgresql:postgresql")
+
+	compile("org.projectlombok:lombok:1.18.2")
+
+	compile("commons-io:commons-io:2.6")
+
+	compile("io.springfox:springfox-swagger2:2.8.0")
+	compile("io.springfox:springfox-swagger-ui:2.8.0")
+
+	testCompile("com.h2database:h2")
+	testCompile("com.github.tomakehurst:wiremock:2.18.0")
+	testCompile("io.rest-assured:rest-assured:3.1.0")
+	testCompile("br.com.leonardoferreira:JBacon:1.1.2")
+	testCompile("com.github.javafaker:javafaker:0.13")
+	testCompile("com.icegreen:greenmail:1.5.7")
+	testCompile("org.springframework.boot:spring-boot-starter-test")
+}
+
+dependencyManagement {
+	imports {
+		mavenBom "org.springframework.cloud:spring-cloud-dependencies:Finchley.RELEASE"
+	}
+}
+
+checkstyle {
+	toolVersion = "8.11"
+	configFile = new File(rootDir, "checkstyle.xml")
+}
+
+pmd {
+	toolVersion = "6.0.0"
+	ruleSets = [
+			"java-unusedcode",
+			"java-basic",
+			"java-design"
+	]
+}
