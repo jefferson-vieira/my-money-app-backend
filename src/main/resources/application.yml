@@ -1,6 +1,17 @@
 server:
   port: 1800
 
+cors-path: /**
+
+ssh-key:
+  public: classpath:ssh_key/spring-rest-security.pub
+  private: classpath:ssh_key/spring-rest-security
+
+logging:
+  level:
+    org.springframework.web: INFO
+  file: ./logs/application.log
+
 spring:
   application:
     name: my-money-app
