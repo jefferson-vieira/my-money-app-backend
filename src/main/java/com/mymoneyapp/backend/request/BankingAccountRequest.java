@@ -8,15 +8,15 @@ import javax.validation.constraints.*;
 public class BankingAccountRequest {
 
     @NotEmpty(message = "O número da conta bancária precisa ser informado")//Não deixa o usuario digitar a conta do banco nulo
-    @Digits(message = "Há caracteres inválidos no número da conta bancária")//Só deixa ele digitar numeros
+    @Digits(integer=0, fraction=0, message = "Há caracteres inválidos no número da conta bancária")//Só deixa ele digitar numeros
     private String accountNumber;
 
     @NotEmpty(message = "O digito da conta da conta bancária precisa ser informado")
-    @Digits(message = "Há caracteres inválidos no digito da conta bancária")
+    @Digits(integer=0, fraction=0, message = "Há caracteres inválidos no digito da conta bancária")
     private String accountDigit;
 
     @NotEmpty(message = "O digito da agência da agência bancária precisa ser informado")
-    @Digits(message = "Há caracteres inválidos na agência da conta bancária")
+    @Digits(integer=0, fraction=0, message = "Há caracteres inválidos na agência da conta bancária")
     private String accountAgency;
 
     @NotEmpty(message = "O nome da instituição bancária precisa ser informado")
