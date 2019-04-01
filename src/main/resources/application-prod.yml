@@ -1,0 +1,23 @@
+cors-path: /**
+
+ssh-key:
+  public: classpath:ssh_key/spring-rest-security.pub
+  private: classpath:ssh_key/spring-rest-security
+
+spring:
+  application:
+    name: my-money-app
+  datasource:
+    username: ${DATABASE_USERNAME}
+    password: ${DATABASE_PASSWORD}
+    url: ${DATABASE_URL}
+  jpa:
+    open-in-view: false
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        jdbc:
+          lob:
+            non_contextual_creation: true
