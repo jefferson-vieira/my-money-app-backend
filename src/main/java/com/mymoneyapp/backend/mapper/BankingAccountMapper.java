@@ -3,7 +3,7 @@ package com.mymoneyapp.backend.mapper;
 import com.mymoneyapp.backend.domain.BankingAccount;
 import com.mymoneyapp.backend.request.BankingAccountRequest;
 import com.mymoneyapp.backend.response.BankingAccountResponse;
-
+import org.mapstruct.InheritConfiguration;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
@@ -12,13 +12,21 @@ import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface BankingAccountMapper {
-    //Coisas que você não ira seram enviadas pelo usuario nem para ele
+
     @Mappings({
             @Mapping(target = "id", ignore = true),
             @Mapping(target = "createdAt", ignore = true),
             @Mapping(target = "enabled", ignore = true),
+            @Mapping(target = "user.id", source = "userId"),
     })
     BankingAccount requestToBankingAccount(BankingAccountRequest bankingAccountRequest);
 
-    List<BankingAccountResponse> bankingAccountToResponse(Iterable<BankingAccount> bankingAccount);
+    @Mappings({
+            @Mapping(target = "createdAt", dateFormat = "dd/MM/yyyy HH:mm"),
+    })
+    BankingAccountResponse bankingAccountToResponse(BankingAccount bankingAccount);
+
+    @InheritConfiguration
+    List<BankingAccountResponse> bankingAccountsToResponses(Iterable<BankingAccount> bankingAccount);
+
 }

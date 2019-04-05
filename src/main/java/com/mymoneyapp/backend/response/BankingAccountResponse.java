@@ -5,12 +5,16 @@ import lombok.Data;
 @Data
 public class BankingAccountResponse {
 
-    //O que eu retorno para front fica nessa class
-    private String accountNumber;
+    private Long id;
 
-    private String accountDigit;
+    private String bankName;
 
-    private String accountAgency;
+    private String agency;
 
-    private String bankingInstitutionName;
+    private String number;
+
+    private String digit;
+
+    private String createdAt;
+
 }

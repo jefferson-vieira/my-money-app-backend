@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Builder
 @Where(clause = "flg_active <> false")
-@SQLDelete(sql = "update bankingAccount set flg_active = false where id = ?")
+@SQLDelete(sql = "update banking_account set flg_active = false where id = ?")
 public class BankingAccount {
 
     @Id
@@ -25,16 +25,16 @@ public class BankingAccount {
     private Long id;
 
     @Column(nullable = false)
-    private String bankingInstitutionName;
+    private String bankName;
+
+    @Column(nullable = false)
+    private String agency;
 
     @Column(nullable = false, unique = true)
-    private String accountNumber;
+    private String number;
 
     @Column(nullable = false)
-    private String accountAgency;
-
-    @Column(nullable = false)
-    private String accountDigit;
+    private String digit;
 
     @CreationTimestamp
     private LocalDateTime createdAt;
@@ -42,4 +42,8 @@ public class BankingAccount {
     @Builder.Default
     @Column(name = "flg_Active")
     private boolean enabled = true;
+
+    @ManyToOne(optional = false)
+    private User user;
+
 }

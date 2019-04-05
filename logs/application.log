@@ -776,3 +776,701 @@
 2019-04-05 09:21:45.200  INFO [my-money-app,4768696e03b12ac9,4768696e03b12ac9,false] 9460 --- [http-nio-1800-exec-3] c.m.b.service.BankingAccountService      : C=BankingAccountService, M=save, T=BankingAccountRequest BankingAccountRequest(accountNumber=565559, accountDigit=1, accountAgency=1114, bankingInstitutionName=NuBank)
 2019-04-05 09:21:45.202  INFO [my-money-app,4768696e03b12ac9,4768696e03b12ac9,false] 9460 --- [http-nio-1800-exec-3] c.m.b.service.BankingAccountService      : C=BankingAccountService, M=persist, T=BankingAccount BankingAccount(id=null, bankingInstitutionName=NuBank, accountNumber=565559, accountAgency=1114, accountDigit=1, createdAt=null, enabled=true)
 2019-04-05 09:22:14.113  INFO [my-money-app,ccc18c0d18f626dd,ccc18c0d18f626dd,false] 9460 --- [http-nio-1800-exec-4] c.m.b.service.BankingAccountService      : C=BankingAccountService, M=findAll
+2019-04-05 14:28:40.925  INFO [my-money-app,,,] 20880 --- [restartedMain] com.mymoneyapp.backend.Application       : No active profile set, falling back to default profiles: default
+2019-04-05 14:28:40.940  INFO [my-money-app,,,] 20880 --- [restartedMain] ConfigServletWebServerApplicationContext : Refreshing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@7e6c90cf: startup date [Fri Apr 05 14:28:40 BRT 2019]; parent: org.springframework.context.annotation.AnnotationConfigApplicationContext@65b05825
+2019-04-05 14:28:43.155  INFO [my-money-app,,,] 20880 --- [restartedMain] o.s.b.f.s.DefaultListableBeanFactory     : Overriding bean definition for bean 'dataSource' with a different definition: replacing [Root bean: class [null]; scope=refresh; abstract=false; lazyInit=false; autowireMode=3; dependencyCheck=0; autowireCandidate=false; primary=false; factoryBeanName=org.springframework.boot.autoconfigure.jdbc.DataSourceConfiguration$Hikari; factoryMethodName=dataSource; initMethodName=null; destroyMethodName=(inferred); defined in class path resource [org/springframework/boot/autoconfigure/jdbc/DataSourceConfiguration$Hikari.class]] with [Root bean: class [org.springframework.aop.scope.ScopedProxyFactoryBean]; scope=; abstract=false; lazyInit=false; autowireMode=0; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=null; factoryMethodName=null; initMethodName=null; destroyMethodName=null; defined in BeanDefinition defined in class path resource [org/springframework/boot/autoconfigure/jdbc/DataSourceConfiguration$Hikari.class]]
+2019-04-05 14:28:43.784  INFO [my-money-app,,,] 20880 --- [restartedMain] o.s.cloud.context.scope.GenericScope     : BeanFactory id=7d3c2184-8efc-3e60-80e2-6ede7013c62f
+2019-04-05 14:28:43.852  INFO [my-money-app,,,] 20880 --- [restartedMain] f.a.AutowiredAnnotationBeanPostProcessor : JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2019-04-05 14:28:44.387  INFO [my-money-app,,,] 20880 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$9b401c22] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-04-05 14:28:44.501  INFO [my-money-app,,,] 20880 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.cloud.autoconfigure.ConfigurationPropertiesRebinderAutoConfiguration' of type [org.springframework.cloud.autoconfigure.ConfigurationPropertiesRebinderAutoConfiguration$$EnhancerBySpringCGLIB$$b75a1f1f] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-04-05 14:28:44.518  INFO [my-money-app,,,] 20880 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.cloud.sleuth.instrument.web.client.TraceWebClientAutoConfiguration$TraceOAuthConfiguration' of type [org.springframework.cloud.sleuth.instrument.web.client.TraceWebClientAutoConfiguration$TraceOAuthConfiguration$$EnhancerBySpringCGLIB$$e03cae81] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-04-05 14:28:45.547  INFO [my-money-app,,,] 20880 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 1800 (http)
+2019-04-05 14:28:45.591  INFO [my-money-app,,,] 20880 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-04-05 14:28:45.591  INFO [my-money-app,,,] 20880 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet Engine: Apache Tomcat/8.5.34
+2019-04-05 14:28:45.606  INFO [my-money-app,,,] 20880 --- [localhost-startStop-1] o.a.catalina.core.AprLifecycleListener   : The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [/usr/java/packages/lib/amd64:/usr/lib64:/lib64:/lib:/usr/lib]
+2019-04-05 14:28:45.833  INFO [my-money-app,,,] 20880 --- [localhost-startStop-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-04-05 14:28:45.833  INFO [my-money-app,,,] 20880 --- [localhost-startStop-1] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 4893 ms
+2019-04-05 14:28:46.679  INFO [my-money-app,,,] 20880 --- [localhost-startStop-1] o.s.aop.framework.CglibAopProxy          : Method [void com.zaxxer.hikari.HikariConfig.seal()] is package-visible across different ClassLoaders and cannot get proxied via CGLIB: Declare this method as public or protected if you need to support invocations through the proxy.
+2019-04-05 14:28:47.488  INFO [my-money-app,,,] 20880 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'characterEncodingFilter' to: [/*]
+2019-04-05 14:28:47.488  INFO [my-money-app,,,] 20880 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'webMvcMetricsFilter' to: [/*]
+2019-04-05 14:28:47.488  INFO [my-money-app,,,] 20880 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'tracingFilter' to: [/*]
+2019-04-05 14:28:47.488  INFO [my-money-app,,,] 20880 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'exceptionLoggingFilter' to: [/*]
+2019-04-05 14:28:47.489  INFO [my-money-app,,,] 20880 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2019-04-05 14:28:47.489  INFO [my-money-app,,,] 20880 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'httpPutFormContentFilter' to: [/*]
+2019-04-05 14:28:47.489  INFO [my-money-app,,,] 20880 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'requestContextFilter' to: [/*]
+2019-04-05 14:28:47.489  INFO [my-money-app,,,] 20880 --- [localhost-startStop-1] .s.DelegatingFilterProxyRegistrationBean : Mapping filter: 'springSecurityFilterChain' to: [/*]
+2019-04-05 14:28:47.490  INFO [my-money-app,,,] 20880 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'httpTraceFilter' to: [/*]
+2019-04-05 14:28:47.490  INFO [my-money-app,,,] 20880 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'corsConfig' to: [/*]
+2019-04-05 14:28:47.490  INFO [my-money-app,,,] 20880 --- [localhost-startStop-1] o.s.b.w.servlet.ServletRegistrationBean  : Servlet dispatcherServlet mapped to [/]
+2019-04-05 14:28:47.693  INFO [my-money-app,,,] 20880 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2019-04-05 14:28:47.978  INFO [my-money-app,,,] 20880 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2019-04-05 14:28:48.098  INFO [my-money-app,,,] 20880 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Building JPA container EntityManagerFactory for persistence unit 'default'
+2019-04-05 14:28:48.131  INFO [my-money-app,,,] 20880 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2019-04-05 14:28:48.268  INFO [my-money-app,,,] 20880 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate Core {5.2.17.Final}
+2019-04-05 14:28:48.274  INFO [my-money-app,,,] 20880 --- [restartedMain] org.hibernate.cfg.Environment            : HHH000206: hibernate.properties not found
+2019-04-05 14:28:48.317  INFO [my-money-app,,,] 20880 --- [restartedMain] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+2019-04-05 14:28:48.471  INFO [my-money-app,,,] 20880 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL95Dialect
+2019-04-05 14:28:48.624  INFO [my-money-app,,,] 20880 --- [restartedMain] o.h.e.j.e.i.LobCreatorBuilderImpl        : HHH000421: Disabling contextual LOB creation as hibernate.jdbc.lob.non_contextual_creation is true
+2019-04-05 14:28:48.625  INFO [my-money-app,,,] 20880 --- [restartedMain] org.hibernate.type.BasicTypeRegistry     : HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@7f5f95c4
+2019-04-05 14:28:49.512  WARN [my-money-app,,,] 20880 --- [restartedMain] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
+2019-04-05 14:28:49.512  WARN [my-money-app,,,] 20880 --- [restartedMain] o.h.engine.jdbc.spi.SqlExceptionHelper   : constraint "uk_l6mxxqp9dsnpttsybgx8vi3re" of relation "banking_account" does not exist, skipping
+2019-04-05 14:28:49.559  INFO [my-money-app,,,] 20880 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2019-04-05 14:28:51.446  INFO [my-money-app,,,] 20880 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/banking-accounts],methods=[GET]}" onto public java.util.List<com.mymoneyapp.backend.response.BankingAccountResponse> com.mymoneyapp.backend.controller.BankingAccountController.findAllByUser(com.mymoneyapp.backend.domain.User)
+2019-04-05 14:28:51.447  INFO [my-money-app,,,] 20880 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/banking-accounts],methods=[POST]}" onto public org.springframework.http.HttpEntity com.mymoneyapp.backend.controller.BankingAccountController.save(com.mymoneyapp.backend.request.BankingAccountRequest)
+2019-04-05 14:28:51.448  INFO [my-money-app,,,] 20880 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/register],methods=[POST]}" onto public org.springframework.http.HttpEntity com.mymoneyapp.backend.controller.OAuthController.save(com.mymoneyapp.backend.request.UserRequest)
+2019-04-05 14:28:51.451  INFO [my-money-app,,,] 20880 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/users],methods=[GET]}" onto public org.springframework.data.domain.Page<com.mymoneyapp.backend.response.UserResponse> com.mymoneyapp.backend.controller.UserController.findAll(com.mymoneyapp.backend.specification.UserSpecification,org.springframework.data.domain.Pageable)
+2019-04-05 14:28:51.452  INFO [my-money-app,,,] 20880 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/users/me],methods=[GET]}" onto public com.mymoneyapp.backend.domain.User com.mymoneyapp.backend.controller.UserController.principal(com.mymoneyapp.backend.domain.User)
+2019-04-05 14:28:51.455  INFO [my-money-app,,,] 20880 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/swagger-resources/configuration/ui]}" onto public org.springframework.http.ResponseEntity<springfox.documentation.swagger.web.UiConfiguration> springfox.documentation.swagger.web.ApiResourceController.uiConfiguration()
+2019-04-05 14:28:51.456  INFO [my-money-app,,,] 20880 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/swagger-resources]}" onto public org.springframework.http.ResponseEntity<java.util.List<springfox.documentation.swagger.web.SwaggerResource>> springfox.documentation.swagger.web.ApiResourceController.swaggerResources()
+2019-04-05 14:28:51.460  INFO [my-money-app,,,] 20880 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/swagger-resources/configuration/security]}" onto public org.springframework.http.ResponseEntity<springfox.documentation.swagger.web.SecurityConfiguration> springfox.documentation.swagger.web.ApiResourceController.securityConfiguration()
+2019-04-05 14:28:51.464  INFO [my-money-app,,,] 20880 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2019-04-05 14:28:51.466  INFO [my-money-app,,,] 20880 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2019-04-05 14:28:51.625  INFO [my-money-app,,,] 20880 --- [restartedMain] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 2 endpoint(s) beneath base path '/actuator'
+2019-04-05 14:28:51.640  INFO [my-money-app,,,] 20880 --- [restartedMain] s.b.a.e.w.s.WebMvcEndpointHandlerMapping : Mapped "{[/actuator/health],methods=[GET],produces=[application/vnd.spring-boot.actuator.v2+json || application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.web.servlet.AbstractWebMvcEndpointHandlerMapping$OperationHandler.handle(javax.servlet.http.HttpServletRequest,java.util.Map<java.lang.String, java.lang.String>)
+2019-04-05 14:28:51.641  INFO [my-money-app,,,] 20880 --- [restartedMain] s.b.a.e.w.s.WebMvcEndpointHandlerMapping : Mapped "{[/actuator/info],methods=[GET],produces=[application/vnd.spring-boot.actuator.v2+json || application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.web.servlet.AbstractWebMvcEndpointHandlerMapping$OperationHandler.handle(javax.servlet.http.HttpServletRequest,java.util.Map<java.lang.String, java.lang.String>)
+2019-04-05 14:28:51.642  INFO [my-money-app,,,] 20880 --- [restartedMain] s.b.a.e.w.s.WebMvcEndpointHandlerMapping : Mapped "{[/actuator],methods=[GET],produces=[application/vnd.spring-boot.actuator.v2+json || application/json]}" onto protected java.util.Map<java.lang.String, java.util.Map<java.lang.String, org.springframework.boot.actuate.endpoint.web.Link>> org.springframework.boot.actuate.endpoint.web.servlet.WebMvcEndpointHandlerMapping.links(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2019-04-05 14:28:52.492  INFO [my-money-app,,,] 20880 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: org.springframework.security.web.util.matcher.AnyRequestMatcher@1, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@64209bc7, org.springframework.security.web.context.SecurityContextPersistenceFilter@139d5647, org.springframework.security.web.header.HeaderWriterFilter@542f1e5b, org.springframework.web.filter.CorsFilter@6268768a, org.springframework.security.web.authentication.logout.LogoutFilter@f34ae48, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@2e6f484f, com.mymoneyapp.backend.config.filter.AuthenticationFilter@3c4d7c66, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@dc4c8d, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@40ed023e, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@1ede3012, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@1a356563, org.springframework.security.web.session.SessionManagementFilter@46ef28c8, org.springframework.security.web.access.ExceptionTranslationFilter@6dd1de3f, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@326d7635]
+2019-04-05 14:28:52.549  INFO [my-money-app,,,] 20880 --- [restartedMain] pertySourcedRequestMappingHandlerMapping : Mapped URL path [/v2/api-docs] onto method [public org.springframework.http.ResponseEntity<springfox.documentation.spring.web.json.Json> springfox.documentation.swagger2.web.Swagger2Controller.getDocumentation(java.lang.String,javax.servlet.http.HttpServletRequest)]
+2019-04-05 14:28:52.617  WARN [my-money-app,,,] 20880 --- [restartedMain] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
+2019-04-05 14:28:52.617  INFO [my-money-app,,,] 20880 --- [restartedMain] c.n.c.sources.URLConfigurationSource     : To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+2019-04-05 14:28:52.630  WARN [my-money-app,,,] 20880 --- [restartedMain] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
+2019-04-05 14:28:52.630  INFO [my-money-app,,,] 20880 --- [restartedMain] c.n.c.sources.URLConfigurationSource     : To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+2019-04-05 14:28:52.840  INFO [my-money-app,,,] 20880 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2019-04-05 14:28:52.975  INFO [my-money-app,,,] 20880 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerAdapter : Looking for @ControllerAdvice: org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@7e6c90cf: startup date [Fri Apr 05 14:28:40 BRT 2019]; parent: org.springframework.context.annotation.AnnotationConfigApplicationContext@65b05825
+2019-04-05 14:28:53.136  INFO [my-money-app,,,] 20880 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2019-04-05 14:28:53.137  INFO [my-money-app,,,] 20880 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2019-04-05 14:28:53.917  INFO [my-money-app,,,] 20880 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2019-04-05 14:28:54.398  INFO [my-money-app,,,] 20880 --- [restartedMain] o.s.aop.framework.CglibAopProxy          : Method [com.netflix.client.config.IClientConfig org.springframework.cloud.openfeign.ribbon.LoadBalancerFeignClient.getClientConfig(feign.Request$Options,java.lang.String)] is package-visible across different ClassLoaders and cannot get proxied via CGLIB: Declare this method as public or protected if you need to support invocations through the proxy.
+2019-04-05 14:28:54.638  INFO [my-money-app,,,] 20880 --- [restartedMain] o.s.j.e.a.AnnotationMBeanExporter        : Registering beans for JMX exposure on startup
+2019-04-05 14:28:54.641  INFO [my-money-app,,,] 20880 --- [restartedMain] o.s.j.e.a.AnnotationMBeanExporter        : Bean with name 'dataSource' has been autodetected for JMX exposure
+2019-04-05 14:28:54.653  INFO [my-money-app,,,] 20880 --- [restartedMain] o.s.j.e.a.AnnotationMBeanExporter        : Bean with name 'environmentManager' has been autodetected for JMX exposure
+2019-04-05 14:28:54.654  INFO [my-money-app,,,] 20880 --- [restartedMain] o.s.j.e.a.AnnotationMBeanExporter        : Bean with name 'refreshScope' has been autodetected for JMX exposure
+2019-04-05 14:28:54.655  INFO [my-money-app,,,] 20880 --- [restartedMain] o.s.j.e.a.AnnotationMBeanExporter        : Bean with name 'configurationPropertiesRebinder' has been autodetected for JMX exposure
+2019-04-05 14:28:54.667  INFO [my-money-app,,,] 20880 --- [restartedMain] o.s.j.e.a.AnnotationMBeanExporter        : Located managed bean 'environmentManager': registering with JMX server as MBean [org.springframework.cloud.context.environment:name=environmentManager,type=EnvironmentManager]
+2019-04-05 14:28:54.682  INFO [my-money-app,,,] 20880 --- [restartedMain] o.s.j.e.a.AnnotationMBeanExporter        : Located managed bean 'refreshScope': registering with JMX server as MBean [org.springframework.cloud.context.scope.refresh:name=refreshScope,type=RefreshScope]
+2019-04-05 14:28:54.692  INFO [my-money-app,,,] 20880 --- [restartedMain] o.s.j.e.a.AnnotationMBeanExporter        : Located managed bean 'configurationPropertiesRebinder': registering with JMX server as MBean [org.springframework.cloud.context.properties:name=configurationPropertiesRebinder,context=7e6c90cf,type=ConfigurationPropertiesRebinder]
+2019-04-05 14:28:54.702  INFO [my-money-app,,,] 20880 --- [restartedMain] o.s.j.e.a.AnnotationMBeanExporter        : Located MBean 'dataSource': registering with JMX server as MBean [com.zaxxer.hikari:name=dataSource,type=HikariDataSource]
+2019-04-05 14:28:54.724  INFO [my-money-app,,,] 20880 --- [restartedMain] o.s.c.support.DefaultLifecycleProcessor  : Starting beans in phase 2147483647
+2019-04-05 14:28:54.724  INFO [my-money-app,,,] 20880 --- [restartedMain] d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
+2019-04-05 14:28:54.758  INFO [my-money-app,,,] 20880 --- [restartedMain] d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
+2019-04-05 14:28:54.791  INFO [my-money-app,,,] 20880 --- [restartedMain] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
+2019-04-05 14:28:55.028  INFO [my-money-app,,,] 20880 --- [restartedMain] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: saveUsingPOST_1
+2019-04-05 14:28:55.187  INFO [my-money-app,,,] 20880 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 1800 (http) with context path ''
+2019-04-05 14:28:55.190  INFO [my-money-app,,,] 20880 --- [restartedMain] com.mymoneyapp.backend.Application       : Started Application in 15.656 seconds (JVM running for 16.217)
+2019-04-05 14:29:21.620  INFO [my-money-app,,,] 20880 --- [http-nio-1800-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring FrameworkServlet 'dispatcherServlet'
+2019-04-05 14:29:21.624  INFO [my-money-app,,,] 20880 --- [http-nio-1800-exec-1] o.s.web.servlet.DispatcherServlet        : FrameworkServlet 'dispatcherServlet': initialization started
+2019-04-05 14:29:21.657  INFO [my-money-app,,,] 20880 --- [http-nio-1800-exec-1] o.s.web.servlet.DispatcherServlet        : FrameworkServlet 'dispatcherServlet': initialization completed in 32 ms
+2019-04-05 14:29:21.745  INFO [my-money-app,ea900d14c3bf543a,ea900d14c3bf543a,false] 20880 --- [http-nio-1800-exec-1] c.m.backend.service.OAuthUserService     : C=OAuthUserService, M=loadUserByUsername, T=User jefferson.vieira@invillia.com
+2019-04-05 14:29:21.745  INFO [my-money-app,ea900d14c3bf543a,ea900d14c3bf543a,false] 20880 --- [http-nio-1800-exec-1] c.m.backend.service.UserService          : C=UserService, M=retrieveUserByEmail, T=Email jefferson.vieira@invillia.com
+2019-04-05 14:29:21.791  INFO [my-money-app,ea900d14c3bf543a,ea900d14c3bf543a,false] 20880 --- [http-nio-1800-exec-1] o.h.h.i.QueryTranslatorFactoryInitiator  : HHH000397: Using ASTQueryTranslatorFactory
+2019-04-05 14:29:22.435  INFO [my-money-app,ea900d14c3bf543a,ea900d14c3bf543a,false] 20880 --- [http-nio-1800-exec-1] c.m.b.c.handler.LoginSuccessHandler      : C=LoginSuccessHandler, M=onAuthenticationSuccess, T=User jefferson.vieira@invillia.com
+2019-04-05 14:29:50.623  INFO [my-money-app,ad494ffe252b5da5,ad494ffe252b5da5,false] 20880 --- [http-nio-1800-exec-2] c.m.backend.service.UserService          : C=UserService, M=findAll, T=UserSpecification UserSpecification[Conjunction [innerSpecs=[null]]]; Pageable Page request [number: 0, size 10, sort: name: ASC]
+2019-04-05 14:30:33.190  INFO [my-money-app,4c50d305acefe1c6,4c50d305acefe1c6,false] 20880 --- [http-nio-1800-exec-3] c.m.backend.service.UserService          : C=UserService, M=findAll, T=UserSpecification UserSpecification[Conjunction [innerSpecs=[null]]]; Pageable Page request [number: 0, size 10, sort: name: ASC]
+2019-04-05 14:30:41.277  INFO [my-money-app,c09337c14f38a9eb,c09337c14f38a9eb,false] 20880 --- [http-nio-1800-exec-4] c.m.b.service.BankingAccountService      : C=BankingAccountService, M=findAll, T=User User(id=12, name=ADM Jefferson, email=jefferson.vieira@invillia.com, username=jefferson.vieira@invillia.com, password=null, createdAt=2019-03-29T15:07:54.854, enabled=true)
+2019-04-05 14:30:45.497  INFO [my-money-app,f8979ca901d7e918,f8979ca901d7e918,false] 20880 --- [http-nio-1800-exec-5] c.m.b.service.BankingAccountService      : C=BankingAccountService, M=findAll, T=User User(id=12, name=ADM Jefferson, email=jefferson.vieira@invillia.com, username=jefferson.vieira@invillia.com, password=null, createdAt=2019-03-29T15:07:54.854, enabled=true)
+2019-04-05 14:37:19.851  INFO [my-money-app,,,] 20880 --- [Thread-15] ConfigServletWebServerApplicationContext : Closing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@7e6c90cf: startup date [Fri Apr 05 14:28:40 BRT 2019]; parent: org.springframework.context.annotation.AnnotationConfigApplicationContext@65b05825
+2019-04-05 14:37:19.858  INFO [my-money-app,,,] 20880 --- [Thread-15] o.s.c.support.DefaultLifecycleProcessor  : Stopping beans in phase 2147483647
+2019-04-05 14:37:19.864  INFO [my-money-app,,,] 20880 --- [Thread-15] o.s.j.e.a.AnnotationMBeanExporter        : Unregistering JMX-exposed beans on shutdown
+2019-04-05 14:37:19.865  INFO [my-money-app,,,] 20880 --- [Thread-15] o.s.j.e.a.AnnotationMBeanExporter        : Unregistering JMX-exposed beans
+2019-04-05 14:37:19.876  INFO [my-money-app,,,] 20880 --- [Thread-15] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2019-04-05 14:37:19.889  INFO [my-money-app,,,] 20880 --- [Thread-15] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2019-04-05 14:37:19.962  INFO [my-money-app,,,] 20880 --- [Thread-15] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2019-04-05 14:37:56.647  INFO [my-money-app,,,] 22739 --- [restartedMain] com.mymoneyapp.backend.Application       : No active profile set, falling back to default profiles: default
+2019-04-05 14:37:56.660  INFO [my-money-app,,,] 22739 --- [restartedMain] ConfigServletWebServerApplicationContext : Refreshing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@1ee6fb0: startup date [Fri Apr 05 14:37:56 BRT 2019]; parent: org.springframework.context.annotation.AnnotationConfigApplicationContext@2bc9af24
+2019-04-05 14:37:58.428  INFO [my-money-app,,,] 22739 --- [restartedMain] o.s.b.f.s.DefaultListableBeanFactory     : Overriding bean definition for bean 'dataSource' with a different definition: replacing [Root bean: class [null]; scope=refresh; abstract=false; lazyInit=false; autowireMode=3; dependencyCheck=0; autowireCandidate=false; primary=false; factoryBeanName=org.springframework.boot.autoconfigure.jdbc.DataSourceConfiguration$Hikari; factoryMethodName=dataSource; initMethodName=null; destroyMethodName=(inferred); defined in class path resource [org/springframework/boot/autoconfigure/jdbc/DataSourceConfiguration$Hikari.class]] with [Root bean: class [org.springframework.aop.scope.ScopedProxyFactoryBean]; scope=; abstract=false; lazyInit=false; autowireMode=0; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=null; factoryMethodName=null; initMethodName=null; destroyMethodName=null; defined in BeanDefinition defined in class path resource [org/springframework/boot/autoconfigure/jdbc/DataSourceConfiguration$Hikari.class]]
+2019-04-05 14:37:58.760  INFO [my-money-app,,,] 22739 --- [restartedMain] o.s.cloud.context.scope.GenericScope     : BeanFactory id=7d3c2184-8efc-3e60-80e2-6ede7013c62f
+2019-04-05 14:37:58.798  INFO [my-money-app,,,] 22739 --- [restartedMain] f.a.AutowiredAnnotationBeanPostProcessor : JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2019-04-05 14:37:59.200  INFO [my-money-app,,,] 22739 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$c52f527b] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-04-05 14:37:59.278  INFO [my-money-app,,,] 22739 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.cloud.autoconfigure.ConfigurationPropertiesRebinderAutoConfiguration' of type [org.springframework.cloud.autoconfigure.ConfigurationPropertiesRebinderAutoConfiguration$$EnhancerBySpringCGLIB$$e1495578] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-04-05 14:37:59.295  INFO [my-money-app,,,] 22739 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.cloud.sleuth.instrument.web.client.TraceWebClientAutoConfiguration$TraceOAuthConfiguration' of type [org.springframework.cloud.sleuth.instrument.web.client.TraceWebClientAutoConfiguration$TraceOAuthConfiguration$$EnhancerBySpringCGLIB$$a2be4da] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-04-05 14:38:00.054  INFO [my-money-app,,,] 22739 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 1800 (http)
+2019-04-05 14:38:00.081  INFO [my-money-app,,,] 22739 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-04-05 14:38:00.082  INFO [my-money-app,,,] 22739 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet Engine: Apache Tomcat/8.5.34
+2019-04-05 14:38:00.090  INFO [my-money-app,,,] 22739 --- [localhost-startStop-1] o.a.catalina.core.AprLifecycleListener   : The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [/usr/java/packages/lib/amd64:/usr/lib64:/lib64:/lib:/usr/lib]
+2019-04-05 14:38:00.232  INFO [my-money-app,,,] 22739 --- [localhost-startStop-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-04-05 14:38:00.232  INFO [my-money-app,,,] 22739 --- [localhost-startStop-1] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 3572 ms
+2019-04-05 14:38:00.840  INFO [my-money-app,,,] 22739 --- [localhost-startStop-1] o.s.aop.framework.CglibAopProxy          : Method [void com.zaxxer.hikari.HikariConfig.seal()] is package-visible across different ClassLoaders and cannot get proxied via CGLIB: Declare this method as public or protected if you need to support invocations through the proxy.
+2019-04-05 14:38:01.419  INFO [my-money-app,,,] 22739 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'characterEncodingFilter' to: [/*]
+2019-04-05 14:38:01.419  INFO [my-money-app,,,] 22739 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'webMvcMetricsFilter' to: [/*]
+2019-04-05 14:38:01.420  INFO [my-money-app,,,] 22739 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'tracingFilter' to: [/*]
+2019-04-05 14:38:01.420  INFO [my-money-app,,,] 22739 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'exceptionLoggingFilter' to: [/*]
+2019-04-05 14:38:01.420  INFO [my-money-app,,,] 22739 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2019-04-05 14:38:01.420  INFO [my-money-app,,,] 22739 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'httpPutFormContentFilter' to: [/*]
+2019-04-05 14:38:01.420  INFO [my-money-app,,,] 22739 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'requestContextFilter' to: [/*]
+2019-04-05 14:38:01.421  INFO [my-money-app,,,] 22739 --- [localhost-startStop-1] .s.DelegatingFilterProxyRegistrationBean : Mapping filter: 'springSecurityFilterChain' to: [/*]
+2019-04-05 14:38:01.421  INFO [my-money-app,,,] 22739 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'httpTraceFilter' to: [/*]
+2019-04-05 14:38:01.421  INFO [my-money-app,,,] 22739 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'corsConfig' to: [/*]
+2019-04-05 14:38:01.421  INFO [my-money-app,,,] 22739 --- [localhost-startStop-1] o.s.b.w.servlet.ServletRegistrationBean  : Servlet dispatcherServlet mapped to [/]
+2019-04-05 14:38:01.608  INFO [my-money-app,,,] 22739 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2019-04-05 14:38:01.752  INFO [my-money-app,,,] 22739 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2019-04-05 14:38:01.831  INFO [my-money-app,,,] 22739 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Building JPA container EntityManagerFactory for persistence unit 'default'
+2019-04-05 14:38:01.851  INFO [my-money-app,,,] 22739 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2019-04-05 14:38:02.018  INFO [my-money-app,,,] 22739 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate Core {5.2.17.Final}
+2019-04-05 14:38:02.020  INFO [my-money-app,,,] 22739 --- [restartedMain] org.hibernate.cfg.Environment            : HHH000206: hibernate.properties not found
+2019-04-05 14:38:02.067  INFO [my-money-app,,,] 22739 --- [restartedMain] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+2019-04-05 14:38:02.213  INFO [my-money-app,,,] 22739 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL95Dialect
+2019-04-05 14:38:02.336  INFO [my-money-app,,,] 22739 --- [restartedMain] o.h.e.j.e.i.LobCreatorBuilderImpl        : HHH000421: Disabling contextual LOB creation as hibernate.jdbc.lob.non_contextual_creation is true
+2019-04-05 14:38:02.343  INFO [my-money-app,,,] 22739 --- [restartedMain] org.hibernate.type.BasicTypeRegistry     : HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@50e22461
+2019-04-05 14:38:03.013  INFO [my-money-app,,,] 22739 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2019-04-05 14:38:04.337  INFO [my-money-app,,,] 22739 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/banking-accounts],methods=[GET]}" onto public java.util.List<com.mymoneyapp.backend.response.BankingAccountResponse> com.mymoneyapp.backend.controller.BankingAccountController.findAllByUser(com.mymoneyapp.backend.domain.User)
+2019-04-05 14:38:04.338  INFO [my-money-app,,,] 22739 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/banking-accounts],methods=[POST]}" onto public org.springframework.http.HttpEntity com.mymoneyapp.backend.controller.BankingAccountController.save(com.mymoneyapp.backend.request.BankingAccountRequest)
+2019-04-05 14:38:04.338  INFO [my-money-app,,,] 22739 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/register],methods=[POST]}" onto public org.springframework.http.HttpEntity com.mymoneyapp.backend.controller.OAuthController.save(com.mymoneyapp.backend.request.UserRequest)
+2019-04-05 14:38:04.340  INFO [my-money-app,,,] 22739 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/users],methods=[GET]}" onto public org.springframework.data.domain.Page<com.mymoneyapp.backend.response.UserResponse> com.mymoneyapp.backend.controller.UserController.findAll(com.mymoneyapp.backend.specification.UserSpecification,org.springframework.data.domain.Pageable)
+2019-04-05 14:38:04.341  INFO [my-money-app,,,] 22739 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/users/me],methods=[GET]}" onto public com.mymoneyapp.backend.domain.User com.mymoneyapp.backend.controller.UserController.principal(com.mymoneyapp.backend.domain.User)
+2019-04-05 14:38:04.343  INFO [my-money-app,,,] 22739 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/swagger-resources/configuration/ui]}" onto public org.springframework.http.ResponseEntity<springfox.documentation.swagger.web.UiConfiguration> springfox.documentation.swagger.web.ApiResourceController.uiConfiguration()
+2019-04-05 14:38:04.344  INFO [my-money-app,,,] 22739 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/swagger-resources]}" onto public org.springframework.http.ResponseEntity<java.util.List<springfox.documentation.swagger.web.SwaggerResource>> springfox.documentation.swagger.web.ApiResourceController.swaggerResources()
+2019-04-05 14:38:04.345  INFO [my-money-app,,,] 22739 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/swagger-resources/configuration/security]}" onto public org.springframework.http.ResponseEntity<springfox.documentation.swagger.web.SecurityConfiguration> springfox.documentation.swagger.web.ApiResourceController.securityConfiguration()
+2019-04-05 14:38:04.347  INFO [my-money-app,,,] 22739 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2019-04-05 14:38:04.348  INFO [my-money-app,,,] 22739 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2019-04-05 14:38:04.451  INFO [my-money-app,,,] 22739 --- [restartedMain] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 2 endpoint(s) beneath base path '/actuator'
+2019-04-05 14:38:04.464  INFO [my-money-app,,,] 22739 --- [restartedMain] s.b.a.e.w.s.WebMvcEndpointHandlerMapping : Mapped "{[/actuator/health],methods=[GET],produces=[application/vnd.spring-boot.actuator.v2+json || application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.web.servlet.AbstractWebMvcEndpointHandlerMapping$OperationHandler.handle(javax.servlet.http.HttpServletRequest,java.util.Map<java.lang.String, java.lang.String>)
+2019-04-05 14:38:04.465  INFO [my-money-app,,,] 22739 --- [restartedMain] s.b.a.e.w.s.WebMvcEndpointHandlerMapping : Mapped "{[/actuator/info],methods=[GET],produces=[application/vnd.spring-boot.actuator.v2+json || application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.web.servlet.AbstractWebMvcEndpointHandlerMapping$OperationHandler.handle(javax.servlet.http.HttpServletRequest,java.util.Map<java.lang.String, java.lang.String>)
+2019-04-05 14:38:04.466  INFO [my-money-app,,,] 22739 --- [restartedMain] s.b.a.e.w.s.WebMvcEndpointHandlerMapping : Mapped "{[/actuator],methods=[GET],produces=[application/vnd.spring-boot.actuator.v2+json || application/json]}" onto protected java.util.Map<java.lang.String, java.util.Map<java.lang.String, org.springframework.boot.actuate.endpoint.web.Link>> org.springframework.boot.actuate.endpoint.web.servlet.WebMvcEndpointHandlerMapping.links(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2019-04-05 14:38:05.067  INFO [my-money-app,,,] 22739 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: org.springframework.security.web.util.matcher.AnyRequestMatcher@1, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@7714b3f6, org.springframework.security.web.context.SecurityContextPersistenceFilter@6cedd255, org.springframework.security.web.header.HeaderWriterFilter@71b6811b, org.springframework.web.filter.CorsFilter@3753e431, org.springframework.security.web.authentication.logout.LogoutFilter@7ca26d8, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@31ee0247, com.mymoneyapp.backend.config.filter.AuthenticationFilter@1dae6d42, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@7beca976, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@700e709f, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@34ba9426, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@c1e18d9, org.springframework.security.web.session.SessionManagementFilter@2149ae29, org.springframework.security.web.access.ExceptionTranslationFilter@5080ea4a, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@422164fb]
+2019-04-05 14:38:05.145  INFO [my-money-app,,,] 22739 --- [restartedMain] pertySourcedRequestMappingHandlerMapping : Mapped URL path [/v2/api-docs] onto method [public org.springframework.http.ResponseEntity<springfox.documentation.spring.web.json.Json> springfox.documentation.swagger2.web.Swagger2Controller.getDocumentation(java.lang.String,javax.servlet.http.HttpServletRequest)]
+2019-04-05 14:38:05.217  WARN [my-money-app,,,] 22739 --- [restartedMain] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
+2019-04-05 14:38:05.218  INFO [my-money-app,,,] 22739 --- [restartedMain] c.n.c.sources.URLConfigurationSource     : To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+2019-04-05 14:38:05.225  WARN [my-money-app,,,] 22739 --- [restartedMain] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
+2019-04-05 14:38:05.225  INFO [my-money-app,,,] 22739 --- [restartedMain] c.n.c.sources.URLConfigurationSource     : To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+2019-04-05 14:38:05.360  INFO [my-money-app,,,] 22739 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2019-04-05 14:38:05.458  INFO [my-money-app,,,] 22739 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerAdapter : Looking for @ControllerAdvice: org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@1ee6fb0: startup date [Fri Apr 05 14:37:56 BRT 2019]; parent: org.springframework.context.annotation.AnnotationConfigApplicationContext@2bc9af24
+2019-04-05 14:38:05.530  INFO [my-money-app,,,] 22739 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2019-04-05 14:38:05.530  INFO [my-money-app,,,] 22739 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2019-04-05 14:38:06.118  INFO [my-money-app,,,] 22739 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2019-04-05 14:38:06.396  INFO [my-money-app,,,] 22739 --- [restartedMain] o.s.aop.framework.CglibAopProxy          : Method [com.netflix.client.config.IClientConfig org.springframework.cloud.openfeign.ribbon.LoadBalancerFeignClient.getClientConfig(feign.Request$Options,java.lang.String)] is package-visible across different ClassLoaders and cannot get proxied via CGLIB: Declare this method as public or protected if you need to support invocations through the proxy.
+2019-04-05 14:38:06.605  INFO [my-money-app,,,] 22739 --- [restartedMain] o.s.j.e.a.AnnotationMBeanExporter        : Registering beans for JMX exposure on startup
+2019-04-05 14:38:06.608  INFO [my-money-app,,,] 22739 --- [restartedMain] o.s.j.e.a.AnnotationMBeanExporter        : Bean with name 'dataSource' has been autodetected for JMX exposure
+2019-04-05 14:38:06.616  INFO [my-money-app,,,] 22739 --- [restartedMain] o.s.j.e.a.AnnotationMBeanExporter        : Bean with name 'environmentManager' has been autodetected for JMX exposure
+2019-04-05 14:38:06.617  INFO [my-money-app,,,] 22739 --- [restartedMain] o.s.j.e.a.AnnotationMBeanExporter        : Bean with name 'refreshScope' has been autodetected for JMX exposure
+2019-04-05 14:38:06.619  INFO [my-money-app,,,] 22739 --- [restartedMain] o.s.j.e.a.AnnotationMBeanExporter        : Bean with name 'configurationPropertiesRebinder' has been autodetected for JMX exposure
+2019-04-05 14:38:06.623  INFO [my-money-app,,,] 22739 --- [restartedMain] o.s.j.e.a.AnnotationMBeanExporter        : Located managed bean 'environmentManager': registering with JMX server as MBean [org.springframework.cloud.context.environment:name=environmentManager,type=EnvironmentManager]
+2019-04-05 14:38:06.632  INFO [my-money-app,,,] 22739 --- [restartedMain] o.s.j.e.a.AnnotationMBeanExporter        : Located managed bean 'refreshScope': registering with JMX server as MBean [org.springframework.cloud.context.scope.refresh:name=refreshScope,type=RefreshScope]
+2019-04-05 14:38:06.644  INFO [my-money-app,,,] 22739 --- [restartedMain] o.s.j.e.a.AnnotationMBeanExporter        : Located managed bean 'configurationPropertiesRebinder': registering with JMX server as MBean [org.springframework.cloud.context.properties:name=configurationPropertiesRebinder,context=1ee6fb0,type=ConfigurationPropertiesRebinder]
+2019-04-05 14:38:06.651  INFO [my-money-app,,,] 22739 --- [restartedMain] o.s.j.e.a.AnnotationMBeanExporter        : Located MBean 'dataSource': registering with JMX server as MBean [com.zaxxer.hikari:name=dataSource,type=HikariDataSource]
+2019-04-05 14:38:06.661  INFO [my-money-app,,,] 22739 --- [restartedMain] o.s.c.support.DefaultLifecycleProcessor  : Starting beans in phase 2147483647
+2019-04-05 14:38:06.662  INFO [my-money-app,,,] 22739 --- [restartedMain] d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
+2019-04-05 14:38:06.686  INFO [my-money-app,,,] 22739 --- [restartedMain] d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
+2019-04-05 14:38:06.720  INFO [my-money-app,,,] 22739 --- [restartedMain] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
+2019-04-05 14:38:06.908  INFO [my-money-app,,,] 22739 --- [restartedMain] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: saveUsingPOST_1
+2019-04-05 14:38:07.018  INFO [my-money-app,,,] 22739 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 1800 (http) with context path ''
+2019-04-05 14:38:07.022  INFO [my-money-app,,,] 22739 --- [restartedMain] com.mymoneyapp.backend.Application       : Started Application in 11.48 seconds (JVM running for 12.329)
+2019-04-05 14:39:56.077  INFO [my-money-app,,,] 22739 --- [http-nio-1800-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring FrameworkServlet 'dispatcherServlet'
+2019-04-05 14:39:56.077  INFO [my-money-app,,,] 22739 --- [http-nio-1800-exec-1] o.s.web.servlet.DispatcherServlet        : FrameworkServlet 'dispatcherServlet': initialization started
+2019-04-05 14:39:56.103  INFO [my-money-app,,,] 22739 --- [http-nio-1800-exec-1] o.s.web.servlet.DispatcherServlet        : FrameworkServlet 'dispatcherServlet': initialization completed in 26 ms
+2019-04-05 14:40:41.612  INFO [my-money-app,434d596ba86a0a9c,434d596ba86a0a9c,false] 22739 --- [http-nio-1800-exec-2] c.m.b.service.BankingAccountService      : C=BankingAccountService, M=save, T=BankingAccountRequest BankingAccountRequest(bankName=Bradesco, agency=9999, number=123456, digit=7, userId=12)
+2019-04-05 14:40:41.613  INFO [my-money-app,434d596ba86a0a9c,434d596ba86a0a9c,false] 22739 --- [http-nio-1800-exec-2] c.m.b.service.BankingAccountService      : C=BankingAccountService, M=persist, T=BankingAccount BankingAccount(id=null, bankName=Bradesco, agency=9999, number=123456, digit=7, createdAt=null, enabled=true, user=User(id=12, name=null, email=null, username=null, password=null, createdAt=null, enabled=true))
+2019-04-05 14:40:41.730  WARN [my-money-app,434d596ba86a0a9c,434d596ba86a0a9c,false] 22739 --- [http-nio-1800-exec-2] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Error: 0, SQLState: 23502
+2019-04-05 14:40:41.730 ERROR [my-money-app,434d596ba86a0a9c,434d596ba86a0a9c,false] 22739 --- [http-nio-1800-exec-2] o.h.engine.jdbc.spi.SqlExceptionHelper   : ERROR: null value in column "account_agency" violates not-null constraint
+  Detail: Failing row contains (1, null, null, null, null, 2019-04-05 14:40:41.664, t, 9999, Bradesco, 7, 123456, 12).
+2019-04-05 14:40:41.766 ERROR [my-money-app,434d596ba86a0a9c,434d596ba86a0a9c,false] 22739 --- [http-nio-1800-exec-2] o.s.c.s.i.web.ExceptionLoggingFilter     : Uncaught exception thrown
+
+org.springframework.web.util.NestedServletException: Request processing failed; nested exception is org.springframework.dao.DataIntegrityViolationException: could not execute statement; SQL [n/a]; constraint [account_agency]; nested exception is org.hibernate.exception.ConstraintViolationException: could not execute statement
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:982) ~[spring-webmvc-5.0.9.RELEASE.jar:5.0.9.RELEASE]
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:877) ~[spring-webmvc-5.0.9.RELEASE.jar:5.0.9.RELEASE]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:661) ~[tomcat-embed-core-8.5.34.jar:8.5.34]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:851) ~[spring-webmvc-5.0.9.RELEASE.jar:5.0.9.RELEASE]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:742) ~[tomcat-embed-core-8.5.34.jar:8.5.34]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231) [tomcat-embed-core-8.5.34.jar:8.5.34]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) [tomcat-embed-core-8.5.34.jar:8.5.34]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:52) ~[tomcat-embed-websocket-8.5.34.jar:8.5.34]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) [tomcat-embed-core-8.5.34.jar:8.5.34]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) [tomcat-embed-core-8.5.34.jar:8.5.34]
+	at com.mymoneyapp.backend.config.CorsConfig.doFilterInternal(CorsConfig.java:24) ~[main/:na]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) [spring-web-5.0.9.RELEASE.jar:5.0.9.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) [tomcat-embed-core-8.5.34.jar:8.5.34]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) [tomcat-embed-core-8.5.34.jar:8.5.34]
+	at org.springframework.boot.actuate.web.trace.servlet.HttpTraceFilter.doFilterInternal(HttpTraceFilter.java:90) ~[spring-boot-actuator-2.0.5.RELEASE.jar:2.0.5.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) [spring-web-5.0.9.RELEASE.jar:5.0.9.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) [tomcat-embed-core-8.5.34.jar:8.5.34]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) [tomcat-embed-core-8.5.34.jar:8.5.34]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:320) ~[spring-security-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.security.web.access.intercept.FilterSecurityInterceptor.invoke(FilterSecurityInterceptor.java:127) ~[spring-security-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.security.web.access.intercept.FilterSecurityInterceptor.doFilter(FilterSecurityInterceptor.java:91) ~[spring-security-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334) ~[spring-security-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:119) ~[spring-security-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334) ~[spring-security-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:137) ~[spring-security-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334) ~[spring-security-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:111) ~[spring-security-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334) ~[spring-security-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:170) ~[spring-security-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334) ~[spring-security-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63) ~[spring-security-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334) ~[spring-security-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.security.web.authentication.www.BasicAuthenticationFilter.doFilterInternal(BasicAuthenticationFilter.java:158) ~[spring-security-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) [spring-web-5.0.9.RELEASE.jar:5.0.9.RELEASE]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334) ~[spring-security-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at com.mymoneyapp.backend.config.filter.AuthenticationFilter.doFilter(AuthenticationFilter.java:51) ~[main/:na]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334) ~[spring-security-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter.doFilter(AbstractAuthenticationProcessingFilter.java:200) ~[spring-security-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334) ~[spring-security-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:116) ~[spring-security-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334) ~[spring-security-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:96) ~[spring-web-5.0.9.RELEASE.jar:5.0.9.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) [spring-web-5.0.9.RELEASE.jar:5.0.9.RELEASE]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334) ~[spring-security-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:66) ~[spring-security-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) [spring-web-5.0.9.RELEASE.jar:5.0.9.RELEASE]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334) ~[spring-security-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.security.web.context.SecurityContextPersistenceFilter.doFilter(SecurityContextPersistenceFilter.java:105) ~[spring-security-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334) ~[spring-security-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:56) ~[spring-security-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) [spring-web-5.0.9.RELEASE.jar:5.0.9.RELEASE]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334) ~[spring-security-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:215) ~[spring-security-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:178) ~[spring-security-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:357) ~[spring-web-5.0.9.RELEASE.jar:5.0.9.RELEASE]
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:270) ~[spring-web-5.0.9.RELEASE.jar:5.0.9.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) [tomcat-embed-core-8.5.34.jar:8.5.34]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) [tomcat-embed-core-8.5.34.jar:8.5.34]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:99) ~[spring-web-5.0.9.RELEASE.jar:5.0.9.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) [spring-web-5.0.9.RELEASE.jar:5.0.9.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) [tomcat-embed-core-8.5.34.jar:8.5.34]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) [tomcat-embed-core-8.5.34.jar:8.5.34]
+	at org.springframework.web.filter.HttpPutFormContentFilter.doFilterInternal(HttpPutFormContentFilter.java:109) ~[spring-web-5.0.9.RELEASE.jar:5.0.9.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) [spring-web-5.0.9.RELEASE.jar:5.0.9.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) [tomcat-embed-core-8.5.34.jar:8.5.34]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) [tomcat-embed-core-8.5.34.jar:8.5.34]
+	at org.springframework.web.filter.HiddenHttpMethodFilter.doFilterInternal(HiddenHttpMethodFilter.java:93) ~[spring-web-5.0.9.RELEASE.jar:5.0.9.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) [spring-web-5.0.9.RELEASE.jar:5.0.9.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) [tomcat-embed-core-8.5.34.jar:8.5.34]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) [tomcat-embed-core-8.5.34.jar:8.5.34]
+	at org.springframework.cloud.sleuth.instrument.web.ExceptionLoggingFilter.doFilter(ExceptionLoggingFilter.java:48) ~[spring-cloud-sleuth-core-2.0.0.RELEASE.jar:2.0.0.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) [tomcat-embed-core-8.5.34.jar:8.5.34]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) [tomcat-embed-core-8.5.34.jar:8.5.34]
+	at brave.servlet.TracingFilter.doFilter(TracingFilter.java:86) [brave-instrumentation-servlet-5.1.0.jar:na]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) [tomcat-embed-core-8.5.34.jar:8.5.34]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) [tomcat-embed-core-8.5.34.jar:8.5.34]
+	at org.springframework.boot.actuate.metrics.web.servlet.WebMvcMetricsFilter.filterAndRecordMetrics(WebMvcMetricsFilter.java:155) [spring-boot-actuator-2.0.5.RELEASE.jar:2.0.5.RELEASE]
+	at org.springframework.boot.actuate.metrics.web.servlet.WebMvcMetricsFilter.filterAndRecordMetrics(WebMvcMetricsFilter.java:123) [spring-boot-actuator-2.0.5.RELEASE.jar:2.0.5.RELEASE]
+	at org.springframework.boot.actuate.metrics.web.servlet.WebMvcMetricsFilter.doFilterInternal(WebMvcMetricsFilter.java:108) [spring-boot-actuator-2.0.5.RELEASE.jar:2.0.5.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) [spring-web-5.0.9.RELEASE.jar:5.0.9.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) [tomcat-embed-core-8.5.34.jar:8.5.34]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) [tomcat-embed-core-8.5.34.jar:8.5.34]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:200) [spring-web-5.0.9.RELEASE.jar:5.0.9.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) [spring-web-5.0.9.RELEASE.jar:5.0.9.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) [tomcat-embed-core-8.5.34.jar:8.5.34]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) [tomcat-embed-core-8.5.34.jar:8.5.34]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:198) [tomcat-embed-core-8.5.34.jar:8.5.34]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96) [tomcat-embed-core-8.5.34.jar:8.5.34]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:493) [tomcat-embed-core-8.5.34.jar:8.5.34]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:140) [tomcat-embed-core-8.5.34.jar:8.5.34]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:81) [tomcat-embed-core-8.5.34.jar:8.5.34]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:87) [tomcat-embed-core-8.5.34.jar:8.5.34]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:342) [tomcat-embed-core-8.5.34.jar:8.5.34]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:800) [tomcat-embed-core-8.5.34.jar:8.5.34]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66) [tomcat-embed-core-8.5.34.jar:8.5.34]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:806) [tomcat-embed-core-8.5.34.jar:8.5.34]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1498) [tomcat-embed-core-8.5.34.jar:8.5.34]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49) [tomcat-embed-core-8.5.34.jar:8.5.34]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149) [na:1.8.0_202]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624) [na:1.8.0_202]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) [tomcat-embed-core-8.5.34.jar:8.5.34]
+	at java.lang.Thread.run(Thread.java:748) [na:1.8.0_202]
+Caused by: org.springframework.dao.DataIntegrityViolationException: could not execute statement; SQL [n/a]; constraint [account_agency]; nested exception is org.hibernate.exception.ConstraintViolationException: could not execute statement
+	at org.springframework.orm.jpa.vendor.HibernateJpaDialect.convertHibernateAccessException(HibernateJpaDialect.java:257) ~[spring-orm-5.0.9.RELEASE.jar:5.0.9.RELEASE]
+	at org.springframework.orm.jpa.vendor.HibernateJpaDialect.translateExceptionIfPossible(HibernateJpaDialect.java:223) ~[spring-orm-5.0.9.RELEASE.jar:5.0.9.RELEASE]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.translateExceptionIfPossible(AbstractEntityManagerFactoryBean.java:527) ~[spring-orm-5.0.9.RELEASE.jar:5.0.9.RELEASE]
+	at org.springframework.dao.support.ChainedPersistenceExceptionTranslator.translateExceptionIfPossible(ChainedPersistenceExceptionTranslator.java:61) ~[spring-tx-5.0.9.RELEASE.jar:5.0.9.RELEASE]
+	at org.springframework.dao.support.DataAccessUtils.translateIfNecessary(DataAccessUtils.java:242) ~[spring-tx-5.0.9.RELEASE.jar:5.0.9.RELEASE]
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:153) ~[spring-tx-5.0.9.RELEASE.jar:5.0.9.RELEASE]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:185) ~[spring-aop-5.0.9.RELEASE.jar:5.0.9.RELEASE]
+	at org.springframework.data.jpa.repository.support.CrudMethodMetadataPostProcessor$CrudMethodMetadataPopulatingMethodInterceptor.invoke(CrudMethodMetadataPostProcessor.java:135) ~[spring-data-jpa-2.0.10.RELEASE.jar:2.0.10.RELEASE]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:185) ~[spring-aop-5.0.9.RELEASE.jar:5.0.9.RELEASE]
+	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:92) ~[spring-aop-5.0.9.RELEASE.jar:5.0.9.RELEASE]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:185) ~[spring-aop-5.0.9.RELEASE.jar:5.0.9.RELEASE]
+	at org.springframework.data.repository.core.support.SurroundingTransactionDetectorMethodInterceptor.invoke(SurroundingTransactionDetectorMethodInterceptor.java:61) ~[spring-data-commons-2.0.10.RELEASE.jar:2.0.10.RELEASE]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:185) ~[spring-aop-5.0.9.RELEASE.jar:5.0.9.RELEASE]
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:212) ~[spring-aop-5.0.9.RELEASE.jar:5.0.9.RELEASE]
+	at com.sun.proxy.$Proxy159.save(Unknown Source) ~[na:na]
+	at com.mymoneyapp.backend.service.BankingAccountService.persist(BankingAccountService.java:48) ~[main/:na]
+	at com.mymoneyapp.backend.service.BankingAccountService.save(BankingAccountService.java:32) ~[main/:na]
+	at com.mymoneyapp.backend.service.BankingAccountService$$FastClassBySpringCGLIB$$39973c7.invoke(<generated>) ~[main/:na]
+	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:204) ~[spring-core-5.0.9.RELEASE.jar:5.0.9.RELEASE]
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.invokeJoinpoint(CglibAopProxy.java:746) ~[spring-aop-5.0.9.RELEASE.jar:5.0.9.RELEASE]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163) ~[spring-aop-5.0.9.RELEASE.jar:5.0.9.RELEASE]
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:294) ~[spring-tx-5.0.9.RELEASE.jar:5.0.9.RELEASE]
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:98) ~[spring-tx-5.0.9.RELEASE.jar:5.0.9.RELEASE]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:185) ~[spring-aop-5.0.9.RELEASE.jar:5.0.9.RELEASE]
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:688) ~[spring-aop-5.0.9.RELEASE.jar:5.0.9.RELEASE]
+	at com.mymoneyapp.backend.service.BankingAccountService$$EnhancerBySpringCGLIB$$a91f8958.save(<generated>) ~[main/:na]
+	at com.mymoneyapp.backend.controller.BankingAccountController.save(BankingAccountController.java:29) ~[main/:na]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_202]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:1.8.0_202]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_202]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[na:1.8.0_202]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:209) ~[spring-web-5.0.9.RELEASE.jar:5.0.9.RELEASE]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:136) ~[spring-web-5.0.9.RELEASE.jar:5.0.9.RELEASE]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:102) ~[spring-webmvc-5.0.9.RELEASE.jar:5.0.9.RELEASE]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:891) ~[spring-webmvc-5.0.9.RELEASE.jar:5.0.9.RELEASE]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:797) ~[spring-webmvc-5.0.9.RELEASE.jar:5.0.9.RELEASE]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) ~[spring-webmvc-5.0.9.RELEASE.jar:5.0.9.RELEASE]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:991) ~[spring-webmvc-5.0.9.RELEASE.jar:5.0.9.RELEASE]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:925) ~[spring-webmvc-5.0.9.RELEASE.jar:5.0.9.RELEASE]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:974) ~[spring-webmvc-5.0.9.RELEASE.jar:5.0.9.RELEASE]
+	... 101 common frames omitted
+Caused by: org.hibernate.exception.ConstraintViolationException: could not execute statement
+	at org.hibernate.exception.internal.SQLStateConversionDelegate.convert(SQLStateConversionDelegate.java:112) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.exception.internal.StandardSQLExceptionConverter.convert(StandardSQLExceptionConverter.java:42) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(SqlExceptionHelper.java:111) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(SqlExceptionHelper.java:97) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.engine.jdbc.internal.ResultSetReturnImpl.executeUpdate(ResultSetReturnImpl.java:178) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.dialect.identity.GetGeneratedKeysDelegate.executeAndExtract(GetGeneratedKeysDelegate.java:57) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.id.insert.AbstractReturningDelegate.performInsert(AbstractReturningDelegate.java:42) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.persister.entity.AbstractEntityPersister.insert(AbstractEntityPersister.java:2933) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.persister.entity.AbstractEntityPersister.insert(AbstractEntityPersister.java:3524) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.action.internal.EntityIdentityInsertAction.execute(EntityIdentityInsertAction.java:81) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.engine.spi.ActionQueue.execute(ActionQueue.java:637) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.engine.spi.ActionQueue.addResolvedEntityInsertAction(ActionQueue.java:282) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.engine.spi.ActionQueue.addInsertAction(ActionQueue.java:263) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.engine.spi.ActionQueue.addAction(ActionQueue.java:317) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.event.internal.AbstractSaveEventListener.addInsertAction(AbstractSaveEventListener.java:318) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.event.internal.AbstractSaveEventListener.performSaveOrReplicate(AbstractSaveEventListener.java:275) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.event.internal.AbstractSaveEventListener.performSave(AbstractSaveEventListener.java:182) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.event.internal.AbstractSaveEventListener.saveWithGeneratedId(AbstractSaveEventListener.java:113) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.jpa.event.internal.core.JpaPersistEventListener.saveWithGeneratedId(JpaPersistEventListener.java:67) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.event.internal.DefaultPersistEventListener.entityIsTransient(DefaultPersistEventListener.java:189) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.event.internal.DefaultPersistEventListener.onPersist(DefaultPersistEventListener.java:132) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.event.internal.DefaultPersistEventListener.onPersist(DefaultPersistEventListener.java:58) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.internal.SessionImpl.firePersist(SessionImpl.java:783) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.internal.SessionImpl.persist(SessionImpl.java:768) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_202]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:1.8.0_202]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_202]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[na:1.8.0_202]
+	at org.springframework.orm.jpa.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler.invoke(SharedEntityManagerCreator.java:305) ~[spring-orm-5.0.9.RELEASE.jar:5.0.9.RELEASE]
+	at com.sun.proxy.$Proxy153.persist(Unknown Source) ~[na:na]
+	at org.springframework.data.jpa.repository.support.SimpleJpaRepository.save(SimpleJpaRepository.java:490) ~[spring-data-jpa-2.0.10.RELEASE.jar:2.0.10.RELEASE]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_202]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:1.8.0_202]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_202]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[na:1.8.0_202]
+	at org.springframework.data.repository.core.support.RepositoryComposition$RepositoryFragments.invoke(RepositoryComposition.java:377) ~[spring-data-commons-2.0.10.RELEASE.jar:2.0.10.RELEASE]
+	at org.springframework.data.repository.core.support.RepositoryComposition.invoke(RepositoryComposition.java:200) ~[spring-data-commons-2.0.10.RELEASE.jar:2.0.10.RELEASE]
+	at org.springframework.data.repository.core.support.RepositoryFactorySupport$ImplementationMethodExecutionInterceptor.invoke(RepositoryFactorySupport.java:641) ~[spring-data-commons-2.0.10.RELEASE.jar:2.0.10.RELEASE]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:185) ~[spring-aop-5.0.9.RELEASE.jar:5.0.9.RELEASE]
+	at org.springframework.data.repository.core.support.RepositoryFactorySupport$QueryExecutorMethodInterceptor.doInvoke(RepositoryFactorySupport.java:605) ~[spring-data-commons-2.0.10.RELEASE.jar:2.0.10.RELEASE]
+	at org.springframework.data.repository.core.support.RepositoryFactorySupport$QueryExecutorMethodInterceptor.invoke(RepositoryFactorySupport.java:590) ~[spring-data-commons-2.0.10.RELEASE.jar:2.0.10.RELEASE]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:185) ~[spring-aop-5.0.9.RELEASE.jar:5.0.9.RELEASE]
+	at org.springframework.data.projection.DefaultMethodInvokingMethodInterceptor.invoke(DefaultMethodInvokingMethodInterceptor.java:59) ~[spring-data-commons-2.0.10.RELEASE.jar:2.0.10.RELEASE]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:185) ~[spring-aop-5.0.9.RELEASE.jar:5.0.9.RELEASE]
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:294) ~[spring-tx-5.0.9.RELEASE.jar:5.0.9.RELEASE]
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:98) ~[spring-tx-5.0.9.RELEASE.jar:5.0.9.RELEASE]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:185) ~[spring-aop-5.0.9.RELEASE.jar:5.0.9.RELEASE]
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:139) ~[spring-tx-5.0.9.RELEASE.jar:5.0.9.RELEASE]
+	... 135 common frames omitted
+Caused by: org.postgresql.util.PSQLException: ERROR: null value in column "account_agency" violates not-null constraint
+  Detail: Failing row contains (1, null, null, null, null, 2019-04-05 14:40:41.664, t, 9999, Bradesco, 7, 123456, 12).
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2440) ~[postgresql-42.2.5.jar:42.2.5]
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2183) ~[postgresql-42.2.5.jar:42.2.5]
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:308) ~[postgresql-42.2.5.jar:42.2.5]
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:441) ~[postgresql-42.2.5.jar:42.2.5]
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:365) ~[postgresql-42.2.5.jar:42.2.5]
+	at org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:143) ~[postgresql-42.2.5.jar:42.2.5]
+	at org.postgresql.jdbc.PgPreparedStatement.executeUpdate(PgPreparedStatement.java:120) ~[postgresql-42.2.5.jar:42.2.5]
+	at com.zaxxer.hikari.pool.ProxyPreparedStatement.executeUpdate(ProxyPreparedStatement.java:61) ~[HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.pool.HikariProxyPreparedStatement.executeUpdate(HikariProxyPreparedStatement.java) ~[HikariCP-2.7.9.jar:na]
+	at org.hibernate.engine.jdbc.internal.ResultSetReturnImpl.executeUpdate(ResultSetReturnImpl.java:175) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	... 178 common frames omitted
+
+2019-04-05 14:40:41.777 ERROR [my-money-app,,,] 22739 --- [http-nio-1800-exec-2] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is org.springframework.dao.DataIntegrityViolationException: could not execute statement; SQL [n/a]; constraint [account_agency]; nested exception is org.hibernate.exception.ConstraintViolationException: could not execute statement] with root cause
+
+org.postgresql.util.PSQLException: ERROR: null value in column "account_agency" violates not-null constraint
+  Detail: Failing row contains (1, null, null, null, null, 2019-04-05 14:40:41.664, t, 9999, Bradesco, 7, 123456, 12).
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2440) ~[postgresql-42.2.5.jar:42.2.5]
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2183) ~[postgresql-42.2.5.jar:42.2.5]
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:308) ~[postgresql-42.2.5.jar:42.2.5]
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:441) ~[postgresql-42.2.5.jar:42.2.5]
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:365) ~[postgresql-42.2.5.jar:42.2.5]
+	at org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:143) ~[postgresql-42.2.5.jar:42.2.5]
+	at org.postgresql.jdbc.PgPreparedStatement.executeUpdate(PgPreparedStatement.java:120) ~[postgresql-42.2.5.jar:42.2.5]
+	at com.zaxxer.hikari.pool.ProxyPreparedStatement.executeUpdate(ProxyPreparedStatement.java:61) ~[HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.pool.HikariProxyPreparedStatement.executeUpdate(HikariProxyPreparedStatement.java) ~[HikariCP-2.7.9.jar:na]
+	at org.hibernate.engine.jdbc.internal.ResultSetReturnImpl.executeUpdate(ResultSetReturnImpl.java:175) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.dialect.identity.GetGeneratedKeysDelegate.executeAndExtract(GetGeneratedKeysDelegate.java:57) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.id.insert.AbstractReturningDelegate.performInsert(AbstractReturningDelegate.java:42) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.persister.entity.AbstractEntityPersister.insert(AbstractEntityPersister.java:2933) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.persister.entity.AbstractEntityPersister.insert(AbstractEntityPersister.java:3524) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.action.internal.EntityIdentityInsertAction.execute(EntityIdentityInsertAction.java:81) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.engine.spi.ActionQueue.execute(ActionQueue.java:637) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.engine.spi.ActionQueue.addResolvedEntityInsertAction(ActionQueue.java:282) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.engine.spi.ActionQueue.addInsertAction(ActionQueue.java:263) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.engine.spi.ActionQueue.addAction(ActionQueue.java:317) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.event.internal.AbstractSaveEventListener.addInsertAction(AbstractSaveEventListener.java:318) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.event.internal.AbstractSaveEventListener.performSaveOrReplicate(AbstractSaveEventListener.java:275) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.event.internal.AbstractSaveEventListener.performSave(AbstractSaveEventListener.java:182) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.event.internal.AbstractSaveEventListener.saveWithGeneratedId(AbstractSaveEventListener.java:113) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.jpa.event.internal.core.JpaPersistEventListener.saveWithGeneratedId(JpaPersistEventListener.java:67) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.event.internal.DefaultPersistEventListener.entityIsTransient(DefaultPersistEventListener.java:189) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.event.internal.DefaultPersistEventListener.onPersist(DefaultPersistEventListener.java:132) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.event.internal.DefaultPersistEventListener.onPersist(DefaultPersistEventListener.java:58) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.internal.SessionImpl.firePersist(SessionImpl.java:783) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.internal.SessionImpl.persist(SessionImpl.java:768) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_202]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:1.8.0_202]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_202]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[na:1.8.0_202]
+	at org.springframework.orm.jpa.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler.invoke(SharedEntityManagerCreator.java:305) ~[spring-orm-5.0.9.RELEASE.jar:5.0.9.RELEASE]
+	at com.sun.proxy.$Proxy153.persist(Unknown Source) ~[na:na]
+	at org.springframework.data.jpa.repository.support.SimpleJpaRepository.save(SimpleJpaRepository.java:490) ~[spring-data-jpa-2.0.10.RELEASE.jar:2.0.10.RELEASE]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_202]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:1.8.0_202]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_202]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[na:1.8.0_202]
+	at org.springframework.data.repository.core.support.RepositoryComposition$RepositoryFragments.invoke(RepositoryComposition.java:377) ~[spring-data-commons-2.0.10.RELEASE.jar:2.0.10.RELEASE]
+	at org.springframework.data.repository.core.support.RepositoryComposition.invoke(RepositoryComposition.java:200) ~[spring-data-commons-2.0.10.RELEASE.jar:2.0.10.RELEASE]
+	at org.springframework.data.repository.core.support.RepositoryFactorySupport$ImplementationMethodExecutionInterceptor.invoke(RepositoryFactorySupport.java:641) ~[spring-data-commons-2.0.10.RELEASE.jar:2.0.10.RELEASE]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:185) ~[spring-aop-5.0.9.RELEASE.jar:5.0.9.RELEASE]
+	at org.springframework.data.repository.core.support.RepositoryFactorySupport$QueryExecutorMethodInterceptor.doInvoke(RepositoryFactorySupport.java:605) ~[spring-data-commons-2.0.10.RELEASE.jar:2.0.10.RELEASE]
+	at org.springframework.data.repository.core.support.RepositoryFactorySupport$QueryExecutorMethodInterceptor.invoke(RepositoryFactorySupport.java:590) ~[spring-data-commons-2.0.10.RELEASE.jar:2.0.10.RELEASE]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:185) ~[spring-aop-5.0.9.RELEASE.jar:5.0.9.RELEASE]
+	at org.springframework.data.projection.DefaultMethodInvokingMethodInterceptor.invoke(DefaultMethodInvokingMethodInterceptor.java:59) ~[spring-data-commons-2.0.10.RELEASE.jar:2.0.10.RELEASE]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:185) ~[spring-aop-5.0.9.RELEASE.jar:5.0.9.RELEASE]
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:294) ~[spring-tx-5.0.9.RELEASE.jar:5.0.9.RELEASE]
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:98) ~[spring-tx-5.0.9.RELEASE.jar:5.0.9.RELEASE]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:185) ~[spring-aop-5.0.9.RELEASE.jar:5.0.9.RELEASE]
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:139) ~[spring-tx-5.0.9.RELEASE.jar:5.0.9.RELEASE]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:185) ~[spring-aop-5.0.9.RELEASE.jar:5.0.9.RELEASE]
+	at org.springframework.data.jpa.repository.support.CrudMethodMetadataPostProcessor$CrudMethodMetadataPopulatingMethodInterceptor.invoke(CrudMethodMetadataPostProcessor.java:135) ~[spring-data-jpa-2.0.10.RELEASE.jar:2.0.10.RELEASE]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:185) ~[spring-aop-5.0.9.RELEASE.jar:5.0.9.RELEASE]
+	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:92) ~[spring-aop-5.0.9.RELEASE.jar:5.0.9.RELEASE]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:185) ~[spring-aop-5.0.9.RELEASE.jar:5.0.9.RELEASE]
+	at org.springframework.data.repository.core.support.SurroundingTransactionDetectorMethodInterceptor.invoke(SurroundingTransactionDetectorMethodInterceptor.java:61) ~[spring-data-commons-2.0.10.RELEASE.jar:2.0.10.RELEASE]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:185) ~[spring-aop-5.0.9.RELEASE.jar:5.0.9.RELEASE]
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:212) ~[spring-aop-5.0.9.RELEASE.jar:5.0.9.RELEASE]
+	at com.sun.proxy.$Proxy159.save(Unknown Source) ~[na:na]
+	at com.mymoneyapp.backend.service.BankingAccountService.persist(BankingAccountService.java:48) ~[main/:na]
+	at com.mymoneyapp.backend.service.BankingAccountService.save(BankingAccountService.java:32) ~[main/:na]
+	at com.mymoneyapp.backend.service.BankingAccountService$$FastClassBySpringCGLIB$$39973c7.invoke(<generated>) ~[main/:na]
+	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:204) ~[spring-core-5.0.9.RELEASE.jar:5.0.9.RELEASE]
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.invokeJoinpoint(CglibAopProxy.java:746) ~[spring-aop-5.0.9.RELEASE.jar:5.0.9.RELEASE]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163) ~[spring-aop-5.0.9.RELEASE.jar:5.0.9.RELEASE]
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:294) ~[spring-tx-5.0.9.RELEASE.jar:5.0.9.RELEASE]
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:98) ~[spring-tx-5.0.9.RELEASE.jar:5.0.9.RELEASE]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:185) ~[spring-aop-5.0.9.RELEASE.jar:5.0.9.RELEASE]
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:688) ~[spring-aop-5.0.9.RELEASE.jar:5.0.9.RELEASE]
+	at com.mymoneyapp.backend.service.BankingAccountService$$EnhancerBySpringCGLIB$$a91f8958.save(<generated>) ~[main/:na]
+	at com.mymoneyapp.backend.controller.BankingAccountController.save(BankingAccountController.java:29) ~[main/:na]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_202]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:1.8.0_202]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_202]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[na:1.8.0_202]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:209) ~[spring-web-5.0.9.RELEASE.jar:5.0.9.RELEASE]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:136) ~[spring-web-5.0.9.RELEASE.jar:5.0.9.RELEASE]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:102) ~[spring-webmvc-5.0.9.RELEASE.jar:5.0.9.RELEASE]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:891) ~[spring-webmvc-5.0.9.RELEASE.jar:5.0.9.RELEASE]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:797) ~[spring-webmvc-5.0.9.RELEASE.jar:5.0.9.RELEASE]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) ~[spring-webmvc-5.0.9.RELEASE.jar:5.0.9.RELEASE]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:991) ~[spring-webmvc-5.0.9.RELEASE.jar:5.0.9.RELEASE]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:925) ~[spring-webmvc-5.0.9.RELEASE.jar:5.0.9.RELEASE]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:974) ~[spring-webmvc-5.0.9.RELEASE.jar:5.0.9.RELEASE]
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:877) ~[spring-webmvc-5.0.9.RELEASE.jar:5.0.9.RELEASE]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:661) ~[tomcat-embed-core-8.5.34.jar:8.5.34]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:851) ~[spring-webmvc-5.0.9.RELEASE.jar:5.0.9.RELEASE]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:742) ~[tomcat-embed-core-8.5.34.jar:8.5.34]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231) ~[tomcat-embed-core-8.5.34.jar:8.5.34]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-8.5.34.jar:8.5.34]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:52) ~[tomcat-embed-websocket-8.5.34.jar:8.5.34]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-8.5.34.jar:8.5.34]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-8.5.34.jar:8.5.34]
+	at com.mymoneyapp.backend.config.CorsConfig.doFilterInternal(CorsConfig.java:24) ~[main/:na]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) ~[spring-web-5.0.9.RELEASE.jar:5.0.9.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-8.5.34.jar:8.5.34]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-8.5.34.jar:8.5.34]
+	at org.springframework.boot.actuate.web.trace.servlet.HttpTraceFilter.doFilterInternal(HttpTraceFilter.java:90) ~[spring-boot-actuator-2.0.5.RELEASE.jar:2.0.5.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) ~[spring-web-5.0.9.RELEASE.jar:5.0.9.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-8.5.34.jar:8.5.34]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-8.5.34.jar:8.5.34]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:320) ~[spring-security-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.security.web.access.intercept.FilterSecurityInterceptor.invoke(FilterSecurityInterceptor.java:127) ~[spring-security-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.security.web.access.intercept.FilterSecurityInterceptor.doFilter(FilterSecurityInterceptor.java:91) ~[spring-security-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334) ~[spring-security-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:119) ~[spring-security-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334) ~[spring-security-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:137) ~[spring-security-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334) ~[spring-security-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:111) ~[spring-security-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334) ~[spring-security-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:170) ~[spring-security-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334) ~[spring-security-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63) ~[spring-security-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334) ~[spring-security-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.security.web.authentication.www.BasicAuthenticationFilter.doFilterInternal(BasicAuthenticationFilter.java:158) ~[spring-security-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) ~[spring-web-5.0.9.RELEASE.jar:5.0.9.RELEASE]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334) ~[spring-security-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at com.mymoneyapp.backend.config.filter.AuthenticationFilter.doFilter(AuthenticationFilter.java:51) ~[main/:na]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334) ~[spring-security-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter.doFilter(AbstractAuthenticationProcessingFilter.java:200) ~[spring-security-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334) ~[spring-security-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:116) ~[spring-security-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334) ~[spring-security-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:96) ~[spring-web-5.0.9.RELEASE.jar:5.0.9.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) ~[spring-web-5.0.9.RELEASE.jar:5.0.9.RELEASE]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334) ~[spring-security-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:66) ~[spring-security-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) ~[spring-web-5.0.9.RELEASE.jar:5.0.9.RELEASE]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334) ~[spring-security-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.security.web.context.SecurityContextPersistenceFilter.doFilter(SecurityContextPersistenceFilter.java:105) ~[spring-security-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334) ~[spring-security-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:56) ~[spring-security-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) ~[spring-web-5.0.9.RELEASE.jar:5.0.9.RELEASE]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334) ~[spring-security-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:215) ~[spring-security-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:178) ~[spring-security-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:357) ~[spring-web-5.0.9.RELEASE.jar:5.0.9.RELEASE]
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:270) ~[spring-web-5.0.9.RELEASE.jar:5.0.9.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-8.5.34.jar:8.5.34]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-8.5.34.jar:8.5.34]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:99) ~[spring-web-5.0.9.RELEASE.jar:5.0.9.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) ~[spring-web-5.0.9.RELEASE.jar:5.0.9.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-8.5.34.jar:8.5.34]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-8.5.34.jar:8.5.34]
+	at org.springframework.web.filter.HttpPutFormContentFilter.doFilterInternal(HttpPutFormContentFilter.java:109) ~[spring-web-5.0.9.RELEASE.jar:5.0.9.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) ~[spring-web-5.0.9.RELEASE.jar:5.0.9.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-8.5.34.jar:8.5.34]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-8.5.34.jar:8.5.34]
+	at org.springframework.web.filter.HiddenHttpMethodFilter.doFilterInternal(HiddenHttpMethodFilter.java:93) ~[spring-web-5.0.9.RELEASE.jar:5.0.9.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) ~[spring-web-5.0.9.RELEASE.jar:5.0.9.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-8.5.34.jar:8.5.34]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-8.5.34.jar:8.5.34]
+	at org.springframework.cloud.sleuth.instrument.web.ExceptionLoggingFilter.doFilter(ExceptionLoggingFilter.java:48) ~[spring-cloud-sleuth-core-2.0.0.RELEASE.jar:2.0.0.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-8.5.34.jar:8.5.34]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-8.5.34.jar:8.5.34]
+	at brave.servlet.TracingFilter.doFilter(TracingFilter.java:86) ~[brave-instrumentation-servlet-5.1.0.jar:na]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-8.5.34.jar:8.5.34]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-8.5.34.jar:8.5.34]
+	at org.springframework.boot.actuate.metrics.web.servlet.WebMvcMetricsFilter.filterAndRecordMetrics(WebMvcMetricsFilter.java:155) ~[spring-boot-actuator-2.0.5.RELEASE.jar:2.0.5.RELEASE]
+	at org.springframework.boot.actuate.metrics.web.servlet.WebMvcMetricsFilter.filterAndRecordMetrics(WebMvcMetricsFilter.java:123) ~[spring-boot-actuator-2.0.5.RELEASE.jar:2.0.5.RELEASE]
+	at org.springframework.boot.actuate.metrics.web.servlet.WebMvcMetricsFilter.doFilterInternal(WebMvcMetricsFilter.java:108) ~[spring-boot-actuator-2.0.5.RELEASE.jar:2.0.5.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) ~[spring-web-5.0.9.RELEASE.jar:5.0.9.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-8.5.34.jar:8.5.34]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-8.5.34.jar:8.5.34]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:200) ~[spring-web-5.0.9.RELEASE.jar:5.0.9.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) ~[spring-web-5.0.9.RELEASE.jar:5.0.9.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-8.5.34.jar:8.5.34]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-8.5.34.jar:8.5.34]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:198) ~[tomcat-embed-core-8.5.34.jar:8.5.34]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96) [tomcat-embed-core-8.5.34.jar:8.5.34]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:493) [tomcat-embed-core-8.5.34.jar:8.5.34]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:140) [tomcat-embed-core-8.5.34.jar:8.5.34]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:81) [tomcat-embed-core-8.5.34.jar:8.5.34]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:87) [tomcat-embed-core-8.5.34.jar:8.5.34]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:342) [tomcat-embed-core-8.5.34.jar:8.5.34]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:800) [tomcat-embed-core-8.5.34.jar:8.5.34]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66) [tomcat-embed-core-8.5.34.jar:8.5.34]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:806) [tomcat-embed-core-8.5.34.jar:8.5.34]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1498) [tomcat-embed-core-8.5.34.jar:8.5.34]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49) [tomcat-embed-core-8.5.34.jar:8.5.34]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149) [na:1.8.0_202]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624) [na:1.8.0_202]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) [tomcat-embed-core-8.5.34.jar:8.5.34]
+	at java.lang.Thread.run(Thread.java:748) [na:1.8.0_202]
+
+2019-04-05 14:41:23.053  INFO [my-money-app,,,] 22739 --- [Thread-15] ConfigServletWebServerApplicationContext : Closing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@1ee6fb0: startup date [Fri Apr 05 14:37:56 BRT 2019]; parent: org.springframework.context.annotation.AnnotationConfigApplicationContext@2bc9af24
+2019-04-05 14:41:23.056  INFO [my-money-app,,,] 22739 --- [Thread-15] o.s.c.support.DefaultLifecycleProcessor  : Stopping beans in phase 2147483647
+2019-04-05 14:41:23.071  INFO [my-money-app,,,] 22739 --- [Thread-15] o.s.j.e.a.AnnotationMBeanExporter        : Unregistering JMX-exposed beans on shutdown
+2019-04-05 14:41:23.072  INFO [my-money-app,,,] 22739 --- [Thread-15] o.s.j.e.a.AnnotationMBeanExporter        : Unregistering JMX-exposed beans
+2019-04-05 14:41:23.080  INFO [my-money-app,,,] 22739 --- [Thread-15] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2019-04-05 14:41:23.084  INFO [my-money-app,,,] 22739 --- [Thread-15] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2019-04-05 14:41:23.089  INFO [my-money-app,,,] 22739 --- [Thread-15] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2019-04-05 14:41:59.803  INFO [my-money-app,,,] 23612 --- [restartedMain] com.mymoneyapp.backend.Application       : No active profile set, falling back to default profiles: default
+2019-04-05 14:41:59.824  INFO [my-money-app,,,] 23612 --- [restartedMain] ConfigServletWebServerApplicationContext : Refreshing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@4eefeece: startup date [Fri Apr 05 14:41:59 BRT 2019]; parent: org.springframework.context.annotation.AnnotationConfigApplicationContext@27568a3b
+2019-04-05 14:42:01.521  INFO [my-money-app,,,] 23612 --- [restartedMain] o.s.b.f.s.DefaultListableBeanFactory     : Overriding bean definition for bean 'dataSource' with a different definition: replacing [Root bean: class [null]; scope=refresh; abstract=false; lazyInit=false; autowireMode=3; dependencyCheck=0; autowireCandidate=false; primary=false; factoryBeanName=org.springframework.boot.autoconfigure.jdbc.DataSourceConfiguration$Hikari; factoryMethodName=dataSource; initMethodName=null; destroyMethodName=(inferred); defined in class path resource [org/springframework/boot/autoconfigure/jdbc/DataSourceConfiguration$Hikari.class]] with [Root bean: class [org.springframework.aop.scope.ScopedProxyFactoryBean]; scope=; abstract=false; lazyInit=false; autowireMode=0; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=null; factoryMethodName=null; initMethodName=null; destroyMethodName=null; defined in BeanDefinition defined in class path resource [org/springframework/boot/autoconfigure/jdbc/DataSourceConfiguration$Hikari.class]]
+2019-04-05 14:42:01.802  INFO [my-money-app,,,] 23612 --- [restartedMain] o.s.cloud.context.scope.GenericScope     : BeanFactory id=7d3c2184-8efc-3e60-80e2-6ede7013c62f
+2019-04-05 14:42:01.839  INFO [my-money-app,,,] 23612 --- [restartedMain] f.a.AutowiredAnnotationBeanPostProcessor : JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2019-04-05 14:42:02.234  INFO [my-money-app,,,] 23612 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$8b4976f1] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-04-05 14:42:02.303  INFO [my-money-app,,,] 23612 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.cloud.autoconfigure.ConfigurationPropertiesRebinderAutoConfiguration' of type [org.springframework.cloud.autoconfigure.ConfigurationPropertiesRebinderAutoConfiguration$$EnhancerBySpringCGLIB$$a76379ee] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-04-05 14:42:02.318  INFO [my-money-app,,,] 23612 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.cloud.sleuth.instrument.web.client.TraceWebClientAutoConfiguration$TraceOAuthConfiguration' of type [org.springframework.cloud.sleuth.instrument.web.client.TraceWebClientAutoConfiguration$TraceOAuthConfiguration$$EnhancerBySpringCGLIB$$d0460950] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-04-05 14:42:03.098  INFO [my-money-app,,,] 23612 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 1800 (http)
+2019-04-05 14:42:03.127  INFO [my-money-app,,,] 23612 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-04-05 14:42:03.128  INFO [my-money-app,,,] 23612 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet Engine: Apache Tomcat/8.5.34
+2019-04-05 14:42:03.137  INFO [my-money-app,,,] 23612 --- [localhost-startStop-1] o.a.catalina.core.AprLifecycleListener   : The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [/usr/java/packages/lib/amd64:/usr/lib64:/lib64:/lib:/usr/lib]
+2019-04-05 14:42:03.252  INFO [my-money-app,,,] 23612 --- [localhost-startStop-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-04-05 14:42:03.253  INFO [my-money-app,,,] 23612 --- [localhost-startStop-1] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 3429 ms
+2019-04-05 14:42:03.948  INFO [my-money-app,,,] 23612 --- [localhost-startStop-1] o.s.aop.framework.CglibAopProxy          : Method [void com.zaxxer.hikari.HikariConfig.seal()] is package-visible across different ClassLoaders and cannot get proxied via CGLIB: Declare this method as public or protected if you need to support invocations through the proxy.
+2019-04-05 14:42:04.536  INFO [my-money-app,,,] 23612 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'characterEncodingFilter' to: [/*]
+2019-04-05 14:42:04.536  INFO [my-money-app,,,] 23612 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'webMvcMetricsFilter' to: [/*]
+2019-04-05 14:42:04.536  INFO [my-money-app,,,] 23612 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'tracingFilter' to: [/*]
+2019-04-05 14:42:04.536  INFO [my-money-app,,,] 23612 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'exceptionLoggingFilter' to: [/*]
+2019-04-05 14:42:04.537  INFO [my-money-app,,,] 23612 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2019-04-05 14:42:04.537  INFO [my-money-app,,,] 23612 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'httpPutFormContentFilter' to: [/*]
+2019-04-05 14:42:04.537  INFO [my-money-app,,,] 23612 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'requestContextFilter' to: [/*]
+2019-04-05 14:42:04.537  INFO [my-money-app,,,] 23612 --- [localhost-startStop-1] .s.DelegatingFilterProxyRegistrationBean : Mapping filter: 'springSecurityFilterChain' to: [/*]
+2019-04-05 14:42:04.537  INFO [my-money-app,,,] 23612 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'httpTraceFilter' to: [/*]
+2019-04-05 14:42:04.537  INFO [my-money-app,,,] 23612 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'corsConfig' to: [/*]
+2019-04-05 14:42:04.538  INFO [my-money-app,,,] 23612 --- [localhost-startStop-1] o.s.b.w.servlet.ServletRegistrationBean  : Servlet dispatcherServlet mapped to [/]
+2019-04-05 14:42:04.690  INFO [my-money-app,,,] 23612 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2019-04-05 14:42:04.810  INFO [my-money-app,,,] 23612 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2019-04-05 14:42:04.862  INFO [my-money-app,,,] 23612 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Building JPA container EntityManagerFactory for persistence unit 'default'
+2019-04-05 14:42:04.884  INFO [my-money-app,,,] 23612 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2019-04-05 14:42:04.996  INFO [my-money-app,,,] 23612 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate Core {5.2.17.Final}
+2019-04-05 14:42:04.998  INFO [my-money-app,,,] 23612 --- [restartedMain] org.hibernate.cfg.Environment            : HHH000206: hibernate.properties not found
+2019-04-05 14:42:05.037  INFO [my-money-app,,,] 23612 --- [restartedMain] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+2019-04-05 14:42:05.156  INFO [my-money-app,,,] 23612 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL95Dialect
+2019-04-05 14:42:05.271  INFO [my-money-app,,,] 23612 --- [restartedMain] o.h.e.j.e.i.LobCreatorBuilderImpl        : HHH000421: Disabling contextual LOB creation as hibernate.jdbc.lob.non_contextual_creation is true
+2019-04-05 14:42:05.272  INFO [my-money-app,,,] 23612 --- [restartedMain] org.hibernate.type.BasicTypeRegistry     : HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@2c2f1759
+2019-04-05 14:42:06.105  WARN [my-money-app,,,] 23612 --- [restartedMain] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
+2019-04-05 14:42:06.105  WARN [my-money-app,,,] 23612 --- [restartedMain] o.h.engine.jdbc.spi.SqlExceptionHelper   : constraint "uk_l6mxxqp9dsnpttsybgx8vi3re" of relation "banking_account" does not exist, skipping
+2019-04-05 14:42:06.121  INFO [my-money-app,,,] 23612 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2019-04-05 14:42:07.430  INFO [my-money-app,,,] 23612 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/banking-accounts],methods=[GET]}" onto public java.util.List<com.mymoneyapp.backend.response.BankingAccountResponse> com.mymoneyapp.backend.controller.BankingAccountController.findAllByUser(com.mymoneyapp.backend.domain.User)
+2019-04-05 14:42:07.431  INFO [my-money-app,,,] 23612 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/banking-accounts],methods=[POST]}" onto public org.springframework.http.HttpEntity com.mymoneyapp.backend.controller.BankingAccountController.save(com.mymoneyapp.backend.request.BankingAccountRequest)
+2019-04-05 14:42:07.432  INFO [my-money-app,,,] 23612 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/register],methods=[POST]}" onto public org.springframework.http.HttpEntity com.mymoneyapp.backend.controller.OAuthController.save(com.mymoneyapp.backend.request.UserRequest)
+2019-04-05 14:42:07.434  INFO [my-money-app,,,] 23612 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/users],methods=[GET]}" onto public org.springframework.data.domain.Page<com.mymoneyapp.backend.response.UserResponse> com.mymoneyapp.backend.controller.UserController.findAll(com.mymoneyapp.backend.specification.UserSpecification,org.springframework.data.domain.Pageable)
+2019-04-05 14:42:07.434  INFO [my-money-app,,,] 23612 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/users/me],methods=[GET]}" onto public com.mymoneyapp.backend.domain.User com.mymoneyapp.backend.controller.UserController.principal(com.mymoneyapp.backend.domain.User)
+2019-04-05 14:42:07.438  INFO [my-money-app,,,] 23612 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/swagger-resources/configuration/ui]}" onto public org.springframework.http.ResponseEntity<springfox.documentation.swagger.web.UiConfiguration> springfox.documentation.swagger.web.ApiResourceController.uiConfiguration()
+2019-04-05 14:42:07.438  INFO [my-money-app,,,] 23612 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/swagger-resources]}" onto public org.springframework.http.ResponseEntity<java.util.List<springfox.documentation.swagger.web.SwaggerResource>> springfox.documentation.swagger.web.ApiResourceController.swaggerResources()
+2019-04-05 14:42:07.439  INFO [my-money-app,,,] 23612 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/swagger-resources/configuration/security]}" onto public org.springframework.http.ResponseEntity<springfox.documentation.swagger.web.SecurityConfiguration> springfox.documentation.swagger.web.ApiResourceController.securityConfiguration()
+2019-04-05 14:42:07.442  INFO [my-money-app,,,] 23612 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2019-04-05 14:42:07.442  INFO [my-money-app,,,] 23612 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2019-04-05 14:42:07.557  INFO [my-money-app,,,] 23612 --- [restartedMain] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 2 endpoint(s) beneath base path '/actuator'
+2019-04-05 14:42:07.569  INFO [my-money-app,,,] 23612 --- [restartedMain] s.b.a.e.w.s.WebMvcEndpointHandlerMapping : Mapped "{[/actuator/health],methods=[GET],produces=[application/vnd.spring-boot.actuator.v2+json || application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.web.servlet.AbstractWebMvcEndpointHandlerMapping$OperationHandler.handle(javax.servlet.http.HttpServletRequest,java.util.Map<java.lang.String, java.lang.String>)
+2019-04-05 14:42:07.571  INFO [my-money-app,,,] 23612 --- [restartedMain] s.b.a.e.w.s.WebMvcEndpointHandlerMapping : Mapped "{[/actuator/info],methods=[GET],produces=[application/vnd.spring-boot.actuator.v2+json || application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.web.servlet.AbstractWebMvcEndpointHandlerMapping$OperationHandler.handle(javax.servlet.http.HttpServletRequest,java.util.Map<java.lang.String, java.lang.String>)
+2019-04-05 14:42:07.573  INFO [my-money-app,,,] 23612 --- [restartedMain] s.b.a.e.w.s.WebMvcEndpointHandlerMapping : Mapped "{[/actuator],methods=[GET],produces=[application/vnd.spring-boot.actuator.v2+json || application/json]}" onto protected java.util.Map<java.lang.String, java.util.Map<java.lang.String, org.springframework.boot.actuate.endpoint.web.Link>> org.springframework.boot.actuate.endpoint.web.servlet.WebMvcEndpointHandlerMapping.links(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2019-04-05 14:42:08.084  INFO [my-money-app,,,] 23612 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: org.springframework.security.web.util.matcher.AnyRequestMatcher@1, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@59ca5d6b, org.springframework.security.web.context.SecurityContextPersistenceFilter@3cd3b467, org.springframework.security.web.header.HeaderWriterFilter@7fb88883, org.springframework.web.filter.CorsFilter@19ffa7d7, org.springframework.security.web.authentication.logout.LogoutFilter@3577a41a, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@4d3645a0, com.mymoneyapp.backend.config.filter.AuthenticationFilter@7453940b, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@409d9fe0, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@7e408200, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@4e99af21, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@66724d83, org.springframework.security.web.session.SessionManagementFilter@3d1823a3, org.springframework.security.web.access.ExceptionTranslationFilter@2908cf67, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@40e4c1e2]
+2019-04-05 14:42:08.139  INFO [my-money-app,,,] 23612 --- [restartedMain] pertySourcedRequestMappingHandlerMapping : Mapped URL path [/v2/api-docs] onto method [public org.springframework.http.ResponseEntity<springfox.documentation.spring.web.json.Json> springfox.documentation.swagger2.web.Swagger2Controller.getDocumentation(java.lang.String,javax.servlet.http.HttpServletRequest)]
+2019-04-05 14:42:08.198  WARN [my-money-app,,,] 23612 --- [restartedMain] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
+2019-04-05 14:42:08.199  INFO [my-money-app,,,] 23612 --- [restartedMain] c.n.c.sources.URLConfigurationSource     : To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+2019-04-05 14:42:08.206  WARN [my-money-app,,,] 23612 --- [restartedMain] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
+2019-04-05 14:42:08.207  INFO [my-money-app,,,] 23612 --- [restartedMain] c.n.c.sources.URLConfigurationSource     : To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+2019-04-05 14:42:08.382  INFO [my-money-app,,,] 23612 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2019-04-05 14:42:08.587  INFO [my-money-app,,,] 23612 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerAdapter : Looking for @ControllerAdvice: org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@4eefeece: startup date [Fri Apr 05 14:41:59 BRT 2019]; parent: org.springframework.context.annotation.AnnotationConfigApplicationContext@27568a3b
+2019-04-05 14:42:08.658  INFO [my-money-app,,,] 23612 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2019-04-05 14:42:08.659  INFO [my-money-app,,,] 23612 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2019-04-05 14:42:09.219  INFO [my-money-app,,,] 23612 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2019-04-05 14:42:09.477  INFO [my-money-app,,,] 23612 --- [restartedMain] o.s.aop.framework.CglibAopProxy          : Method [com.netflix.client.config.IClientConfig org.springframework.cloud.openfeign.ribbon.LoadBalancerFeignClient.getClientConfig(feign.Request$Options,java.lang.String)] is package-visible across different ClassLoaders and cannot get proxied via CGLIB: Declare this method as public or protected if you need to support invocations through the proxy.
+2019-04-05 14:42:09.645  INFO [my-money-app,,,] 23612 --- [restartedMain] o.s.j.e.a.AnnotationMBeanExporter        : Registering beans for JMX exposure on startup
+2019-04-05 14:42:09.647  INFO [my-money-app,,,] 23612 --- [restartedMain] o.s.j.e.a.AnnotationMBeanExporter        : Bean with name 'dataSource' has been autodetected for JMX exposure
+2019-04-05 14:42:09.656  INFO [my-money-app,,,] 23612 --- [restartedMain] o.s.j.e.a.AnnotationMBeanExporter        : Bean with name 'environmentManager' has been autodetected for JMX exposure
+2019-04-05 14:42:09.658  INFO [my-money-app,,,] 23612 --- [restartedMain] o.s.j.e.a.AnnotationMBeanExporter        : Bean with name 'refreshScope' has been autodetected for JMX exposure
+2019-04-05 14:42:09.660  INFO [my-money-app,,,] 23612 --- [restartedMain] o.s.j.e.a.AnnotationMBeanExporter        : Bean with name 'configurationPropertiesRebinder' has been autodetected for JMX exposure
+2019-04-05 14:42:09.665  INFO [my-money-app,,,] 23612 --- [restartedMain] o.s.j.e.a.AnnotationMBeanExporter        : Located managed bean 'environmentManager': registering with JMX server as MBean [org.springframework.cloud.context.environment:name=environmentManager,type=EnvironmentManager]
+2019-04-05 14:42:09.673  INFO [my-money-app,,,] 23612 --- [restartedMain] o.s.j.e.a.AnnotationMBeanExporter        : Located managed bean 'refreshScope': registering with JMX server as MBean [org.springframework.cloud.context.scope.refresh:name=refreshScope,type=RefreshScope]
+2019-04-05 14:42:09.683  INFO [my-money-app,,,] 23612 --- [restartedMain] o.s.j.e.a.AnnotationMBeanExporter        : Located managed bean 'configurationPropertiesRebinder': registering with JMX server as MBean [org.springframework.cloud.context.properties:name=configurationPropertiesRebinder,context=4eefeece,type=ConfigurationPropertiesRebinder]
+2019-04-05 14:42:09.692  INFO [my-money-app,,,] 23612 --- [restartedMain] o.s.j.e.a.AnnotationMBeanExporter        : Located MBean 'dataSource': registering with JMX server as MBean [com.zaxxer.hikari:name=dataSource,type=HikariDataSource]
+2019-04-05 14:42:09.704  INFO [my-money-app,,,] 23612 --- [restartedMain] o.s.c.support.DefaultLifecycleProcessor  : Starting beans in phase 2147483647
+2019-04-05 14:42:09.704  INFO [my-money-app,,,] 23612 --- [restartedMain] d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
+2019-04-05 14:42:09.723  INFO [my-money-app,,,] 23612 --- [restartedMain] d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
+2019-04-05 14:42:09.750  INFO [my-money-app,,,] 23612 --- [restartedMain] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
+2019-04-05 14:42:09.895  INFO [my-money-app,,,] 23612 --- [restartedMain] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: saveUsingPOST_1
+2019-04-05 14:42:09.983  INFO [my-money-app,,,] 23612 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 1800 (http) with context path ''
+2019-04-05 14:42:09.986  INFO [my-money-app,,,] 23612 --- [restartedMain] com.mymoneyapp.backend.Application       : Started Application in 11.142 seconds (JVM running for 11.932)
+2019-04-05 14:42:18.270  INFO [my-money-app,,,] 23612 --- [http-nio-1800-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring FrameworkServlet 'dispatcherServlet'
+2019-04-05 14:42:18.270  INFO [my-money-app,,,] 23612 --- [http-nio-1800-exec-1] o.s.web.servlet.DispatcherServlet        : FrameworkServlet 'dispatcherServlet': initialization started
+2019-04-05 14:42:18.305  INFO [my-money-app,,,] 23612 --- [http-nio-1800-exec-1] o.s.web.servlet.DispatcherServlet        : FrameworkServlet 'dispatcherServlet': initialization completed in 34 ms
+2019-04-05 14:42:18.523  INFO [my-money-app,bf327b6321f2ff9a,bf327b6321f2ff9a,false] 23612 --- [http-nio-1800-exec-1] c.m.b.service.BankingAccountService      : C=BankingAccountService, M=save, T=BankingAccountRequest BankingAccountRequest(bankName=Bradesco, agency=9999, number=123456, digit=7, userId=12)
+2019-04-05 14:42:18.524  INFO [my-money-app,bf327b6321f2ff9a,bf327b6321f2ff9a,false] 23612 --- [http-nio-1800-exec-1] c.m.b.service.BankingAccountService      : C=BankingAccountService, M=persist, T=BankingAccount BankingAccount(id=null, bankName=Bradesco, agency=9999, number=123456, digit=7, createdAt=null, enabled=true, user=User(id=12, name=null, email=null, username=null, password=null, createdAt=null, enabled=true))
+2019-04-05 14:42:24.757  INFO [my-money-app,167798b62e8b5b74,167798b62e8b5b74,false] 23612 --- [http-nio-1800-exec-2] c.m.b.service.BankingAccountService      : C=BankingAccountService, M=findAll, T=User User(id=12, name=ADM Jefferson, email=jefferson.vieira@invillia.com, username=jefferson.vieira@invillia.com, password=null, createdAt=2019-03-29T15:07:54.854, enabled=true)
+2019-04-05 14:42:24.817  INFO [my-money-app,167798b62e8b5b74,167798b62e8b5b74,false] 23612 --- [http-nio-1800-exec-2] o.h.h.i.QueryTranslatorFactoryInitiator  : HHH000397: Using ASTQueryTranslatorFactory
+2019-04-05 14:42:45.368  INFO [my-money-app,,,] 23612 --- [Thread-15] ConfigServletWebServerApplicationContext : Closing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@4eefeece: startup date [Fri Apr 05 14:41:59 BRT 2019]; parent: org.springframework.context.annotation.AnnotationConfigApplicationContext@27568a3b
+2019-04-05 14:42:45.371  INFO [my-money-app,,,] 23612 --- [Thread-15] o.s.c.support.DefaultLifecycleProcessor  : Stopping beans in phase 2147483647
+2019-04-05 14:42:45.378  INFO [my-money-app,,,] 23612 --- [Thread-15] o.s.j.e.a.AnnotationMBeanExporter        : Unregistering JMX-exposed beans on shutdown
+2019-04-05 14:42:45.379  INFO [my-money-app,,,] 23612 --- [Thread-15] o.s.j.e.a.AnnotationMBeanExporter        : Unregistering JMX-exposed beans
+2019-04-05 14:42:45.387  INFO [my-money-app,,,] 23612 --- [Thread-15] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2019-04-05 14:42:45.391  INFO [my-money-app,,,] 23612 --- [Thread-15] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2019-04-05 14:42:45.409  INFO [my-money-app,,,] 23612 --- [Thread-15] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.

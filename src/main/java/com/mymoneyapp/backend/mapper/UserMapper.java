@@ -31,4 +31,5 @@ public interface UserMapper {
         List<UserResponse> userResponses = userToResponse(users.getContent());
         return new PageImpl<>(userResponses, users.getPageable(), users.getTotalElements());
     }
+
 }

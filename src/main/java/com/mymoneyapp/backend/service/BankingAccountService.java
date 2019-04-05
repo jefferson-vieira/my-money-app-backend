@@ -1,10 +1,12 @@
 package com.mymoneyapp.backend.service;
 
 import com.mymoneyapp.backend.domain.BankingAccount;
+import com.mymoneyapp.backend.domain.User;
+import com.mymoneyapp.backend.mapper.BankingAccountMapper;
 import com.mymoneyapp.backend.repository.BankingAccountRepository;
 import com.mymoneyapp.backend.request.BankingAccountRequest;
-import com.mymoneyapp.backend.mapper.BankingAccountMapper;
 import com.mymoneyapp.backend.response.BankingAccountResponse;
+import com.mymoneyapp.backend.specification.BankingAccountSpecification;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,11 +34,11 @@ public class BankingAccountService {
     }
 
     @Transactional(readOnly = true)
-    public List<BankingAccountResponse> findAll() {
-        log.info("C=BankingAccountService, M=findAll");
+    public List<BankingAccountResponse> findAllByUser(User user) {
+        log.info("C=BankingAccountService, M=findAll, T=User {}", user);
 
-        List<BankingAccount> bankingAccounts = bankingAccountRepository.findAll();
-        return bankingAccountMapper.bankingAccountToResponse(bankingAccounts);
+        List<BankingAccount> bankingAccounts = bankingAccountRepository.findAllByUser(user);
+        return bankingAccountMapper.bankingAccountsToResponses(bankingAccounts);
     }
 
     @Transactional
