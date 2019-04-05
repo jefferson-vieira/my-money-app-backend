@@ -15,13 +15,13 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping
+@RequestMapping("/banking-account")
 public class BankingAccountController {
 
     @Autowired
     private BankingAccountService bankingAccountService;
 
-    @PostMapping("/createBankingAccount")
+    @PostMapping
     @ApiOperation(value = "Cadastra uma conta bancária", authorizations = @Authorization("OAuth"))
     public HttpEntity save(@Valid @RequestBody final BankingAccountRequest bankingAccountRequest) {
         Long bankingAccountId = bankingAccountService.save(bankingAccountRequest);
@@ -29,7 +29,7 @@ public class BankingAccountController {
     }
 
     @GetMapping
-    @ApiOperation(value = "Lista as contas bancárias cadastrados", authorizations = @Authorization("OAuth"))
+    @ApiOperation(value = "Lista as contas bancárias cadastradas", authorizations = @Authorization("OAuth"))
     public List<BankingAccountResponse> findAll() {
         return bankingAccountService.findAll();
     }

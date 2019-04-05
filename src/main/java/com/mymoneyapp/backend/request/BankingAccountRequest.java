@@ -7,20 +7,27 @@ import javax.validation.constraints.*;
 @Data
 public class BankingAccountRequest {
 
-    @NotEmpty(message = "O número da conta bancária precisa ser informado")//Não deixa o usuario digitar a conta do banco nulo
-    @Digits(integer=0, fraction=0, message = "Há caracteres inválidos no número da conta bancária")//Só deixa ele digitar numeros
+    @NotEmpty(message = "O número da conta bancária precisa ser informado")
+    @Pattern.List({
+            @Pattern(regexp = "^[0-9]*$", message = "Há caracteres inválidos no número da conta bancária"),
+    })
     private String accountNumber;
 
-    @NotEmpty(message = "O digito da conta da conta bancária precisa ser informado")
-    @Digits(integer=0, fraction=0, message = "Há caracteres inválidos no digito da conta bancária")
+    @NotEmpty(message = "O digito da conta bancária precisa ser informado")
+    @Size(min = 1, max = 1, message = "O digito da conta bancária precisa ter 1 caractere")
+    @Pattern.List({
+            @Pattern(regexp = "[0-9]", message = "Há caracteres inválidos no digito da bancária"),
+    })
     private String accountDigit;
 
-    @NotEmpty(message = "O digito da agência da agência bancária precisa ser informado")
-    @Digits(integer=0, fraction=0, message = "Há caracteres inválidos na agência da conta bancária")
+    @NotEmpty(message = "O número da agência bancária precisa ser informado")
+    @Pattern.List({
+            @Pattern(regexp = "^[0-9]*$", message = "Há caracteres inválidos no número da agência bancária"),
+    })
     private String accountAgency;
 
     @NotEmpty(message = "O nome da instituição bancária precisa ser informado")
-    @Size(min = 4, max = 20, message = "O nome da instituição bancária precisa deve ter de 4 à 20 caracteres")//limite o tamanho de caracteres da string
+    @Size(min = 4, max = 20, message = "O nome da instituição bancária precisa ter de 4 à 20 caracteres")
     @Pattern.List({
             @Pattern(regexp = "^[^\\s].*[^\\s]+$", message = "Nome da instituição bancária inválido"),
             @Pattern(regexp = "^[a-zA-ZÀ-ÿ ]+$", message = "Há caracteres inválidos no nome da instituição bancária"),
