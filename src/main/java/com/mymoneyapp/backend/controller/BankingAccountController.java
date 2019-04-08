@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -33,7 +34,7 @@ public class BankingAccountController {
     @ApiOperation(value = "Cadastra uma conta bancária", authorizations = @Authorization("OAuth"))
     public HttpEntity save(@AuthenticationPrincipal final User user,
                            @Valid @RequestBody final BankingAccountRequest bankingAccountRequest) {
-        Long bankingAccountId = bankingAccountService.save(bankingAccountRequest, user);
+        Long bankingAccountId = bankingAccountService.save(user, bankingAccountRequest);
         return ResponseEntity.created(URI.create("/banking-accounts/" + bankingAccountId)).build();
     }
 
@@ -46,10 +47,19 @@ public class BankingAccountController {
 //    @GetMapping("/summary")
 //    @ApiOperation(value = "Gera o sumário das contas", authorizations = @Authorization("OAuth"))
 
+    @PutMapping("/{id}")
+    @ApiOperation(value = "Atualiza os dados da conta bancária", authorizations = @Authorization("OAuth"))
+    public HttpEntity<?> update(@AuthenticationPrincipal final User user,
+                                @PathVariable final Long id,
+                                @Valid @RequestBody final BankingAccountRequest bankingAccountRequest) {
+        bankingAccountService.update(user, id, bankingAccountRequest);
+        return ResponseEntity.noContent().build();
+    }
+
     @DeleteMapping("/{id}")
     @ApiOperation(value = "Remove uma conta bancária do usuário", authorizations = @Authorization("OAuth"))
-    public HttpEntity<?> delete(@PathVariable final Long id) {
-        bankingAccountService.delete(id);
+    public HttpEntity<?> delete(@AuthenticationPrincipal final User user, @PathVariable final Long id) {
+        bankingAccountService.delete(user, id);
         return ResponseEntity.noContent().build();
     }
 

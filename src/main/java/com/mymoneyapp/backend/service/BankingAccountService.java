@@ -2,6 +2,8 @@ package com.mymoneyapp.backend.service;
 
 import com.mymoneyapp.backend.domain.BankingAccount;
 import com.mymoneyapp.backend.domain.User;
+import com.mymoneyapp.backend.exception.ResourceNotFoundException;
+import com.mymoneyapp.backend.exception.UserIsNotDataOwnerException;
 import com.mymoneyapp.backend.mapper.BankingAccountMapper;
 import com.mymoneyapp.backend.repository.BankingAccountRepository;
 import com.mymoneyapp.backend.request.BankingAccountRequest;
@@ -24,7 +26,7 @@ public class BankingAccountService {
     private BankingAccountRepository bankingAccountRepository;
 
     @Transactional
-    public Long save(final BankingAccountRequest bankingAccountRequest, final User user) {
+    public Long save(final User user, final BankingAccountRequest bankingAccountRequest) {
         log.info("C=BankingAccountService, M=save, T=BankingAccountRequest {}; User={}", bankingAccountRequest, user);
 
         BankingAccount toPersist = bankingAccountMapper.requestToBankingAccount(bankingAccountRequest);
@@ -42,10 +44,35 @@ public class BankingAccountService {
     }
 
     @Transactional
-    public void delete(final Long id) {
+    public void update(final User user, final Long id, final BankingAccountRequest bankingAccountRequest) {
+        log.info("C=BankingAccountService, M=update, T=ID {}; BankingAccountRequest {}", id, bankingAccountRequest);
+
+        BankingAccount bankingAccount = retrieveById(user, id);
+
+        bankingAccountMapper.updateBankingAccountFromRequest(bankingAccount, bankingAccountRequest);
+
+        persist(bankingAccount);
+    }
+
+    @Transactional
+    public void delete(final User user, final Long id) {
         log.info("C=BankingAccountService, M=delete, T=ID {}", id);
 
+        retrieveById(user, id);
+
         bankingAccountRepository.deleteById(id);
+    }
+
+    @Transactional(readOnly = true)
+    protected BankingAccount retrieveById(final User user, final Long id) {
+        log.info("C=BankingAccountService, M=persist, T=User {}; ID {}", user, id);
+
+        BankingAccount bankingAccount = bankingAccountRepository.findById(id)
+                .orElseThrow(ResourceNotFoundException::new);
+
+        this.checkIfUserIsDataOwner(user, bankingAccount);
+
+        return bankingAccount;
     }
 
     @Transactional
@@ -53,6 +80,12 @@ public class BankingAccountService {
         log.info("C=BankingAccountService, M=persist, T=BankingAccount {}", bankingAccount);
 
         return bankingAccountRepository.save(bankingAccount);
+    }
+
+    private void checkIfUserIsDataOwner(final User user, final BankingAccount bankingAccount) {
+        if (bankingAccount.getUser().getId() != user.getId()) {
+            throw new UserIsNotDataOwnerException();
+        }
     }
 
 }
