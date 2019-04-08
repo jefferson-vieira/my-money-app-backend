@@ -12,6 +12,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import java.time.LocalDate;
 
 @Data
 @Entity
@@ -29,12 +32,15 @@ public class Credit {
     @Column(nullable = false)
     private String description;
 
-    @Column(nullable = true)
-    private double value;
+    @Column(nullable = false)
+    private Double value;
+
+    @Column(nullable = false)
+    @Builder.Default
+    private LocalDate date = LocalDate.now();
 
     @Builder.Default
     @Column(name = "flg_Active")
     private boolean enabled = true;
-
 
 }

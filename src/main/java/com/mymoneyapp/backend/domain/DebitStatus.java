@@ -1,7 +1,6 @@
 package com.mymoneyapp.backend.domain;
 
-public enum PaymentCycleStatus {
-
+public enum DebitStatus {
     PAGO,
     PENDENTE,
     AGENDADO

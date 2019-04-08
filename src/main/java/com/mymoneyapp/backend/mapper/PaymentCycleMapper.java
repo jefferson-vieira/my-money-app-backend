@@ -10,7 +10,10 @@ import org.mapstruct.Mappings;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses = {
+        CreditMapper.class,
+        DebitMapper.class,
+})
 public interface PaymentCycleMapper {
 
     @Mappings({
@@ -20,7 +23,7 @@ public interface PaymentCycleMapper {
     PaymentCycle requestToPaymentCycle(PaymentCycleRequest paymentCycleRequest);
 
     @Mappings({
-            @Mapping(target = "data", dateFormat = "dd/MM/yyyy"),
+            @Mapping(target = "date", dateFormat = "dd/MM/yyyy"),
     })
     PaymentCycleResponse paymentCycleToResponse(PaymentCycle paymentCycle);
 

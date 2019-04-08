@@ -34,5 +34,5 @@ public class UserController {
     public User principal(@AuthenticationPrincipal final User user) {
         return user;
     }
-
+    
 }

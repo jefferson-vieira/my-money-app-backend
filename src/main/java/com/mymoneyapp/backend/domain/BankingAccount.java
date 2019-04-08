@@ -51,8 +51,4 @@ public class BankingAccount {
     @ManyToOne(optional = false)
     private User user;
 
-    @ManyToOne(optional = true)
-    private PaymentCycle paymentCycle;
-
-
 }

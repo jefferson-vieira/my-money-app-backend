@@ -7,13 +7,13 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-
+import javax.persistence.OneToMany;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -23,7 +23,7 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 @Where(clause = "flg_active <> false")
-@SQLDelete(sql = "update payment-cycle set flg_active = false where id = ?")
+@SQLDelete(sql = "update payment_cycle set flg_active = false where id = ?")
 public class PaymentCycle {
 
     @Id
@@ -34,10 +34,12 @@ public class PaymentCycle {
     private String description;
 
     @Column(nullable = false)
-    private LocalDate data;
+    private LocalDate date;
 
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Credit> credits;
 
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Debit> debits;
 
     @Builder.Default

@@ -24,10 +24,11 @@ public class BankingAccountService {
     private BankingAccountRepository bankingAccountRepository;
 
     @Transactional
-    public Long save(final BankingAccountRequest bankingAccountRequest) {
-        log.info("C=BankingAccountService, M=save, T=BankingAccountRequest {}", bankingAccountRequest);
+    public Long save(final BankingAccountRequest bankingAccountRequest, final User user) {
+        log.info("C=BankingAccountService, M=save, T=BankingAccountRequest {}; User={}", bankingAccountRequest, user);
 
         BankingAccount toPersist = bankingAccountMapper.requestToBankingAccount(bankingAccountRequest);
+        toPersist.setUser(user);
         BankingAccount persistedBankingAccount = persist(toPersist);
         return persistedBankingAccount.getId();
     }
@@ -41,9 +42,17 @@ public class BankingAccountService {
     }
 
     @Transactional
+    public void delete(final Long id) {
+        log.info("C=BankingAccountService, M=delete, T=ID {}", id);
+
+        bankingAccountRepository.deleteById(id);
+    }
+
+    @Transactional
     protected BankingAccount persist(final BankingAccount bankingAccount) {
         log.info("C=BankingAccountService, M=persist, T=BankingAccount {}", bankingAccount);
 
         return bankingAccountRepository.save(bankingAccount);
     }
+
 }

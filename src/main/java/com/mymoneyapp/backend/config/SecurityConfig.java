@@ -83,26 +83,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .csrf()
                     .disable()
-                .cors()
-                .and()
                 .anonymous()
                 .and()
                 .httpBasic()
                 .and()
                 .addFilterBefore(new AuthenticationFilter(authenticationManager()), BasicAuthenticationFilter.class);
         // @formatter:on
-    }
-
-    @Bean
-    CorsConfigurationSource corsConfigurationSource() {
-        final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-
-        CorsConfiguration corsConfiguration = new CorsConfiguration().applyPermitDefaultValues();
-        corsConfiguration.addExposedHeader("Authorization");
-
-        source.registerCorsConfiguration(path, corsConfiguration);
-
-        return source;
     }
 
     @Override

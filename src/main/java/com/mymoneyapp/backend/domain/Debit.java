@@ -9,9 +9,14 @@ import org.hibernate.annotations.Where;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import java.time.LocalDate;
 
 @Data
 @Entity
@@ -29,13 +34,19 @@ public class Debit {
     @Column(nullable = false)
     private String description;
 
-    @Column(nullable = true)
-    private double value;
+    @Column(nullable = false)
+    private Double value;
 
     @Column(nullable = false)
-    private PaymentCycleStatus status;
+    @Builder.Default
+    private LocalDate date = LocalDate.now();
+
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private DebitStatus status;
 
     @Builder.Default
     @Column(name = "flg_Active")
     private boolean enabled = true;
+
 }

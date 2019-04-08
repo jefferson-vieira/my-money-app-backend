@@ -10,11 +10,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.validation.Valid;
 import java.net.URI;
@@ -29,15 +31,29 @@ public class BankingAccountController {
 
     @PostMapping
     @ApiOperation(value = "Cadastra uma conta bancária", authorizations = @Authorization("OAuth"))
-    public HttpEntity save(@Valid @RequestBody final BankingAccountRequest bankingAccountRequest) {
-        Long bankingAccountId = bankingAccountService.save(bankingAccountRequest);
+    public HttpEntity save(@AuthenticationPrincipal final User user,
+                           @Valid @RequestBody final BankingAccountRequest bankingAccountRequest) {
+        Long bankingAccountId = bankingAccountService.save(bankingAccountRequest, user);
         return ResponseEntity.created(URI.create("/banking-accounts/" + bankingAccountId)).build();
     }
 
-    @GetMapping("/me")
+    @GetMapping
     @ApiOperation(value = "Lista as contas bancárias cadastradas", authorizations = @Authorization("OAuth"))
     public List<BankingAccountResponse> findAllByUser(@AuthenticationPrincipal final User user) {
         return bankingAccountService.findAllByUser(user);
     }
+
+//    @GetMapping("/summary")
+//    @ApiOperation(value = "Gera o sumário das contas", authorizations = @Authorization("OAuth"))
+
+    @DeleteMapping("/{id}")
+    @ApiOperation(value = "Remove uma conta bancária do usuário", authorizations = @Authorization("OAuth"))
+    public HttpEntity<?> delete(@PathVariable final Long id) {
+        bankingAccountService.delete(id);
+        return ResponseEntity.noContent().build();
+    }
+
+//    @GetMapping("/{id}/summary")
+//    @ApiOperation(value = "Gera o sumário de uma conta", authorizations = @Authorization("OAuth"))
 
 }
