@@ -14,6 +14,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import java.time.LocalDateTime;
 
 @Data
@@ -23,6 +25,9 @@ import java.time.LocalDateTime;
 @Builder
 @Where(clause = "flg_active <> false")
 @SQLDelete(sql = "update banking_account set flg_active = false where id = ?")
+@Table(uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"agency", "number", "digit"})
+})
 public class BankingAccount {
 
     @Id
@@ -35,7 +40,7 @@ public class BankingAccount {
     @Column(nullable = false)
     private String agency;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private String number;
 
     @Column(nullable = false)
@@ -44,11 +49,11 @@ public class BankingAccount {
     @CreationTimestamp
     private LocalDateTime createdAt;
 
+    @ManyToOne(optional = false)
+    private User user;
+
     @Builder.Default
     @Column(name = "flg_Active")
     private boolean enabled = true;
-
-    @ManyToOne(optional = false)
-    private User user;
 
 }

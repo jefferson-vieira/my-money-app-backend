@@ -10,4 +10,6 @@ public interface PaymentCycleRepository extends JpaRepository<PaymentCycle, Long
 
     List<PaymentCycle> findAllByBankingAccount(BankingAccount bankingAccount);
 
+    List<PaymentCycle> findAllByBankingAccountIn(List<BankingAccount> bankingAccounts);
+
 }

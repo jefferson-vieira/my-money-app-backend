@@ -14,7 +14,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -35,7 +34,7 @@ public class PaymentCycleService {
 
         this.checkIfPaymentCycleRequestHasCreditsOrDebits(paymentCycleRequest);
 
-        BankingAccount bankingAccount = bankingAccountService.retrieveById(user, paymentCycleRequest.getBankingAccountId());
+        BankingAccount bankingAccount = bankingAccountService.retrieveByIdAndUser(paymentCycleRequest.getBankingAccountId(), user);
 
         PaymentCycle toPersist = paymentCycleMapper.requestToPaymentCycle(paymentCycleRequest);
         toPersist.setBankingAccount(bankingAccount);
@@ -52,14 +51,17 @@ public class PaymentCycleService {
     public List<PaymentCycle> retrieveAllByUser(final User user) {
         List<BankingAccount> bankingAccounts = bankingAccountService.retrieveAllByUser(user);
 
-        return bankingAccounts
-                .stream().map(this::retrieveAllByBankingAccount).flatMap(List::stream)
-                .collect(Collectors.toList());
+        return retrieveAllByBankingAccount(bankingAccounts);
     }
 
     @Transactional(readOnly = true)
     public List<PaymentCycle> retrieveAllByBankingAccount(final BankingAccount bankingAccount) {
         return paymentCycleRepository.findAllByBankingAccount(bankingAccount);
+    }
+
+    @Transactional(readOnly = true)
+    public List<PaymentCycle> retrieveAllByBankingAccount(final List<BankingAccount> bankingAccounts) {
+        return paymentCycleRepository.findAllByBankingAccountIn(bankingAccounts);
     }
 
     @Transactional
