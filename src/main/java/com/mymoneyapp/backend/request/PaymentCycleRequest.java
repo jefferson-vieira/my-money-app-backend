@@ -25,4 +25,5 @@ public class PaymentCycleRequest {
 
     @NotNull(message = "A conta bancária precisa ser informada")
     private Long bankingAccountId;
+
 }

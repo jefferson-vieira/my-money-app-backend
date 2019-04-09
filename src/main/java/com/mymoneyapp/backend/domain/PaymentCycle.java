@@ -17,7 +17,6 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import java.time.LocalDate;
-import java.util.List;
 import java.util.Set;
 
 @Data
@@ -51,4 +50,5 @@ public class PaymentCycle {
     @Builder.Default
     @Column(name = "flg_Active")
     private boolean enabled = true;
+
 }

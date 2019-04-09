@@ -15,10 +15,10 @@ import java.util.List;
 public interface BankingAccountMapper {
 
     @Mappings({
-            @Mapping(target = "id", ignore = true),
+            @Mapping(target = "id",        ignore = true),
             @Mapping(target = "createdAt", ignore = true),
-            @Mapping(target = "enabled", ignore = true),
-            @Mapping(target = "user", ignore = true),
+            @Mapping(target = "enabled",   ignore = true),
+            @Mapping(target = "user",      ignore = true),
     })
     BankingAccount requestToBankingAccount(BankingAccountRequest bankingAccountRequest);
 

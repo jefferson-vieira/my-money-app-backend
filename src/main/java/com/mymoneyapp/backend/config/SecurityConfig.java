@@ -22,9 +22,6 @@ import org.springframework.security.jwt.crypto.sign.RsaVerifier;
 import org.springframework.security.oauth2.provider.error.OAuth2AccessDeniedHandler;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 import org.springframework.util.StreamUtils;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.CorsConfigurationSource;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -39,9 +36,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private TokenAuthenticationProvider tokenAuthenticationProvider;
-
-    @Value("${cors-path}")
-    private String path;
 
     @Override
     public void configure(final HttpSecurity http) throws Exception {

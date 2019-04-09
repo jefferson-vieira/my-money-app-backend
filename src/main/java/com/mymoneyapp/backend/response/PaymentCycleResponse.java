@@ -17,4 +17,5 @@ public class PaymentCycleResponse {
     private List<CreditResponse> credits;
 
     private List<DebitResponse> debits;
+
 }

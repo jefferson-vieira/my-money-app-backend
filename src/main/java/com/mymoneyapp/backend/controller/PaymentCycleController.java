@@ -36,7 +36,7 @@ public class PaymentCycleController {
     }
 
     @GetMapping
-    @ApiOperation(value = "Lista os ciclos de pagamentos cadastrados", authorizations = @Authorization("OAuth"))
+    @ApiOperation(value = "Lista os ciclos de pagamentos cadastrados do usuário", authorizations = @Authorization("OAuth"))
     public List<PaymentCycleResponse> findAll(@AuthenticationPrincipal final User user) {
         return paymentCycleService.findAll(user);
     }

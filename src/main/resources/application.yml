@@ -1,7 +1,7 @@
 server:
   port: 1800
 
-cors-path: /**
+cors-path: "*"
 
 ssh-key:
   public: classpath:ssh_key/spring-rest-security.pub

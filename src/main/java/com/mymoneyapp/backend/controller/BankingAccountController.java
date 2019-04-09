@@ -67,7 +67,7 @@ public class BankingAccountController {
     }
 
     @GetMapping("/{id}/summary")
-    @ApiOperation(value = "Gera o sumário de uma conta", authorizations = @Authorization("OAuth"))
+    @ApiOperation(value = "Gera o sumário de uma conta do usuário", authorizations = @Authorization("OAuth"))
     public Double getSummary(@AuthenticationPrincipal final User user, @PathVariable final Long id) {
         return bankingAccountService.getSummary(user, id);
     }

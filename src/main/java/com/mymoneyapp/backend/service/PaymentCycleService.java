@@ -30,7 +30,7 @@ public class PaymentCycleService {
 
     @Transactional
     public Long save(final User user, final PaymentCycleRequest paymentCycleRequest) {
-        log.info("C=PaymentCycleService, M=save, T=PaymentCycleRequest {}", paymentCycleRequest);
+        log.info("C=PaymentCycleService, M=save, U={}, T=PaymentCycleRequest {}", user, paymentCycleRequest);
 
         this.checkIfPaymentCycleRequestHasCreditsOrDebits(paymentCycleRequest);
 
@@ -44,23 +44,30 @@ public class PaymentCycleService {
 
     @Transactional(readOnly = true)
     public List<PaymentCycleResponse> findAll(final User user) {
+        log.info("C=PaymentCycleService, M=findAll, U={}", user);
+
         return paymentCycleMapper.paymentCyclesToResponses(retrieveAllByUser(user));
     }
 
     @Transactional(readOnly = true)
-    public List<PaymentCycle> retrieveAllByUser(final User user) {
-        List<BankingAccount> bankingAccounts = bankingAccountService.retrieveAllByUser(user);
+    protected List<PaymentCycle> retrieveAllByUser(final User user) {
+        log.info("C=PaymentCycleService, M=retrieveAllByUser, U={}", user);
 
-        return retrieveAllByBankingAccount(bankingAccounts);
+        List<BankingAccount> bankingAccounts = bankingAccountService.retrieveAllByUser(user);
+        return retrieveAllByBankingAccountIn(bankingAccounts);
     }
 
     @Transactional(readOnly = true)
-    public List<PaymentCycle> retrieveAllByBankingAccount(final BankingAccount bankingAccount) {
+    protected List<PaymentCycle> retrieveAllByBankingAccount(final BankingAccount bankingAccount) {
+        log.info("C=PaymentCycleService, M=retrieveAllByBankingAccount, T=BankingAccount {}", bankingAccount);
+
         return paymentCycleRepository.findAllByBankingAccount(bankingAccount);
     }
 
     @Transactional(readOnly = true)
-    public List<PaymentCycle> retrieveAllByBankingAccount(final List<BankingAccount> bankingAccounts) {
+    protected List<PaymentCycle> retrieveAllByBankingAccountIn(final List<BankingAccount> bankingAccounts) {
+        log.info("C=PaymentCycleService, M=retrieveAllByBankingAccountIn, T=BankingAccounts {}", bankingAccounts);
+
         return paymentCycleRepository.findAllByBankingAccountIn(bankingAccounts);
     }
 
@@ -71,7 +78,7 @@ public class PaymentCycleService {
         return paymentCycleRepository.save(paymentCycle);
     }
 
-    private void checkIfPaymentCycleRequestHasCreditsOrDebits(PaymentCycleRequest paymentCycleRequest) {
+    private void checkIfPaymentCycleRequestHasCreditsOrDebits(final PaymentCycleRequest paymentCycleRequest) {
         if (paymentCycleRequest.getCredits().isEmpty() && paymentCycleRequest.getDebits().isEmpty()) {
             throw new PaymentCycleNotHasCreditsOrDebitsException();
         }

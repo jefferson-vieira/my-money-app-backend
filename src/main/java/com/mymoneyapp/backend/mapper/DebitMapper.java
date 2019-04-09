@@ -13,7 +13,7 @@ import java.util.List;
 public interface DebitMapper {
 
     @Mappings({
-            @Mapping(target = "id", ignore = true),
+            @Mapping(target = "id",      ignore = true),
             @Mapping(target = "enabled", ignore = true),
     })
     Debit requestToDebit(DebitRequest debitRequest);

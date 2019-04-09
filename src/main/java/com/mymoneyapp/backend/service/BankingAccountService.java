@@ -50,7 +50,7 @@ public class BankingAccountService {
         log.info("C=BankingAccountService, M=getSummary, U={}", user);
 
         List<BankingAccount> bankingAccounts = retrieveAllByUser(user);
-        List<PaymentCycle> paymentCycles = paymentCycleService.retrieveAllByBankingAccount(bankingAccounts);
+        List<PaymentCycle> paymentCycles = paymentCycleService.retrieveAllByBankingAccountIn(bankingAccounts);
         return this.bankingAccountSummary(paymentCycles);
     }
 
@@ -104,13 +104,13 @@ public class BankingAccountService {
         return bankingAccountRepository.save(bankingAccount);
     }
 
-    private Double bankingAccountSummary(List<PaymentCycle> paymentCycles) {
-        return paymentCycles.stream().map(this::paymentCycleSummary).reduce(0.0, Double::sum);
+    private Double bankingAccountSummary(final List<PaymentCycle> paymentCycles) {
+        return paymentCycles.stream().map(this::paymentCycleSummary).reduce(0D, Double::sum);
     }
 
-    private Double paymentCycleSummary(PaymentCycle pc) {
-        return pc.getCredits().stream().reduce(0.0, (acc, c) -> acc + c.getValue(), Double::sum)
-                - pc.getDebits().stream().reduce(0.0, (acc, d) -> acc + d.getValue(), Double::sum);
+    private Double paymentCycleSummary(final PaymentCycle pc) {
+        return pc.getCredits().stream().reduce(0D, (acc, c) -> acc + c.getValue(), Double::sum)
+                - pc.getDebits().stream().reduce(0D, (acc, d) -> acc + d.getValue(), Double::sum);
     }
 
 }
