@@ -31,7 +31,7 @@ public class BankingAccountController {
     private BankingAccountService bankingAccountService;
 
     @PostMapping
-    @ApiOperation(value = "Cadastra uma conta bancária", authorizations = @Authorization("OAuth"))
+    @ApiOperation(value = "Cadastra uma conta bancária para o usuário", authorizations = @Authorization("OAuth"))
     public HttpEntity save(@AuthenticationPrincipal final User user,
                            @Valid @RequestBody final BankingAccountRequest bankingAccountRequest) {
         Long bankingAccountId = bankingAccountService.save(user, bankingAccountRequest);
@@ -39,16 +39,19 @@ public class BankingAccountController {
     }
 
     @GetMapping
-    @ApiOperation(value = "Lista as contas bancárias cadastradas", authorizations = @Authorization("OAuth"))
+    @ApiOperation(value = "Lista as contas bancárias cadastradas do usuário", authorizations = @Authorization("OAuth"))
     public List<BankingAccountResponse> findAllByUser(@AuthenticationPrincipal final User user) {
         return bankingAccountService.findAllByUser(user);
     }
 
-//    @GetMapping("/summary")
-//    @ApiOperation(value = "Gera o sumário das contas", authorizations = @Authorization("OAuth"))
+    @GetMapping("/summary")
+    @ApiOperation(value = "Gera o sumário das contas", authorizations = @Authorization("OAuth"))
+    public Long getSummary(@AuthenticationPrincipal final User user) {
+        return bankingAccountService.getSummary(user);
+    }
 
     @PutMapping("/{id}")
-    @ApiOperation(value = "Atualiza os dados da conta bancária", authorizations = @Authorization("OAuth"))
+    @ApiOperation(value = "Atualiza os dados da conta bancária do usuário", authorizations = @Authorization("OAuth"))
     public HttpEntity<?> update(@AuthenticationPrincipal final User user,
                                 @PathVariable final Long id,
                                 @Valid @RequestBody final BankingAccountRequest bankingAccountRequest) {
@@ -63,7 +66,10 @@ public class BankingAccountController {
         return ResponseEntity.noContent().build();
     }
 
-//    @GetMapping("/{id}/summary")
-//    @ApiOperation(value = "Gera o sumário de uma conta", authorizations = @Authorization("OAuth"))
+    @GetMapping("/{id}/summary")
+    @ApiOperation(value = "Gera o sumário de uma conta", authorizations = @Authorization("OAuth"))
+    public Long getSummary(@AuthenticationPrincipal final User user, @PathVariable final Long id) {
+        return bankingAccountService.getSummary(user, id);
+    }
 
 }

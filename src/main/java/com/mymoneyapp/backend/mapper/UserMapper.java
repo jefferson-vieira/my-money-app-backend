@@ -24,6 +24,9 @@ public interface UserMapper {
     })
     User requestToUser(UserRequest userRequest);
 
+    @Mappings({
+            @Mapping(target = "createdAt", dateFormat = "dd/MM/yyyy HH:mm"),
+    })
     @InheritConfiguration
     List<UserResponse> userToResponse(Iterable<User> user);
 

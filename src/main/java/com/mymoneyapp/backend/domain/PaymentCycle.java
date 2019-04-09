@@ -13,6 +13,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import java.time.LocalDate;
 import java.util.List;
@@ -41,6 +42,9 @@ public class PaymentCycle {
 
     @OneToMany(cascade = CascadeType.ALL)
     private List<Debit> debits;
+
+    @ManyToOne(optional = false)
+    private BankingAccount bankingAccount;
 
     @Builder.Default
     @Column(name = "flg_Active")

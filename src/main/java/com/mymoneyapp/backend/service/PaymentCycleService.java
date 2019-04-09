@@ -1,6 +1,8 @@
 package com.mymoneyapp.backend.service;
 
+import com.mymoneyapp.backend.domain.BankingAccount;
 import com.mymoneyapp.backend.domain.PaymentCycle;
+import com.mymoneyapp.backend.domain.User;
 import com.mymoneyapp.backend.exception.PaymentCycleNotHasCreditsOrDebitsException;
 import com.mymoneyapp.backend.mapper.PaymentCycleMapper;
 import com.mymoneyapp.backend.repository.PaymentCycleRepository;
@@ -12,10 +14,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
 public class PaymentCycleService {
+
+    @Autowired
+    private BankingAccountService bankingAccountService;
 
     @Autowired
     private PaymentCycleMapper paymentCycleMapper;
@@ -24,17 +30,36 @@ public class PaymentCycleService {
     private PaymentCycleRepository paymentCycleRepository;
 
     @Transactional
-    public Long save(final PaymentCycleRequest paymentCycleRequest) {
+    public Long save(final User user, final PaymentCycleRequest paymentCycleRequest) {
         log.info("C=PaymentCycleService, M=save, T=PaymentCycleRequest {}", paymentCycleRequest);
 
         this.checkIfPaymentCycleRequestHasCreditsOrDebits(paymentCycleRequest);
 
-//        this.checkIfCreditsIsInPaymentCycleDuration();
-//        this.checkIfDebitsIsInPaymentCycleDuration();
+        BankingAccount bankingAccount = bankingAccountService.retrieveById(user, paymentCycleRequest.getBankingAccountId());
 
         PaymentCycle toPersist = paymentCycleMapper.requestToPaymentCycle(paymentCycleRequest);
+        toPersist.setBankingAccount(bankingAccount);
         PaymentCycle persistedPaymentCycle = persist(toPersist);
         return persistedPaymentCycle.getId();
+    }
+
+    @Transactional(readOnly = true)
+    public List<PaymentCycleResponse> findAll(final User user) {
+        return paymentCycleMapper.paymentCyclesToResponses(retrieveAllByUser(user));
+    }
+
+    @Transactional(readOnly = true)
+    public List<PaymentCycle> retrieveAllByUser(final User user) {
+        List<BankingAccount> bankingAccounts = bankingAccountService.retrieveAllByUser(user);
+
+        return bankingAccounts
+                .stream().map(this::retrieveAllByBankingAccount).flatMap(List::stream)
+                .collect(Collectors.toList());
+    }
+
+    @Transactional(readOnly = true)
+    public List<PaymentCycle> retrieveAllByBankingAccount(final BankingAccount bankingAccount) {
+        return paymentCycleRepository.findAllByBankingAccount(bankingAccount);
     }
 
     @Transactional
@@ -43,20 +68,6 @@ public class PaymentCycleService {
 
         return paymentCycleRepository.save(paymentCycle);
     }
-
-    @Transactional(readOnly = true)
-    public List<PaymentCycleResponse> findAll() {
-        List<PaymentCycle> paymentCycles = paymentCycleRepository.findAll();
-        return paymentCycleMapper.paymentCyclesToResponses(paymentCycles);
-    }
-
-//    @Transactional(readOnly = true)
-//    public List<PaymentCycleResponse> findAllByBankingAccount(final BankingAccount bankingAccount) {
-//        log.info("C=PaymentCycleService, M=findAll, T=BankingAccount {}", bankingAccount);
-//
-//        List<PaymentCycle> paymentCycles = paymentCycleRepository.findAllByBankingAccount(bankingAccount);
-//        return paymentCycleMapper.paymentCyclesToResponses(paymentCycles);
-//  }
 
     private void checkIfPaymentCycleRequestHasCreditsOrDebits(PaymentCycleRequest paymentCycleRequest) {
         if (paymentCycleRequest.getCredits().isEmpty() && paymentCycleRequest.getDebits().isEmpty()) {

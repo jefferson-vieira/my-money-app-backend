@@ -22,4 +22,7 @@ public class PaymentCycleRequest {
 
     @Valid
     private List<DebitRequest> debits;
+
+    @NotNull(message = "A conta bancária precisa ser informada")
+    private Long bankingAccountId;
 }
