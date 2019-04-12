@@ -1,4 +1,4 @@
-cors-path: /**
+cors-path: "https://meu-dinheiro-frontend.herokuapp.com/**"
 
 ssh-key:
   public: classpath:ssh_key/spring-rest-security.pub

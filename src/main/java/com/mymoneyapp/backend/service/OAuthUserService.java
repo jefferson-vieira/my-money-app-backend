@@ -15,7 +15,7 @@ public class OAuthUserService implements UserDetailsService {
 
     @Override
     public User loadUserByUsername(final String email) {
-        log.info("C=OAuthUserService, M=loadUserByUsername, T=User {}", email);
+        log.info("C=OAuthUserService, M=loadUserByUsername, T=Email {}", email);
 
         return userService.retrieveUserByEmail(email);
     }

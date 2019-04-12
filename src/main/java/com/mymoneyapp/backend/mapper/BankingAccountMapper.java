@@ -6,6 +6,7 @@ import com.mymoneyapp.backend.response.BankingAccountResponse;
 import org.mapstruct.InheritConfiguration;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
 import org.mapstruct.Mappings;
 
 import java.util.List;
@@ -14,10 +15,10 @@ import java.util.List;
 public interface BankingAccountMapper {
 
     @Mappings({
-            @Mapping(target = "id", ignore = true),
+            @Mapping(target = "id",        ignore = true),
             @Mapping(target = "createdAt", ignore = true),
-            @Mapping(target = "enabled", ignore = true),
-            @Mapping(target = "user.id", source = "userId"),
+            @Mapping(target = "enabled",   ignore = true),
+            @Mapping(target = "user",      ignore = true),
     })
     BankingAccount requestToBankingAccount(BankingAccountRequest bankingAccountRequest);
 
@@ -28,5 +29,9 @@ public interface BankingAccountMapper {
 
     @InheritConfiguration
     List<BankingAccountResponse> bankingAccountsToResponses(Iterable<BankingAccount> bankingAccount);
+
+    @InheritConfiguration
+    void updateBankingAccountFromRequest(@MappingTarget BankingAccount bankingAccount,
+                                         BankingAccountRequest bankingAccountRequest);
 
 }

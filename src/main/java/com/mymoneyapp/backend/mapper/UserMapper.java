@@ -16,19 +16,24 @@ import java.util.List;
 public interface UserMapper {
 
     @Mappings({
-            @Mapping(target = "id", ignore = true),
-            @Mapping(target = "username", ignore = true),
-            @Mapping(target = "createdAt", ignore = true),
+            @Mapping(target = "id",          ignore = true),
+            @Mapping(target = "username",    ignore = true),
+            @Mapping(target = "createdAt",   ignore = true),
             @Mapping(target = "authorities", ignore = true),
-            @Mapping(target = "enabled", ignore = true),
+            @Mapping(target = "enabled",     ignore = true),
     })
     User requestToUser(UserRequest userRequest);
 
+    @Mappings({
+            @Mapping(target = "createdAt", dateFormat = "dd/MM/yyyy HH:mm"),
+    })
+    UserResponse userToResponse(User user);
+
     @InheritConfiguration
-    List<UserResponse> userToResponse(Iterable<User> user);
+    List<UserResponse> usersToResponses(Iterable<User> user);
 
     default Page<UserResponse> usersToResponses(Page<User> users) {
-        List<UserResponse> userResponses = userToResponse(users.getContent());
+        List<UserResponse> userResponses = usersToResponses(users.getContent());
         return new PageImpl<>(userResponses, users.getPageable(), users.getTotalElements());
     }
 

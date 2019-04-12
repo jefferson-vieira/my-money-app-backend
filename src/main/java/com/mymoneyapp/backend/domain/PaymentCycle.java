@@ -4,19 +4,20 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
-import java.time.LocalDateTime;
+import javax.persistence.OneToMany;
+import java.time.LocalDate;
+import java.util.Set;
 
 @Data
 @Entity
@@ -24,33 +25,27 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Builder
 @Where(clause = "flg_active <> false")
-@SQLDelete(sql = "update banking_account set flg_active = false where id = ?")
-@Table(uniqueConstraints = {
-        @UniqueConstraint(columnNames = {"agency", "number", "digit"})
-})
-public class BankingAccount {
+@SQLDelete(sql = "update payment_cycle set flg_active = false where id = ?")
+public class PaymentCycle {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false)
-    private String bankName;
+    private String description;
 
     @Column(nullable = false)
-    private String agency;
+    private LocalDate date;
 
-    @Column(nullable = false)
-    private String number;
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Set<Credit> credits;
 
-    @Column(nullable = false)
-    private String digit;
-
-    @CreationTimestamp
-    private LocalDateTime createdAt;
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Set<Debit> debits;
 
     @ManyToOne(optional = false)
-    private User user;
+    private BankingAccount bankingAccount;
 
     @Builder.Default
     @Column(name = "flg_Active")
