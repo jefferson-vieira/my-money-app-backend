@@ -1,6 +1,7 @@
 package com.mymoneyapp.backend.controller;
 
 import com.mymoneyapp.backend.domain.User;
+import com.mymoneyapp.backend.model.Summary;
 import com.mymoneyapp.backend.request.BankingAccountRequest;
 import com.mymoneyapp.backend.response.BankingAccountResponse;
 import com.mymoneyapp.backend.service.BankingAccountService;
@@ -46,7 +47,7 @@ public class BankingAccountController {
 
     @GetMapping("/summary")
     @ApiOperation(value = "Gera o sumário das contas", authorizations = @Authorization("OAuth"))
-    public Double getSummary(@AuthenticationPrincipal final User user) {
+    public Summary getSummary(@AuthenticationPrincipal final User user) {
         return bankingAccountService.getSummary(user);
     }
 
@@ -68,7 +69,7 @@ public class BankingAccountController {
 
     @GetMapping("/{id}/summary")
     @ApiOperation(value = "Gera o sumário de uma conta do usuário", authorizations = @Authorization("OAuth"))
-    public Double getSummary(@AuthenticationPrincipal final User user, @PathVariable final Long id) {
+    public Summary getSummary(@AuthenticationPrincipal final User user, @PathVariable final Long id) {
         return bankingAccountService.getSummary(user, id);
     }
 

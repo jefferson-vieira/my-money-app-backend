@@ -5,6 +5,7 @@ import com.mymoneyapp.backend.domain.PaymentCycle;
 import com.mymoneyapp.backend.domain.User;
 import com.mymoneyapp.backend.exception.ResourceNotFoundException;
 import com.mymoneyapp.backend.mapper.BankingAccountMapper;
+import com.mymoneyapp.backend.model.Summary;
 import com.mymoneyapp.backend.repository.BankingAccountRepository;
 import com.mymoneyapp.backend.request.BankingAccountRequest;
 import com.mymoneyapp.backend.response.BankingAccountResponse;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -46,7 +48,7 @@ public class BankingAccountService {
         return bankingAccountMapper.bankingAccountsToResponses(bankingAccounts);
     }
 
-    public Double getSummary(final User user) {
+    public Summary getSummary(final User user) {
         log.info("C=BankingAccountService, M=getSummary, U={}", user);
 
         List<BankingAccount> bankingAccounts = retrieveAllByUser(user);
@@ -54,7 +56,7 @@ public class BankingAccountService {
         return this.bankingAccountSummary(paymentCycles);
     }
 
-    public Double getSummary(final User user, final Long id) {
+    public Summary getSummary(final User user, final Long id) {
         log.info("C=BankingAccountService, M=getSummary, U={}, T=ID {}", user, id);
 
         BankingAccount bankingAccount = retrieveByIdAndUser(id, user);
@@ -104,13 +106,15 @@ public class BankingAccountService {
         return bankingAccountRepository.save(bankingAccount);
     }
 
-    private Double bankingAccountSummary(final List<PaymentCycle> paymentCycles) {
-        return paymentCycles.stream().map(this::paymentCycleSummary).reduce(0D, Double::sum);
+    private Summary bankingAccountSummary(final List<PaymentCycle> paymentCycles) {
+        List<Summary> summaries = paymentCycles.stream().map(this::paymentCycleSummary).collect(Collectors.toList());
+        return new Summary(summaries.stream().map(Summary::getCredit).reduce(0D, Double::sum),
+                summaries.stream().map(Summary::getDebit).reduce(0D, Double::sum));
     }
 
-    private Double paymentCycleSummary(final PaymentCycle pc) {
-        return pc.getCredits().stream().reduce(0D, (acc, c) -> acc + c.getValue(), Double::sum)
-                - pc.getDebits().stream().reduce(0D, (acc, d) -> acc + d.getValue(), Double::sum);
+    private Summary paymentCycleSummary(final PaymentCycle pc) {
+        return new Summary(pc.getCredits().stream().reduce(0D, (acc, c) -> acc + c.getValue(), Double::sum),
+                pc.getDebits().stream().reduce(0D, (acc, d) -> acc + d.getValue(), Double::sum));
     }
 
 }
