@@ -4,6 +4,7 @@ import com.mymoneyapp.backend.domain.User;
 import com.mymoneyapp.backend.exception.PasswordsNotMatchException;
 import com.mymoneyapp.backend.exception.UserNotFoundException;
 import com.mymoneyapp.backend.mapper.UserMapper;
+import com.mymoneyapp.backend.model.EmailType;
 import com.mymoneyapp.backend.repository.UserRepository;
 import com.mymoneyapp.backend.request.UserRequest;
 import com.mymoneyapp.backend.response.UserResponse;
@@ -16,12 +17,17 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 @Slf4j
 @Service
 public class UserService {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private EmailService emailService;
 
     @Autowired
     private UserMapper userMapper;
@@ -38,6 +44,7 @@ public class UserService {
         User toPersist = userMapper.requestToUser(userRequest);
         toPersist.setPassword(passwordEncoder.encode(toPersist.getPassword()));
         User persistedUser = persist(toPersist);
+        emailService.sendEmail(EmailType.EMAIL_VALIDATION, persistedUser);
         return persistedUser.getId();
     }
 
@@ -47,6 +54,15 @@ public class UserService {
 
         Page<User> users = userRepository.findAll(userSpecification, pageable);
         return userMapper.usersToResponses(users);
+    }
+
+    public void userValidation(final String encodedEmail) {
+        log.info("C=UserService, M=userValidation, T=EncodedEmail {}", encodedEmail);
+
+        final String email = emailService.decryptEmail(encodedEmail);
+        User user = userRepository.findByEmail(email).orElseThrow(UserNotFoundException::new);
+        user.setEnabled(true);
+        this.persist(user);
     }
 
     @Transactional(readOnly = true)
@@ -63,6 +79,7 @@ public class UserService {
 
         return userRepository.save(user);
     }
+
 
     private void checkIfPasswordMatchConfirmPassword(final UserRequest userRequest) {
         if (!userRequest.getPassword().equals(userRequest.getConfirmPassword())) {

@@ -1,10 +1,12 @@
 package com.mymoneyapp.backend.controller;
 
+import com.mymoneyapp.backend.model.EmailType;
 import com.mymoneyapp.backend.domain.User;
 import com.mymoneyapp.backend.model.Summary;
 import com.mymoneyapp.backend.request.BankingAccountRequest;
 import com.mymoneyapp.backend.response.BankingAccountResponse;
 import com.mymoneyapp.backend.service.BankingAccountService;
+import com.mymoneyapp.backend.service.EmailService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.Authorization;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +32,9 @@ public class BankingAccountController {
 
     @Autowired
     private BankingAccountService bankingAccountService;
+
+    @Autowired
+    private EmailService emailService;
 
     @PostMapping
     @ApiOperation(value = "Cadastra uma conta bancária para o usuário", authorizations = @Authorization("OAuth"))

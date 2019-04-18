@@ -1,6 +1,8 @@
 package com.mymoneyapp.backend.controller;
 
+import com.mymoneyapp.backend.repository.UserRepository;
 import com.mymoneyapp.backend.response.UserResponse;
+import com.mymoneyapp.backend.service.EmailService;
 import com.mymoneyapp.backend.service.UserService;
 import com.mymoneyapp.backend.specification.UserSpecification;
 import io.swagger.annotations.ApiOperation;
@@ -10,6 +12,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -25,6 +28,12 @@ public class UserController {
     public Page<UserResponse> findAll(final UserSpecification userSpecification,
                                       @PageableDefault(sort = {"name"}) final Pageable pageable) {
         return userService.findAll(userSpecification, pageable);
+    }
+
+    @GetMapping("/validate/{encodedEmail}")
+    @ApiOperation(value = "Valida o e-mail do usuário cadastrado",  authorizations = @Authorization("OAuth"))
+    public void validateUserEmail (@PathVariable final String encodedEmail) {
+        userService.userValidation(encodedEmail);
     }
 
 }

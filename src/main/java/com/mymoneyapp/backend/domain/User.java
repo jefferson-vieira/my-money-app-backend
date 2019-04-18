@@ -53,7 +53,7 @@ public class User implements UserDetails {
 
     @Builder.Default
     @Column(name = "flg_Active")
-    private boolean enabled = true;
+    private boolean enabled = false;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
