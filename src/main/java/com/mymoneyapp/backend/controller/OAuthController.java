@@ -39,10 +39,10 @@ public class OAuthController {
         return ResponseEntity.created(URI.create("/users/" + userId)).build();
     }
 
-    @GetMapping("/validate/{encodedEmail}")
+    @GetMapping("/regitration-confirm/{token}")
     @ApiOperation(value = "Valída o e-mail do usuário cadastrado",  authorizations = @Authorization("OAuth"))
-    public void validateUserEmail (@PathVariable final String encodedEmail) {
-        userService.validationUserEmail(encodedEmail);
+    public void validateUserEmail (@PathVariable final String token) {
+        userService.validationUserEmail(token);
     }
 
 }

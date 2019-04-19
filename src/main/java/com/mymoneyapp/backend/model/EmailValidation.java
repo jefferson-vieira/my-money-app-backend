@@ -1,8 +1,10 @@
 package com.mymoneyapp.backend.model;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
+@EqualsAndHashCode(callSuper=false)
 public class EmailValidation extends Email {
 
     public EmailValidation(String to, String toName) {

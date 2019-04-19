@@ -1,20 +1,28 @@
 package com.mymoneyapp.backend.service;
 
+import com.mymoneyapp.backend.domain.EmailVerificationToken;
+import com.mymoneyapp.backend.exception.EmailNotFoundException;
+import com.mymoneyapp.backend.mapper.EmailVerificationTokenMapper;
 import com.mymoneyapp.backend.model.Email;
 import com.mymoneyapp.backend.model.EmailType;
 import com.mymoneyapp.backend.model.EmailValidation;
 import com.mymoneyapp.backend.domain.User;
+import com.mymoneyapp.backend.repository.EmailVerificationTokenRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
 import java.util.Locale;
 
@@ -28,13 +36,19 @@ public class EmailService {
     @Autowired
     private TemplateEngine templateEngine;
 
+    @Autowired
+    private EmailVerificationTokenMapper emailVerificationTokenMapper;
+
+    @Autowired
+    private EmailVerificationTokenRepository emailVerificationTokenRepository;
+
     public void sendEmail(EmailType emailType, @AuthenticationPrincipal final User user) {
         log.info("C=EmailService, M=sendEmail; T=Emailtype {}, User {}", emailType, user);
 
         switch (emailType) {
             case EMAIL_VALIDATION:
                 EmailValidation mail = new EmailValidation(user.getEmail(), user.getName());
-                this.sendEmailValidation(mail);
+                this.sendEmailValidation(mail, user);
                 break;
             case FORGET_PÀSSWORD:
                 break;
@@ -44,8 +58,8 @@ public class EmailService {
 
     }
 
-    private void sendEmailValidation(EmailValidation mail) {
-        log.info("C=EmailService, M=sendEmailValidation; T=EmaiValidation {}", mail);
+    private void sendEmailValidation(EmailValidation mail, final User user) {
+        log.info("C=EmailService, M=sendEmailValidation; T=EmaiValidation {}, User {}", mail, user);
 
         try {
             final MimeMessage message = javaMailSender.createMimeMessage();
@@ -55,8 +69,8 @@ public class EmailService {
             helper.setFrom(new InternetAddress(mail.getFrom(), mail.getFromName()));
             helper.setSubject(mail.getSubject());
 
-            mail.setEmailLink("http://localhost:1800" + "/users/validate/" + this.encryptEmail(mail.getTo()));
-            //mail.setEmailLink("https://meu-dinheiro-backend.herokuapp.com"+"/users/validate/"+this.encryptEmail(mail.getTo()));
+            mail.setEmailLink("http://localhost:1800" + "/regitration-confirm/" + this.encryptHash(this.save(user)));
+            //mail.setEmailLink("https://meu-dinheiro-backend.herokuapp.com"+"/regitration-confirm/"+this.encryptEmail(mail.getTo()));
 
             final String htmlContent = templateEngine.process("email.html", this.setContext(mail));
 
@@ -69,23 +83,51 @@ public class EmailService {
         }
     }
 
-    private String encryptEmail(String email) {
-        log.info("C=EmailService, M=encryptEmail; T=Email {}", email);
+    private final String encryptHash(final String token) {
+        log.info("C=EmailService, M=encryptHash; T=Token {}", token);
 
-        final String encodedEmail = "Seu_babaca_pau_no_cu#" + email + "#por_que_ta_dando_decode_no_meu_base_64_?";
-        final String strData = Base64.getUrlEncoder().encodeToString(encodedEmail.getBytes());
-
-        return strData;
+        try {
+            return Base64.getUrlEncoder().encodeToString(token.getBytes("UTF-8"));
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
-    public String decryptEmail(String emailEncrypted) {
-        log.info("C=EmailService, M=decryptEmail; T=EncodedEmail {}", emailEncrypted);
+    public final String decryptHash(String token) {
+        log.info("C=EmailService, M=decryptHash; T=TokenBase64 {}", token);
 
-        final String decodeEmail = new String(Base64.getUrlDecoder().decode(emailEncrypted.getBytes()));
-        final String[] decodedEmail = decodeEmail.split("#");
-        final String decryptedEmail = decodedEmail[1];
+        try {
+            return new String(Base64.getUrlDecoder().decode(token.getBytes("UTF-8")));
+        }catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
-        return decryptedEmail;
+    @Transactional
+    private String save(final User user) {
+        log.info("C=EmailService, M=save, T=User {}", user);
+
+        EmailVerificationToken toPersist = emailVerificationTokenMapper.userToEmailVerificationToken(user, this.generateHash(user));
+        EmailVerificationToken persistedEmailVerificationToken = this.persist(toPersist);
+
+        return persistedEmailVerificationToken.getToken();
+    }
+
+    @Transactional(readOnly = true)
+    protected EmailVerificationToken retrieveEmailVerificationTokenByToken(final String token) {
+        log.info("C=EmailService, M=retrieveEmailVerificationTokenByToken, T=Token {}", token);
+
+        return emailVerificationTokenRepository.findByToken(token)
+                .orElseThrow(EmailNotFoundException::new);
+    }
+
+    @Transactional
+    protected EmailVerificationToken persist(final EmailVerificationToken emailVerificationToken) {
+        log.info("C=EmailService, M=persist; T=EmailVerificationToken {}", emailVerificationToken);
+
+        return emailVerificationTokenRepository.save(emailVerificationToken);
     }
 
     private static Context setContext(Email mail) {
@@ -104,6 +146,27 @@ public class EmailService {
         ctx.setVariable("message", mail.getEmailMessage());
 
         return ctx;
+    }
+
+    private final String generateHash(final User user) {
+        try {
+            MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
+            messageDigest.update(user.toString().getBytes("UTF-8"));
+            final byte[] hashBytes = messageDigest.digest();
+            StringBuffer hash = new StringBuffer();
+
+            for (byte b : hashBytes)
+                hash.append(String.format("%02x", b & 0xff));
+
+            return hash.toString();
+        }
+        catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
 }

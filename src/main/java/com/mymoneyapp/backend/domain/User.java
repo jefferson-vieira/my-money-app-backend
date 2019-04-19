@@ -51,8 +51,8 @@ public class User implements UserDetails {
     @CreationTimestamp
     private LocalDateTime createdAt;
 
-    @Column(nullable = false)
-    private boolean isAccountNonLocked = false;
+    @Builder.Default
+    private boolean accountNonLocked = false;
 
     @Builder.Default
     @Column(name = "flg_Active")

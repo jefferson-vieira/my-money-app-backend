@@ -1,5 +1,6 @@
 package com.mymoneyapp.backend.service;
 
+import com.mymoneyapp.backend.domain.EmailVerificationToken;
 import com.mymoneyapp.backend.domain.User;
 import com.mymoneyapp.backend.exception.EmailNotFoundException;
 import com.mymoneyapp.backend.exception.PasswordsNotMatchException;
@@ -17,8 +18,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.Optional;
 
 @Slf4j
 @Service
@@ -57,16 +56,6 @@ public class UserService {
         return userMapper.usersToResponses(users);
     }
 
-    @Transactional
-    protected void unlockUser(String email) {
-        log.info("C=UserService, M=unlockUser, T=Email {}", email);
-
-        User user = userRepository.findByEmail(email)
-                .orElseThrow(EmailNotFoundException::new);
-        user.setAccountNonLocked(true);
-        this.persist(user);
-    }
-
     @Transactional(readOnly = true)
     protected User retrieveUserByEmail(final String email) {
         log.info("C=UserService, M=retrieveUserByEmail, T=Email {}", email);
@@ -82,10 +71,20 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public void validationUserEmail(final String encodedEmail) {
-        log.info("C=UserService, M=userEmailValidation, T=EncodedEmail {}", encodedEmail);
+    @Transactional
+    protected void unlockUser(String token) {
+        log.info("C=UserService, M=unlockUser, T=Token {}", token);
 
-        final String email = emailService.decryptEmail(encodedEmail);
+        final EmailVerificationToken emailVerificationToken = emailService.retrieveEmailVerificationTokenByToken(token);
+        User user = userRepository.findByEmail(emailVerificationToken.getUser().getEmail())
+                .orElseThrow(EmailNotFoundException::new);
+        user.setAccountNonLocked(true);
+        this.persist(user);
+    }
+    public void validationUserEmail(final String token) {
+        log.info("C=UserService, M=validationUserEmail, T=TokenBase64 {}", token);
+
+        final String email = emailService.decryptHash(token);
         this.unlockUser(email);
     }
 
