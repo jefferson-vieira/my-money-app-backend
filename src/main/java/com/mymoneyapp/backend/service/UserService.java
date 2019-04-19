@@ -15,9 +15,12 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 
 @Slf4j
 @Service
@@ -72,7 +75,7 @@ public class UserService {
     }
 
     @Transactional
-    protected void unlockUser(String token) {
+    protected HttpEntity unlockUser(String token) {
         log.info("C=UserService, M=unlockUser, T=Token {}", token);
 
         final EmailVerificationToken emailVerificationToken = emailService.retrieveEmailVerificationTokenByToken(token);
@@ -80,12 +83,13 @@ public class UserService {
                 .orElseThrow(EmailNotFoundException::new);
         user.setAccountNonLocked(true);
         this.persist(user);
+        return ResponseEntity.ok("Message: email successfully confirmed");
     }
-    public void validationUserEmail(final String token) {
+    public HttpEntity validationUserEmail(final String token) {
         log.info("C=UserService, M=validationUserEmail, T=TokenBase64 {}", token);
 
         final String email = emailService.decryptHash(token);
-        this.unlockUser(email);
+        return this.unlockUser(email);
     }
 
     private void checkIfPasswordMatchConfirmPassword(final UserRequest userRequest) {

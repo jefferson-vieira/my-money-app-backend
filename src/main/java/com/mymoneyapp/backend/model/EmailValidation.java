@@ -17,12 +17,9 @@ public class EmailValidation extends Email {
         this.emailSubTitle = "Obrigado por criar sua nova conta no My Money App, ";
         this.emailSubTitleDescription = "Para usar a gama completa dos serviços My Money App, você precisará verificar o endereço de e-mail da sua conta.";
         this.emailMessageTitle = "O que é o My Money App?";
-        this.emailMessage = "É uma pequena aplicação desenvolvida para ajudar a gerênciar multiplas\\n\" +\n" +
-                "                \" contas bancárias e\\n\" +\n" +
-                "                \" a situação financeira\\n\" +\n" +
-                "                \" dos nossos usuários <br><br> Permite gerênciar os cartões de crédito e débito, notíficar\\n\" +\n" +
-                "                \" sobre vencimentos, além de claro,\\n\" +\n" +
-                "                \" permitir a gestão das contas pessoais dos nossos clientes com total segurança e\\n\" +\n" +
-                "                \" praticidade ";
+        this.emailMessage = "É uma pequena aplicação desenvolvida para ajudar a gerênciar multiplas"+
+                " contas bancárias e a situação financeira" +
+                " dos nossos usuários <br><br> Permite gerênciar os cartões de crédito e débito, notíficar" +
+                " sobre vencimentos, além de claro, permitir a gestão das contas pessoais dos nossos clientes com total segurança e praticidade ";
     }
 }
