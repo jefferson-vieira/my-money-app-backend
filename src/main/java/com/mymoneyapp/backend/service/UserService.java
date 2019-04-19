@@ -1,6 +1,7 @@
 package com.mymoneyapp.backend.service;
 
 import com.mymoneyapp.backend.domain.User;
+import com.mymoneyapp.backend.exception.EmailNotFoundException;
 import com.mymoneyapp.backend.exception.PasswordsNotMatchException;
 import com.mymoneyapp.backend.exception.UserNotFoundException;
 import com.mymoneyapp.backend.mapper.UserMapper;
@@ -56,12 +57,13 @@ public class UserService {
         return userMapper.usersToResponses(users);
     }
 
-    public void userValidation(final String encodedEmail) {
-        log.info("C=UserService, M=userValidation, T=EncodedEmail {}", encodedEmail);
+    @Transactional
+    protected void unlockUser(String email) {
+        log.info("C=UserService, M=unlockUser, T=Email {}", email);
 
-        final String email = emailService.decryptEmail(encodedEmail);
-        User user = userRepository.findByEmail(email).orElseThrow(UserNotFoundException::new);
-        user.setEnabled(true);
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(EmailNotFoundException::new);
+        user.setAccountNonLocked(true);
         this.persist(user);
     }
 
@@ -80,6 +82,12 @@ public class UserService {
         return userRepository.save(user);
     }
 
+    public void validationUserEmail(final String encodedEmail) {
+        log.info("C=UserService, M=userEmailValidation, T=EncodedEmail {}", encodedEmail);
+
+        final String email = emailService.decryptEmail(encodedEmail);
+        this.unlockUser(email);
+    }
 
     private void checkIfPasswordMatchConfirmPassword(final UserRequest userRequest) {
         if (!userRequest.getPassword().equals(userRequest.getConfirmPassword())) {

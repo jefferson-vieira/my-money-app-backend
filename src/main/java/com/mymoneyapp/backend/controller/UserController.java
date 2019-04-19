@@ -30,10 +30,4 @@ public class UserController {
         return userService.findAll(userSpecification, pageable);
     }
 
-    @GetMapping("/validate/{encodedEmail}")
-    @ApiOperation(value = "Valida o e-mail do usuário cadastrado",  authorizations = @Authorization("OAuth"))
-    public void validateUserEmail (@PathVariable final String encodedEmail) {
-        userService.userValidation(encodedEmail);
-    }
-
 }

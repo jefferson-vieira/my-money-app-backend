@@ -9,11 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.net.URI;
@@ -36,6 +32,12 @@ public class OAuthController {
     public HttpEntity save(@Valid @RequestBody final UserRequest userRequest) {
         Long userId = userService.save(userRequest);
         return ResponseEntity.created(URI.create("/users/" + userId)).build();
+    }
+
+    @GetMapping("/validate/{encodedEmail}")
+    @ApiOperation(value = "Valída o e-mail do usuário cadastrado",  authorizations = @Authorization("OAuth"))
+    public void validateUserEmail (@PathVariable final String encodedEmail) {
+        userService.validationUserEmail(encodedEmail);
     }
 
 }

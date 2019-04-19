@@ -85,8 +85,6 @@ public class EmailService {
         final String[] decodedEmail = decodeEmail.split("#");
         final String decryptedEmail = decodedEmail[1];
 
-        log.info("C=EmailService, M=decryptEmail; T=DecodedEmail {}", decryptedEmail);
-
         return decryptedEmail;
     }
 
