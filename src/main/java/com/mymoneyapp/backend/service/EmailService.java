@@ -180,7 +180,7 @@ public class EmailService {
     }
 
     private void checkIfTokenHasExpired(final EmailVerificationToken emailVerificationToken) {
-        final Integer expireInMinutes = 1;
+        final Integer expireInMinutes = 15;
         final LocalDateTime expiresIn = emailVerificationToken.getCreatedAt().plus(expireInMinutes, ChronoUnit.MINUTES);
         if(expiresIn.isBefore(LocalDateTime.now())) {
             throw  new EmailTokenHasExpiredException();
