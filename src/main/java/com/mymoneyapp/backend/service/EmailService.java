@@ -3,8 +3,10 @@ package com.mymoneyapp.backend.service;
 import com.mymoneyapp.backend.domain.EmailVerificationToken;
 import com.mymoneyapp.backend.exception.EmailNotFoundException;
 import com.mymoneyapp.backend.exception.EmailTokenHasExpiredException;
+import com.mymoneyapp.backend.exception.EmailTokenWasUsedException;
 import com.mymoneyapp.backend.mapper.EmailVerificationTokenMapper;
 import com.mymoneyapp.backend.model.Email;
+import com.mymoneyapp.backend.model.EmailForgetPassword;
 import com.mymoneyapp.backend.model.EmailType;
 import com.mymoneyapp.backend.model.EmailValidation;
 import com.mymoneyapp.backend.domain.User;
@@ -50,10 +52,12 @@ public class EmailService {
 
         switch (emailType) {
             case EMAIL_VALIDATION:
-                EmailValidation mail = new EmailValidation(user.getEmail(), user.getName());
-                this.sendEmailValidation(mail, user);
+                EmailValidation emailValidation = new EmailValidation(user.getEmail(), user.getName());
+                this.sendEmailValidation(emailValidation, user);
                 break;
             case FORGET_PÀSSWORD:
+                EmailForgetPassword emailForgetPassword = new EmailForgetPassword(user.getEmail(), user.getName());
+                this.sendForgetPassword(emailForgetPassword, user);
                 break;
             case BILL_NOTIFICATION:
                 break;
@@ -70,8 +74,28 @@ public class EmailService {
             helper.setFrom(new InternetAddress(mail.getFrom(), mail.getFromName()));
             helper.setSubject(mail.getSubject());
 
-            mail.setEmailLink("http://localhost:1800" + "/registration-confirm/" + this.encryptHash(this.save(user)));
-            //mail.setEmailLink("https://meu-dinheiro-backend.herokuapp.com"+"/registration-confirm/"+this.encryptEmail(mail.getTo()));
+            mail.setEmailLink("https://meu-dinheiro-frontend.herokuapp.com"+"/auth/registration-confirm/"+this.encryptHash(this.save(user)));
+
+            final String htmlContent = templateEngine.process("email.html", this.setContext(mail));
+            helper.setText(htmlContent, true);
+            javaMailSender.send(message);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void sendForgetPassword(EmailForgetPassword mail, final User user) {
+        log.info("C=EmailService, M=sendForgetPassword; T=EmaiValidation {}, User {}", mail, user);
+
+        try {
+            final MimeMessage message = javaMailSender.createMimeMessage();
+            MimeMessageHelper helper = new MimeMessageHelper(message, "UTF-8");
+            helper.setTo(mail.getTo());
+            helper.setFrom(new InternetAddress(mail.getFrom(), mail.getFromName()));
+            helper.setSubject(mail.getSubject());
+
+            mail.setEmailLink("https://meu-dinheiro-frontend.herokuapp.com"+"/auth/change-password/"+this.encryptHash(this.save(user)));
 
             final String htmlContent = templateEngine.process("email.html", this.setContext(mail));
             helper.setText(htmlContent, true);
@@ -104,7 +128,6 @@ public class EmailService {
         return null;
     }
 
-    @Transactional
     private final String save(final User user) {
         log.info("C=EmailService, M=save, T=User {}", user);
 
@@ -119,7 +142,7 @@ public class EmailService {
         log.info("C=EmailService, M=retrieveEmailVerificationTokenByToken, T=Token {}", token);
 
         EmailVerificationToken emailVerificationToken = emailVerificationTokenRepository.findByToken(token)
-                .orElseThrow(EmailNotFoundException::new);
+                .orElseThrow(EmailTokenWasUsedException::new);
 
         this.checkIfTokenHasExpired(emailVerificationToken);
 
@@ -180,9 +203,13 @@ public class EmailService {
     }
 
     private void checkIfTokenHasExpired(final EmailVerificationToken emailVerificationToken) {
+        log.info("C=EmailService, M=checkIfTokenHasExpired; T=EmailVerificationToken {}", emailVerificationToken);
+
         final Integer expireInMinutes = 15;
         final LocalDateTime expiresIn = emailVerificationToken.getCreatedAt().plus(expireInMinutes, ChronoUnit.MINUTES);
         if(expiresIn.isBefore(LocalDateTime.now())) {
+            emailVerificationToken.setEnabled(false);
+            this.persist(emailVerificationToken);
             throw  new EmailTokenHasExpiredException();
         }
     }

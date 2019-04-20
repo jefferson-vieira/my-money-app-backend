@@ -52,7 +52,7 @@ public class User implements UserDetails {
     private LocalDateTime createdAt;
 
     @Builder.Default
-    private boolean accountNonLocked = false;
+    private boolean isAccountNonLocked = false;
 
     @Builder.Default
     @Column(name = "flg_Active")
@@ -67,6 +67,9 @@ public class User implements UserDetails {
     public String getUsername() {
         return this.email;
     }
+
+    @Override
+    public boolean isAccountNonLocked(){ return isAccountNonLocked; }
 
     @Override
     public boolean isAccountNonExpired() {

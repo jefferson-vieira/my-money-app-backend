@@ -4,10 +4,12 @@ import com.mymoneyapp.backend.domain.EmailVerificationToken;
 import com.mymoneyapp.backend.domain.User;
 import com.mymoneyapp.backend.exception.EmailNotFoundException;
 import com.mymoneyapp.backend.exception.PasswordsNotMatchException;
+import com.mymoneyapp.backend.exception.UserIsAccountLocked;
 import com.mymoneyapp.backend.exception.UserNotFoundException;
 import com.mymoneyapp.backend.mapper.UserMapper;
 import com.mymoneyapp.backend.model.EmailType;
 import com.mymoneyapp.backend.repository.UserRepository;
+import com.mymoneyapp.backend.request.UserChangePassRequest;
 import com.mymoneyapp.backend.request.UserRequest;
 import com.mymoneyapp.backend.response.UserResponse;
 import com.mymoneyapp.backend.specification.UserSpecification;
@@ -47,7 +49,9 @@ public class UserService {
         User toPersist = userMapper.requestToUser(userRequest);
         toPersist.setPassword(passwordEncoder.encode(toPersist.getPassword()));
         User persistedUser = persist(toPersist);
+
         emailService.sendEmail(EmailType.EMAIL_VALIDATION, persistedUser);
+
         return persistedUser.getId();
     }
 
@@ -74,6 +78,13 @@ public class UserService {
         return userRepository.save(user);
     }
 
+    public HttpEntity validationUserEmail(final String token) {
+        log.info("C=UserService, M=validationUserEmail, T=TokenBase64 {}", token);
+
+        final String email = emailService.decryptHash(token);
+        return this.unlockUser(email);
+    }
+
     @Transactional
     protected HttpEntity unlockUser(String token) {
         log.info("C=UserService, M=unlockUser, T=Token {}", token);
@@ -85,15 +96,39 @@ public class UserService {
         this.persist(user);
         return ResponseEntity.ok("Message: email successfully confirmed");
     }
-    public HttpEntity validationUserEmail(final String token) {
-        log.info("C=UserService, M=validationUserEmail, T=TokenBase64 {}", token);
 
-        final String email = emailService.decryptHash(token);
-        return this.unlockUser(email);
+    public HttpEntity userForgetPassword(final String email) {
+        log.info("C=UserService, M=userForgetPassword, T=Email {}", email);
+
+        final User user = this.retrieveUserByEmail(email);
+        if(user.isAccountNonLocked()) this.emailService.sendEmail(EmailType.FORGET_PÀSSWORD, user);
+        return ResponseEntity.ok("Message: If the user exists and is checked we'll send a email to you");
+    }
+
+    public HttpEntity userForgetPassword(final UserChangePassRequest userChangePassRequest) {
+        log.info("C=UserService, M=userForgetPassword, T=UserChangePassRequest {}", userChangePassRequest);
+
+        this.checkIfPasswordMatchConfirmPassword(userChangePassRequest);
+
+        final EmailVerificationToken emailVerificationToken = emailService.retrieveEmailVerificationTokenByToken(emailService.decryptHash(userChangePassRequest.getToken()));
+        User toPersist = emailVerificationToken.getUser();
+
+        if(!toPersist.isAccountNonLocked()) throw new UserIsAccountLocked();
+
+        toPersist.setPassword(passwordEncoder.encode(userChangePassRequest.getPassword()));
+        this.persist(toPersist);
+
+        return ResponseEntity.ok("Message: Your password was changed successful");
     }
 
     private void checkIfPasswordMatchConfirmPassword(final UserRequest userRequest) {
         if (!userRequest.getPassword().equals(userRequest.getConfirmPassword())) {
+            throw new PasswordsNotMatchException();
+        }
+    }
+
+    private void checkIfPasswordMatchConfirmPassword(final UserChangePassRequest userChangePassRequest) {
+        if (!userChangePassRequest.getPassword().equals(userChangePassRequest.getConfirmPassword())) {
             throw new PasswordsNotMatchException();
         }
     }
