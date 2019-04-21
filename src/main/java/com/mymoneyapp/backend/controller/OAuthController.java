@@ -11,7 +11,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.validation.Valid;
 import javax.ws.rs.PathParam;
@@ -45,13 +51,13 @@ public class OAuthController {
 
     @GetMapping("/registration-confirm/resend/{email}")
     @ApiOperation(value = "Reenvia o e-mail de confirmação para o usuário cadastrado",  authorizations = @Authorization("OAuth"))
-    public HttpEntity resendUserValidationEmail (@PathParam("email") @ApiParam(value = "E-mail usado pelo usuário ao criar a conta, não codificado em base64 e não confirmando ainda", example = "aaa@bbb.com") @PathVariable final String email) {
+    public HttpEntity resendUserValidationEmail (@PathParam("email") @ApiParam(value = "E-mail usado pelo usuário ao criar a conta, não codificado em base64 e não confirmando ainda") @PathVariable final String email) {
         return userService.resendUserValidationEmail(email);
     }
 
     @GetMapping("/forget-password/request/{email}")
     @ApiOperation(value = "Envia um e-mail para o usuário cadastrado para confirmar a troca da senha",  authorizations = @Authorization("OAuth"))
-    public HttpEntity forgetPasswordRequest (@PathParam("email") @ApiParam(value = "E-mail usado pelo usuário ao criar a conta, não codificado em base64 e confirmação do e-mail realizada", example = "aaa@bbb.com") @PathVariable final String email) {
+    public HttpEntity forgetPasswordRequest (@PathParam("email") @ApiParam(value = "E-mail usado pelo usuário ao criar a conta, não codificado em base64 e confirmação do e-mail realizada") @PathVariable final String email) {
         return userService.userForgetPassword(email);
     }
 
