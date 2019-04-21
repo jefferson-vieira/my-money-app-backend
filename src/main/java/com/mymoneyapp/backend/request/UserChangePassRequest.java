@@ -23,6 +23,6 @@ public class UserChangePassRequest {
     @NotEmpty(message = "Confirmar a senha é necessário")
     private String confirmPassword;
 
-    @NotEmpty(message = "o token é necessário para redefinir a senha")
+    @NotEmpty(message = "O token é necessário para redefinir a senha")
     private String token;
 }

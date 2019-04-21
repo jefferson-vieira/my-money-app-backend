@@ -36,16 +36,20 @@ public class OAuthController {
     @PostMapping("/register")
     @ApiOperation(value = "Cadastra um usuário", authorizations = @Authorization("OAuth"))
     public HttpEntity save(@Valid @RequestBody final UserRequest userRequest) {
-        //falta um exception caso o email ja tenha sido usado
-        //E nao mostrar a senha no log, tanto para registrar, quanto para alterar a senha
         Long userId = userService.save(userRequest);
         return ResponseEntity.created(URI.create("/users/" + userId)).build();
     }
 
     @GetMapping("/registration-confirm/{token}")
-    @ApiOperation(value = "Valída o e-mail do usuário cadastrado",  authorizations = @Authorization("OAuth"))
-    public HttpEntity validateUserEmail (@PathVariable final String token) {
-       return userService.validationUserEmail(token);
+    @ApiOperation(value = "Valída o e-mail do usuário cadastrado", notes = "Token deve estar codificado em Base64 URL",  authorizations = @Authorization("OAuth"))
+    public HttpEntity userValidationEmail (@PathVariable final String token) {
+       return userService.userValidationEmail(token);
+    }
+
+    @GetMapping("/registration-confirm/resend/{email}")
+    @ApiOperation(value = "Reenvia o e-mail de confirmação para o usuário cadastrado",  authorizations = @Authorization("OAuth"))
+    public HttpEntity resendUserValidationEmail (@PathVariable final String email) {
+        return userService.resendUserValidationEmail(email);
     }
 
     @GetMapping("/forget-password/request/{email}")
@@ -55,7 +59,7 @@ public class OAuthController {
     }
 
     @PostMapping("/forget-password/confirm")
-    @ApiOperation(value = "Redefine a senha do usuário cadastrado", notes = "Token codificado em Base64 URL",  authorizations = @Authorization("OAuth"))
+    @ApiOperation(value = "Redefine a senha do usuário cadastrado", notes = "Token deve estar codificado em Base64 URL",  authorizations = @Authorization("OAuth"))
     public HttpEntity forgetPasswordConfirm (@Valid @RequestBody final UserChangePassRequest userChangePassRequest) {
         return userService.userForgetPassword(userChangePassRequest);
     }

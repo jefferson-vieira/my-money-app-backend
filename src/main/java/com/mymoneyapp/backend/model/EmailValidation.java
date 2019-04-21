@@ -16,6 +16,7 @@ public class EmailValidation extends Email {
         this.emailTitle = "Registro de conta";
         this.emailSubTitle = "Obrigado por criar sua nova conta no My Money App, ";
         this.emailSubTitleDescription = "Para usar a gama completa dos serviços My Money App, você precisará verificar o endereço de e-mail da sua conta.";
+        this.emailLink = "https://meu-dinheiro-frontend.herokuapp.com/auth/registration-confirm/";
         this.emailMessageTitle = "O que é o My Money App?";
         this.emailMessage = "É uma pequena aplicação desenvolvida para ajudar a gerênciar multiplas"+
                 " contas bancárias e a situação financeira" +

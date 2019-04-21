@@ -16,6 +16,7 @@ public class EmailForgetPassword extends Email {
         this.emailTitle = "Esqueceu a senha?";
         this.emailSubTitle = "Alguém solicitou a troca da sua senha, ";
         this.emailSubTitleDescription = "Se você não solicitou a redefinição da senha, ignore este e-mail. Nenhuma alteração será realizada. Mas se você solicitou, clique em verificar agora";
+        this.emailLink = "https://meu-dinheiro-frontend.herokuapp.com/auth/change-password/";
         this.emailMessageTitle = "Como criar uma senha segura?";
         this.emailMessage = "Sugerimos uma senha fácil de lembrar, mas que seja a mais forte possível. Tente não usar palavras que se encontram no dicionário, mas use uma combinação de letras maiúsculas e minúsculas, juntamente com números e/ou caracteres especiais.";
     }

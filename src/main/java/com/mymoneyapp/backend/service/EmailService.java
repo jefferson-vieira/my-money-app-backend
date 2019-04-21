@@ -1,7 +1,7 @@
 package com.mymoneyapp.backend.service;
 
 import com.mymoneyapp.backend.domain.EmailVerificationToken;
-import com.mymoneyapp.backend.exception.EmailNotFoundException;
+import com.mymoneyapp.backend.exception.EmailCannotBeSent;
 import com.mymoneyapp.backend.exception.EmailTokenHasExpiredException;
 import com.mymoneyapp.backend.exception.EmailTokenWasUsedException;
 import com.mymoneyapp.backend.mapper.EmailVerificationTokenMapper;
@@ -23,12 +23,8 @@ import org.thymeleaf.context.Context;
 
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import java.io.UnsupportedEncodingException;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
-import java.util.Base64;
 import java.util.Locale;
 
 @Slf4j
@@ -42,98 +38,64 @@ public class EmailService {
     private TemplateEngine templateEngine;
 
     @Autowired
+    private HashService hashService;
+
+    @Autowired
     private EmailVerificationTokenMapper emailVerificationTokenMapper;
 
     @Autowired
     private EmailVerificationTokenRepository emailVerificationTokenRepository;
 
     public void sendEmail(EmailType emailType, @AuthenticationPrincipal final User user) {
-        log.info("C=EmailService, M=sendEmail; T=Emailtype {}, User {}", emailType, user);
+        log.info("C=EmailService, M=sendEmail; T=EmailType {}, User {}", emailType, user);
 
-        switch (emailType) {
-            case EMAIL_VALIDATION:
-                EmailValidation emailValidation = new EmailValidation(user.getEmail(), user.getName());
-                this.sendEmailValidation(emailValidation, user);
-                break;
-            case FORGET_PÀSSWORD:
-                EmailForgetPassword emailForgetPassword = new EmailForgetPassword(user.getEmail(), user.getName());
-                this.sendForgetPassword(emailForgetPassword, user);
-                break;
-            case BILL_NOTIFICATION:
-                break;
+        EmailVerificationToken emailVerificationToken = this.createEmailVerificationToken(user);
+        this.save(emailVerificationToken);
+        Email email;
+        if(emailType == EmailType.EMAIL_VALIDATION) {
+            email = new EmailValidation(user.getEmail(), user.getName());
+        } else {
+            email = new EmailForgetPassword(user.getEmail(), user.getName());
         }
+        email = this.addTokenToEmail(email, emailVerificationToken);
+        this.sendEmail(this.prepareEmailToSend(email));
     }
 
-    private void sendEmailValidation(EmailValidation mail, final User user) {
-        log.info("C=EmailService, M=sendEmailValidation; T=EmaiValidation {}, User {}", mail, user);
+    private void sendEmail(MimeMessage message) {
+        log.info("C=EmailService, M=sendEmail, T=MimeMessage {}", message);
+
+        javaMailSender.send(message);
+    }
+
+    private Email addTokenToEmail(Email email, EmailVerificationToken token) {
+        log.info("C=EmailService, M=addTokenToEmail, T=Email {}, EmailVerificationToken {}", email , token);
+
+        email.setEmailLink(email.getEmailLink()+hashService.encryptHash(token.getToken()));
+        return email;
+    }
+
+    private MimeMessage prepareEmailToSend(Email email) {
+        log.info("C=EmailService, M=prepareEmailToSend, T=Email {}", email);
 
         try {
             final MimeMessage message = javaMailSender.createMimeMessage();
             MimeMessageHelper helper = new MimeMessageHelper(message, "UTF-8");
-            helper.setTo(mail.getTo());
-            helper.setFrom(new InternetAddress(mail.getFrom(), mail.getFromName()));
-            helper.setSubject(mail.getSubject());
-
-            mail.setEmailLink("https://meu-dinheiro-frontend.herokuapp.com"+"/auth/registration-confirm/"+this.encryptHash(this.save(user)));
-
-            final String htmlContent = templateEngine.process("email.html", this.setContext(mail));
+            helper.setTo(email.getTo());
+            helper.setFrom(new InternetAddress(email.getFrom(), email.getFromName()));
+            helper.setSubject(email.getSubject());
+            final String htmlContent = templateEngine.process("email.html", setContext(email));
             helper.setText(htmlContent, true);
-            javaMailSender.send(message);
-
+            return message;
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new EmailCannotBeSent();
         }
     }
 
-    private void sendForgetPassword(EmailForgetPassword mail, final User user) {
-        log.info("C=EmailService, M=sendForgetPassword; T=EmaiValidation {}, User {}", mail, user);
+    @Transactional
+    protected final String save(final EmailVerificationToken toPersist) {
+        log.info("C=EmailService, M=save, T=EmailVerificationToken {}", toPersist);
 
-        try {
-            final MimeMessage message = javaMailSender.createMimeMessage();
-            MimeMessageHelper helper = new MimeMessageHelper(message, "UTF-8");
-            helper.setTo(mail.getTo());
-            helper.setFrom(new InternetAddress(mail.getFrom(), mail.getFromName()));
-            helper.setSubject(mail.getSubject());
-
-            mail.setEmailLink("https://meu-dinheiro-frontend.herokuapp.com"+"/auth/change-password/"+this.encryptHash(this.save(user)));
-
-            final String htmlContent = templateEngine.process("email.html", this.setContext(mail));
-            helper.setText(htmlContent, true);
-            javaMailSender.send(message);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    private final String encryptHash(final String token) {
-        log.info("C=EmailService, M=encryptHash; T=Token {}", token);
-
-        try {
-            return Base64.getUrlEncoder().encodeToString(token.getBytes("UTF-8"));
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    public final String decryptHash(String token) {
-        log.info("C=EmailService, M=decryptHash; T=TokenBase64 {}", token);
-
-        try {
-            return new String(Base64.getUrlDecoder().decode(token.getBytes("UTF-8")));
-        }catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    private final String save(final User user) {
-        log.info("C=EmailService, M=save, T=User {}", user);
-
-        EmailVerificationToken toPersist = emailVerificationTokenMapper.userToEmailVerificationToken(user, this.generateHash(user));
         EmailVerificationToken persistedEmailVerificationToken = this.persist(toPersist);
-
         return persistedEmailVerificationToken.getToken();
     }
 
@@ -149,67 +111,61 @@ public class EmailService {
         emailVerificationToken.setEnabled(false);
         this.persist(emailVerificationToken);
         return emailVerificationToken;
+    }
 
+    @Transactional(readOnly = true)
+    protected EmailVerificationToken retrieveEmailVerificationTokenByTokenWithoutExpiredTime(final String token) {
+        log.info("C=EmailService, M=retrieveEmailVerificationTokenByToken, T=Token {}", token);
 
+        EmailVerificationToken emailVerificationToken = emailVerificationTokenRepository.findByToken(token)
+                .orElseThrow(EmailTokenWasUsedException::new);
+
+        this.checkIfTokenHasExpired(emailVerificationToken);
+
+        emailVerificationToken.setEnabled(false);
+        this.persist(emailVerificationToken);
+        return emailVerificationToken;
     }
 
     @Transactional
-    protected EmailVerificationToken persist(final EmailVerificationToken emailVerificationToken) {
-        log.info("C=EmailService, M=persist; T=EmailVerificationToken {}", emailVerificationToken);
+    protected EmailVerificationToken persist(final EmailVerificationToken token) {
+        log.info("C=EmailService, M=persist; T=EmailVerificationToken {}", token);
 
-        return emailVerificationTokenRepository.save(emailVerificationToken);
+        return emailVerificationTokenRepository.save(token);
     }
 
-    private static Context setContext(Email mail) {
-        log.info("C=EmailService, M=setContext; T=Email {}", mail);
+    private EmailVerificationToken createEmailVerificationToken(final User user) {
+        log.info("C=EmailService, M=createEmailVerificationToken; T=User {}", user);
+
+        final String hash = hashService.generateHash(user);
+        return emailVerificationTokenMapper.userToEmailVerificationToken(user, hash);
+    }
+
+    private static Context setContext(Email email) {
+        log.info("C=EmailService, M=setContext; T=Email {}", email);
         
         final Locale locale = new Locale("pt", "BR");
         final Context ctx = new Context(locale);
 
-        ctx.setVariable("name", mail.getToName());
-        ctx.setVariable("link", mail.getEmailLink());
-        ctx.setVariable("image", mail.getEmailImage());
-        ctx.setVariable("title", mail.getEmailTitle());
-        ctx.setVariable("subtitle", mail.getEmailSubTitle());
-        ctx.setVariable("subtitleDescription", mail.getEmailSubTitleDescription());
-        ctx.setVariable("messageTitle", mail.getEmailMessageTitle());
-        ctx.setVariable("message", mail.getEmailMessage());
-
+        ctx.setVariable("name", email.getToName());
+        ctx.setVariable("link", email.getEmailLink());
+        ctx.setVariable("image", email.getEmailImage());
+        ctx.setVariable("title", email.getEmailTitle());
+        ctx.setVariable("subtitle", email.getEmailSubTitle());
+        ctx.setVariable("subtitleDescription", email.getEmailSubTitleDescription());
+        ctx.setVariable("messageTitle", email.getEmailMessageTitle());
+        ctx.setVariable("message", email.getEmailMessage());
         return ctx;
     }
 
-    private final String generateHash(final User user) {
-        log.info("C=EmailService, M=generateHash; T=User {}", user);
-
-        try {
-            MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
-            final String toHash = user.toString()+ LocalDateTime.now().toString();
-            messageDigest.update(toHash.getBytes("UTF-8"));
-            final byte[] hashBytes = messageDigest.digest();
-            StringBuffer hash = new StringBuffer();
-
-            for (byte b : hashBytes)
-                hash.append(String.format("%02x", b & 0xff));
-
-            return hash.toString();
-        }
-        catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        }
-        catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    private void checkIfTokenHasExpired(final EmailVerificationToken emailVerificationToken) {
-        log.info("C=EmailService, M=checkIfTokenHasExpired; T=EmailVerificationToken {}", emailVerificationToken);
+    private void checkIfTokenHasExpired(final EmailVerificationToken token) {
+        log.info("C=EmailService, M=checkIfTokenHasExpired; T=EmailVerificationToken {}", token);
 
         final Integer expireInMinutes = 15;
-        final LocalDateTime expiresIn = emailVerificationToken.getCreatedAt().plus(expireInMinutes, ChronoUnit.MINUTES);
+        final LocalDateTime expiresIn = token.getCreatedAt().plus(expireInMinutes, ChronoUnit.MINUTES);
         if(expiresIn.isBefore(LocalDateTime.now())) {
-            emailVerificationToken.setEnabled(false);
-            this.persist(emailVerificationToken);
+            token.setEnabled(false);
+            this.persist(token);
             throw  new EmailTokenHasExpiredException();
         }
     }
