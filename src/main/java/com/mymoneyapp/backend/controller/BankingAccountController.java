@@ -1,6 +1,5 @@
 package com.mymoneyapp.backend.controller;
 
-import com.mymoneyapp.backend.model.EmailType;
 import com.mymoneyapp.backend.domain.User;
 import com.mymoneyapp.backend.model.Summary;
 import com.mymoneyapp.backend.request.BankingAccountRequest;

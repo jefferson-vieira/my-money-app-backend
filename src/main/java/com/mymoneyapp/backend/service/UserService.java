@@ -1,6 +1,6 @@
 package com.mymoneyapp.backend.service;
 
-import com.mymoneyapp.backend.domain.EmailVerificationToken;
+import com.mymoneyapp.backend.domain.AccessToken;
 import com.mymoneyapp.backend.domain.User;
 import com.mymoneyapp.backend.exception.*;
 import com.mymoneyapp.backend.mapper.UserMapper;
@@ -32,6 +32,9 @@ public class UserService {
     private EmailService emailService;
 
     @Autowired
+    private AccessTokenService accessTokenService;
+
+    @Autowired
     private HashService hashService;
 
     @Autowired
@@ -42,7 +45,7 @@ public class UserService {
 
     @Transactional
     public Long save(final UserRequest userRequest) {
-        log.info("C=UserService, M=save, T=UserRequest.Email {}, UserRequest.Name, UserRequest.Password {}, UserRequest.ConfirmPassword {}", userRequest.getEmail(), userRequest.getName(), passwordEncoder.encode(userRequest.getPassword()),passwordEncoder.encode(userRequest.getConfirmPassword()));
+        log.info("C=UserService, M=save, T=UserRequest.Email {}, UserRequest.Name {}, UserRequest.Password {}, UserRequest.ConfirmPassword {}", userRequest.getEmail(), userRequest.getName(), passwordEncoder.encode(userRequest.getPassword()),passwordEncoder.encode(userRequest.getConfirmPassword()));
 
         this.checkIfPasswordMatchConfirmPassword(userRequest);
 
@@ -69,8 +72,8 @@ public class UserService {
     protected HttpEntity unlockUser(String token) {
         log.info("C=UserService, M=unlockUser, T=Token {}", token);
 
-        final EmailVerificationToken emailVerificationToken = emailService.retrieveEmailVerificationTokenByToken(token);
-        User user = this.retrieveUserByEmail(emailVerificationToken.getUser().getEmail());
+        final AccessToken accessToken = accessTokenService.retrieveAccessTokenByToken(token);
+        User user = this.retrieveUserByEmail(accessToken.getUser().getEmail());
         user.setAccountNonLocked(true);
         this.persist(user);
 
@@ -89,8 +92,7 @@ public class UserService {
     protected boolean checkIfAlreadyHasUserByEmail(final String email) {
         log.info("C=UserService, M=checkAlreadyHasUserByEmail, T=Email {}", email);
 
-        if(userRepository.findByEmail(email).orElse(null) != null) return true;
-        return false;
+        return userRepository.findByEmail(email).orElse(null) != null;
     }
 
     @Transactional
@@ -134,8 +136,8 @@ public class UserService {
 
         this.checkIfPasswordMatchConfirmPassword(userChangePassRequest);
 
-        final EmailVerificationToken emailVerificationToken = emailService.retrieveEmailVerificationTokenByToken(hashService.decryptHash(userChangePassRequest.getToken()));
-        User toPersist = emailVerificationToken.getUser();
+        final AccessToken accessToken = accessTokenService.retrieveAccessTokenByToken(hashService.decryptHash(userChangePassRequest.getToken()));
+        User toPersist = accessToken.getUser();
 
         if(!toPersist.isAccountNonLocked()) throw new UserIsAccountLocked();
 

@@ -18,7 +18,7 @@ import java.time.LocalDateTime;
 @Builder
 @Where(clause = "flg_active <> false")
 @SQLDelete(sql = "update email_request set flg_active = false where id = ?")
-public class EmailVerificationToken {
+public class AccessToken {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
