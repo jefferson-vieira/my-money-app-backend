@@ -17,8 +17,8 @@ public class EmailConfig {
         javaMailSender.setHost("smtp.gmail.com");
         javaMailSender.setPort(587);
         javaMailSender.setProtocol("smtp");
-        javaMailSender.setUsername("my.money.app0@gmail.com");
-        javaMailSender.setPassword("YourName!123456789");
+        javaMailSender.setUsername("{Se o Jefferson tivesse dado o tutorial certo}");
+        javaMailSender.setPassword("Nada disso teria acontecido");
 
         javaMailSender.setJavaMailProperties(getMailProperties());
 
