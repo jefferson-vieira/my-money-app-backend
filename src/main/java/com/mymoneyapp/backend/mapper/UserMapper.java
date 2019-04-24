@@ -12,7 +12,9 @@ import org.springframework.data.domain.PageImpl;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses = {
+        AddressMapper.class,
+})
 public interface UserMapper {
 
     @Mappings({
