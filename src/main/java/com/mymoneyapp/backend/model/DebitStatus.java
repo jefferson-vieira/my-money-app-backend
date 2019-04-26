@@ -1,4 +1,4 @@
-package com.mymoneyapp.backend.domain;
+package com.mymoneyapp.backend.model;
 
 public enum DebitStatus {
     PAGO,

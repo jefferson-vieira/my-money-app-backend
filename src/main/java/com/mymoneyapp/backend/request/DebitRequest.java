@@ -1,6 +1,6 @@
 package com.mymoneyapp.backend.request;
 
-import com.mymoneyapp.backend.domain.DebitStatus;
+import com.mymoneyapp.backend.model.DebitStatus;
 import lombok.Data;
 
 import javax.validation.constraints.Digits;

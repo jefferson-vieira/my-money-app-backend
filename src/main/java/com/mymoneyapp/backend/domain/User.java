@@ -73,6 +73,9 @@ public class User implements UserDetails {
     private LocalDateTime createdAt;
 
     @Builder.Default
+    private boolean isAccountNonLocked = false;
+
+    @Builder.Default
     @Column(name = "flg_Active")
     private boolean enabled = true;
 
@@ -87,12 +90,10 @@ public class User implements UserDetails {
     }
 
     @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
+    public boolean isAccountNonLocked(){ return isAccountNonLocked; }
 
     @Override
-    public boolean isAccountNonLocked() {
+    public boolean isAccountNonExpired() {
         return true;
     }
 

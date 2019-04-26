@@ -22,6 +22,7 @@ public interface UserMapper {
             @Mapping(target = "username",    ignore = true),
             @Mapping(target = "createdAt",   ignore = true),
             @Mapping(target = "authorities", ignore = true),
+            @Mapping(target = "accountNonLocked", ignore = true),
             @Mapping(target = "enabled",     ignore = true),
     })
     User requestToUser(UserRequest userRequest);

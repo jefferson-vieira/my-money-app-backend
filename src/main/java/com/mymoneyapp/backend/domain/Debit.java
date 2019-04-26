@@ -1,5 +1,6 @@
 package com.mymoneyapp.backend.domain;
 
+import com.mymoneyapp.backend.model.DebitStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
