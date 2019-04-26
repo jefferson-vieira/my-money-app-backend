@@ -1,6 +1,5 @@
 package com.mymoneyapp.backend.config;
 
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -9,7 +8,6 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
 
 import java.util.Properties;
 
-@Slf4j
 @Configuration
 public class EmailConfig {
 
@@ -21,8 +19,6 @@ public class EmailConfig {
 
     @Bean
     public JavaMailSender javaMailService() {
-        log.info("C=EmailConfig, M=javaMailService, T=Username {}", username);
-
         JavaMailSenderImpl javaMailSender = new JavaMailSenderImpl();
 
         javaMailSender.setHost("smtp.gmail.com");
