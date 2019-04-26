@@ -1,5 +1,6 @@
 package com.mymoneyapp.backend.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -10,6 +11,12 @@ import java.util.Properties;
 @Configuration
 public class EmailConfig {
 
+    @Value("${config.mail.username}")
+    private String username;
+
+    @Value("${config.mail.password}")
+    private String password;
+
     @Bean
     public JavaMailSender javaMailService() {
         JavaMailSenderImpl javaMailSender = new JavaMailSenderImpl();
@@ -17,8 +24,8 @@ public class EmailConfig {
         javaMailSender.setHost("smtp.gmail.com");
         javaMailSender.setPort(587);
         javaMailSender.setProtocol("smtp");
-        javaMailSender.setUsername("{Se o Jefferson tivesse dado o tutorial certo}");
-        javaMailSender.setPassword("Nada disso teria acontecido");
+        javaMailSender.setUsername(username);
+        javaMailSender.setPassword(password);
 
         javaMailSender.setJavaMailProperties(getMailProperties());
 

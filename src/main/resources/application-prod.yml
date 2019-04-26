@@ -21,3 +21,8 @@ spring:
         jdbc:
           lob:
             non_contextual_creation: true
+
+config:
+  mail:
+    username: ${MAIL_USERNAME}
+    password: ${MAIL_PASSWORD}
