@@ -25,4 +25,5 @@ public class UserChangePassRequest {
 
     @NotEmpty(message = "O token é necessário para redefinir a senha")
     private String token;
+
 }

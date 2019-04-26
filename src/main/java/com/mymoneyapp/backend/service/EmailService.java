@@ -1,12 +1,12 @@
 package com.mymoneyapp.backend.service;
 
 import com.mymoneyapp.backend.domain.AccessToken;
+import com.mymoneyapp.backend.domain.User;
 import com.mymoneyapp.backend.exception.EmailCannotBeSent;
 import com.mymoneyapp.backend.model.Email;
 import com.mymoneyapp.backend.model.EmailForgetPassword;
 import com.mymoneyapp.backend.model.EmailType;
 import com.mymoneyapp.backend.model.EmailValidation;
-import com.mymoneyapp.backend.domain.User;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -36,53 +36,9 @@ public class EmailService {
     @Autowired
     private AccessTokenService accessTokenService;
 
-    public void sendEmail(EmailType emailType, @AuthenticationPrincipal final User user) {
-        log.info("C=EmailService, M=sendEmail; T=EmailType {}, User {}", emailType, user);
-
-        AccessToken accessToken = accessTokenService.createAccessToken(user);
-        Email email;
-        if(emailType == EmailType.EMAIL_VALIDATION) {
-            email = new EmailValidation(user.getEmail(), user.getName());
-        } else {
-            email = new EmailForgetPassword(user.getEmail(), user.getName());
-        }
-        email = this.addTokenToEmail(email, accessToken);
-        this.sendEmail(this.prepareEmailToSend(email));
-    }
-
-    private void sendEmail(MimeMessage message) {
-        log.info("C=EmailService, M=sendEmail, T=MimeMessage {}", message);
-
-        javaMailSender.send(message);
-    }
-
-    private Email addTokenToEmail(Email email, AccessToken accessToken) {
-        log.info("C=EmailService, M=addTokenToEmail, T=Email {}, AccessToken {}", email , accessToken);
-
-        email.setEmailLink(email.getEmailLink()+hashService.encryptHash(accessToken.getToken()));
-        return email;
-    }
-
-    private MimeMessage prepareEmailToSend(Email email) {
-        log.info("C=EmailService, M=prepareEmailToSend, T=Email {}", email);
-
-        try {
-            final MimeMessage message = javaMailSender.createMimeMessage();
-            MimeMessageHelper helper = new MimeMessageHelper(message, "UTF-8");
-            helper.setTo(email.getTo());
-            helper.setFrom(new InternetAddress(email.getFrom(), email.getFromName()));
-            helper.setSubject(email.getSubject());
-            final String htmlContent = templateEngine.process("email.html", setEmailContext(email));
-            helper.setText(htmlContent, true);
-            return message;
-        } catch (Exception e) {
-            throw new EmailCannotBeSent();
-        }
-    }
-
-    private static Context setEmailContext(Email email) {
+    private static Context setEmailContext(final Email email) {
         log.info("C=EmailService, M=setContext; T=Email {}", email);
-        
+
         final Locale locale = new Locale("pt", "BR");
         final Context context = new Context(locale);
 
@@ -95,6 +51,50 @@ public class EmailService {
         context.setVariable("messageTitle", email.getEmailMessageTitle());
         context.setVariable("message", email.getEmailMessage());
         return context;
+    }
+
+    public void sendEmail(final EmailType emailType, @AuthenticationPrincipal final User user) {
+        log.info("C=EmailService, M=sendEmail; T=EmailType {}, User {}", emailType, user);
+
+        AccessToken accessToken = accessTokenService.createAccessToken(user);
+        Email email;
+        if (emailType == EmailType.EMAIL_VALIDATION) {
+            email = new EmailValidation(user.getEmail(), user.getName());
+        } else {
+            email = new EmailForgetPassword(user.getEmail(), user.getName());
+        }
+        email = this.addTokenToEmail(email, accessToken);
+        this.sendEmail(this.prepareEmailToSend(email));
+    }
+
+    private void sendEmail(final MimeMessage message) {
+        log.info("C=EmailService, M=sendEmail, T=MimeMessage {}", message);
+
+        javaMailSender.send(message);
+    }
+
+    private Email addTokenToEmail(final Email email, final AccessToken accessToken) {
+        log.info("C=EmailService, M=addTokenToEmail, T=Email {}, AccessToken {}", email, accessToken);
+
+        email.setEmailLink(email.getEmailLink() + hashService.encryptHash(accessToken.getToken()));
+        return email;
+    }
+
+    private MimeMessage prepareEmailToSend(final Email email) {
+        log.info("C=EmailService, M=prepareEmailToSend, T=Email {}", email);
+
+        try {
+            final MimeMessage message = javaMailSender.createMimeMessage();
+            MimeMessageHelper helper = new MimeMessageHelper(message, "UTF-8");
+            helper.setTo(email.getTo());
+            helper.setFrom(new InternetAddress(email.getFrom(), email.getFromName()));
+            helper.setSubject(email.getSubject());
+            final String htmlContent = templateEngine.process("email.html", setEmailContext(email));
+            helper.setText(htmlContent, true);
+            return message;
+        } catch (Exception e) {
+            throw new EmailCannotBeSent(e);
+        }
     }
 }
 

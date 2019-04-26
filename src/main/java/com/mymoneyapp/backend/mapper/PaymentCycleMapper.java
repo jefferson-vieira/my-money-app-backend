@@ -17,8 +17,8 @@ import java.util.List;
 public interface PaymentCycleMapper {
 
     @Mappings({
-            @Mapping(target = "id",                ignore = true),
-            @Mapping(target = "enabled",           ignore = true),
+            @Mapping(target = "id", ignore = true),
+            @Mapping(target = "enabled", ignore = true),
             @Mapping(target = "bankingAccount.id", source = "bankingAccountId"),
     })
     PaymentCycle requestToPaymentCycle(PaymentCycleRequest paymentCycleRequest);

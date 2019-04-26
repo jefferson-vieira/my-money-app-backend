@@ -2,7 +2,11 @@ package com.mymoneyapp.backend.service;
 
 import com.mymoneyapp.backend.domain.AccessToken;
 import com.mymoneyapp.backend.domain.User;
-import com.mymoneyapp.backend.exception.*;
+import com.mymoneyapp.backend.exception.PasswordsNotMatchException;
+import com.mymoneyapp.backend.exception.UserAlreadyRegistered;
+import com.mymoneyapp.backend.exception.UserAlreadyValidatedEmail;
+import com.mymoneyapp.backend.exception.UserIsAccountLocked;
+import com.mymoneyapp.backend.exception.UserNotFoundException;
 import com.mymoneyapp.backend.mapper.UserMapper;
 import com.mymoneyapp.backend.model.EmailType;
 import com.mymoneyapp.backend.repository.UserRepository;
@@ -19,7 +23,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 
 @Slf4j
 @Service
@@ -45,11 +48,13 @@ public class UserService {
 
     @Transactional
     public Long save(final UserRequest userRequest) {
-        log.info("C=UserService, M=save, T=UserRequest.Email {}, UserRequest.Name {}, UserRequest.Password {}, UserRequest.ConfirmPassword {}", userRequest.getEmail(), userRequest.getName(), passwordEncoder.encode(userRequest.getPassword()),passwordEncoder.encode(userRequest.getConfirmPassword()));
+        log.info("C=UserService, M=save");
 
         this.checkIfPasswordMatchConfirmPassword(userRequest);
 
-        if(this.checkIfAlreadyHasUserByEmail(userRequest.getEmail())) throw new UserAlreadyRegistered();
+        if (this.checkIfAlreadyHasUserByEmail(userRequest.getEmail())) {
+            throw new UserAlreadyRegistered();
+        }
 
         User toPersist = userMapper.requestToUser(userRequest);
         toPersist.setPassword(passwordEncoder.encode(toPersist.getPassword()));
@@ -69,7 +74,7 @@ public class UserService {
     }
 
     @Transactional
-    protected HttpEntity unlockUser(String token) {
+    protected HttpEntity unlockUser(final String token) {
         log.info("C=UserService, M=unlockUser, T=Token {}", token);
 
         final AccessToken accessToken = accessTokenService.retrieveAccessTokenByToken(token);
@@ -113,7 +118,7 @@ public class UserService {
         log.info("C=UserService, M=resendUserValidationEmail, T=Email {}", email);
 
         final User user = this.retrieveUserByEmail(email);
-        if(!user.isAccountNonLocked()) {
+        if (!user.isAccountNonLocked()) {
             emailService.sendEmail(EmailType.EMAIL_VALIDATION, user);
             return ResponseEntity.ok("");
         }
@@ -124,7 +129,7 @@ public class UserService {
         log.info("C=UserService, M=userForgetPassword, T=Email {}", email);
 
         final User user = this.retrieveUserByEmail(email);
-        if(user.isAccountNonLocked()) {
+        if (user.isAccountNonLocked()) {
             emailService.sendEmail(EmailType.FORGET_PÀSSWORD, user);
             return ResponseEntity.ok("");
         }
@@ -132,14 +137,16 @@ public class UserService {
     }
 
     public HttpEntity userForgetPassword(final UserChangePassRequest userChangePassRequest) {
-        log.info("C=UserService, M=userForgetPassword, T=UserChangePassRequest.Password {}, UserChangePassRequest.ConfirmPassword {}, Token {} ", passwordEncoder.encode(userChangePassRequest.getPassword()), passwordEncoder.encode(userChangePassRequest.getConfirmPassword()), userChangePassRequest.getToken());
+        log.info("C=UserService, M=userForgetPassword");
 
         this.checkIfPasswordMatchConfirmPassword(userChangePassRequest);
 
         final AccessToken accessToken = accessTokenService.retrieveAccessTokenByToken(hashService.decryptHash(userChangePassRequest.getToken()));
         User toPersist = accessToken.getUser();
 
-        if(!toPersist.isAccountNonLocked()) throw new UserIsAccountLocked();
+        if (!toPersist.isAccountNonLocked()) {
+            throw new UserIsAccountLocked();
+        }
 
         toPersist.setPassword(passwordEncoder.encode(userChangePassRequest.getPassword()));
         this.persist(toPersist);
@@ -157,4 +164,5 @@ public class UserService {
             throw new PasswordsNotMatchException();
         }
     }
+
 }
