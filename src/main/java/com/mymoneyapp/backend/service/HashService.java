@@ -20,18 +20,18 @@ public class HashService {
 
         try {
             MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
-            final String toHash = user.toString()+ LocalDateTime.now().toString();
+            final String toHash = user.toString() + LocalDateTime.now().toString();
             messageDigest.update(toHash.getBytes(StandardCharsets.UTF_8));
             final byte[] hashBytes = messageDigest.digest();
             StringBuilder hash = new StringBuilder();
 
-            for (byte b : hashBytes)
+            for (byte b : hashBytes) {
                 hash.append(String.format("%02x", b & 0xff));
+            }
 
             return hash.toString();
-        }
-        catch (NoSuchAlgorithmException e) {
-            throw new AccessTokenCannotGenerateHashException();
+        } catch (NoSuchAlgorithmException e) {
+            throw new AccessTokenCannotGenerateHashException(e);
         }
     }
 
@@ -41,7 +41,7 @@ public class HashService {
         return Base64.getUrlEncoder().encodeToString(token.getBytes(StandardCharsets.UTF_8));
     }
 
-    public final String decryptHash(String token) {
+    public final String decryptHash(final String token) {
         log.info("C=HashService, M=decryptHash; T=TokenBase64 {}", token);
 
         return new String(Base64.getUrlDecoder().decode(token.getBytes(StandardCharsets.UTF_8)));

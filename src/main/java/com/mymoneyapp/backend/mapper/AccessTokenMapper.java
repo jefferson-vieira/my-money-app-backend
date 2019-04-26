@@ -11,10 +11,10 @@ import org.mapstruct.Mappings;
 public interface AccessTokenMapper {
 
     @Mappings({
-            @Mapping(target = "id",          ignore = true),
-            @Mapping(target = "createdAt",   ignore = true),
-            @Mapping(target = "enabled",     ignore = true),
-            @Mapping(target = "token",     source = "hash"),
+            @Mapping(target = "id", ignore = true),
+            @Mapping(target = "createdAt", ignore = true),
+            @Mapping(target = "enabled", ignore = true),
+            @Mapping(target = "token", source = "hash"),
     })
     AccessToken userToAccessToken(User user, String hash);
 
@@ -22,4 +22,5 @@ public interface AccessTokenMapper {
             @Mapping(target = "expiresAt", source = "accessToken.createdAt", dateFormat = "dd/MM/yyyy HH:mm:ss"),
     })
     AccessTokenResponse accessTokenToResponse(AccessToken accessToken);
+
 }

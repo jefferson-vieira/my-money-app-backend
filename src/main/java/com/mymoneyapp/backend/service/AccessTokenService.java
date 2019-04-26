@@ -71,10 +71,10 @@ public class AccessTokenService {
 
         final Integer expireInMinutes = 15;
         final LocalDateTime expiresIn = token.getCreatedAt().plus(expireInMinutes, ChronoUnit.MINUTES);
-        if(expiresIn.isBefore(LocalDateTime.now())) {
+        if (expiresIn.isBefore(LocalDateTime.now())) {
             token.setEnabled(false);
             this.persist(token);
-            throw  new AccessTokenHasExpiredException();
+            throw new AccessTokenHasExpiredException();
         }
     }
 }

@@ -41,4 +41,5 @@ public class EmailConfig {
         properties.setProperty("mail.debug", "false");
         return properties;
     }
+
 }

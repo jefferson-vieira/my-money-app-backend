@@ -1,36 +1,36 @@
 package com.mymoneyapp.backend.model;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
-public abstract class Email {
+@NoArgsConstructor
+public class Email {
 
-    public EmailType emailType;
+    protected EmailType emailType;
 
-    public final String from = "my-money-app0@gmail.com";
+    protected String from = "my-money-app0@gmail.com";
 
-    public final String fromName = "Equipe My Money App";
+    protected String fromName = "Equipe My Money App";
 
-    public String to;
+    protected String to;
 
-    public String toName;
+    protected String toName;
 
-    public String subject;
+    protected String subject;
 
-    public String emailImage;
+    protected String emailImage;
 
-    public String emailTitle;
+    protected String emailTitle;
 
-    public String emailSubTitle;
+    protected String emailSubTitle;
 
-    public String emailSubTitleDescription;
+    protected String emailSubTitleDescription;
 
-    public String emailLink;
+    protected String emailLink;
 
-    public String emailMessageTitle;
+    protected String emailMessageTitle;
 
-    public String emailMessage;
+    protected String emailMessage;
 
-    public Email() {
-    }
 }

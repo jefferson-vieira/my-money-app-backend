@@ -90,7 +90,9 @@ public class User implements UserDetails {
     }
 
     @Override
-    public boolean isAccountNonLocked(){ return isAccountNonLocked; }
+    public boolean isAccountNonLocked() {
+        return isAccountNonLocked;
+    }
 
     @Override
     public boolean isAccountNonExpired() {
