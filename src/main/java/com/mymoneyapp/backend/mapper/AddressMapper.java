@@ -14,6 +14,7 @@ public interface AddressMapper {
 
     @Mappings({
             @Mapping(target = "id", ignore = true),
+            @Mapping(target = "enabled", ignore = true),
     })
     Address requestToAddress(AddressRequest addressRequest);
 
