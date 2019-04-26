@@ -2,6 +2,7 @@ package com.mymoneyapp.backend.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -12,6 +13,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import java.util.Collections;
 
+@Controller
 @Configuration
 @EnableSwagger2
 public class SwaggerConfig {
@@ -34,4 +36,5 @@ public class SwaggerConfig {
     public String redirectSwagger() {
         return "redirect:/swagger-ui.html";
     }
+
 }
