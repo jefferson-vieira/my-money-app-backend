@@ -52,7 +52,7 @@ public class AccessTokenService {
     }
 
     @Transactional(readOnly = true)
-    protected AccessToken retrieveAccessTokenByToken(final String token) {
+    protected AccessToken retrieveByUserEmail(final String token) {
         log.info("C=AccessTokenService, M=retrieveAccessTokenByToken, T=Token {}", token);
 
         AccessToken accessToken = accessTokenRepository.findByToken(token)
@@ -77,4 +77,5 @@ public class AccessTokenService {
             throw new AccessTokenHasExpiredException();
         }
     }
+
 }

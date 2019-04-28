@@ -46,4 +46,5 @@ public class HashService {
 
         return new String(Base64.getUrlDecoder().decode(token.getBytes(StandardCharsets.UTF_8)));
     }
+
 }

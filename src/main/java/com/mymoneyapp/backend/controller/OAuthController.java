@@ -48,7 +48,8 @@ public class OAuthController {
     public HttpEntity userValidationEmail(@PathParam("token")
                                               @ApiParam(value = "Token gerado pelo sistema e enviado por e-mail ao usuário")
                                               @PathVariable final String token) {
-        return userService.userValidationEmail(token);
+        userService.activateUserAccount(token);
+        return ResponseEntity.ok().build();
     }
 
     @GetMapping("/registration-confirm/resend/{email}")
@@ -56,7 +57,8 @@ public class OAuthController {
     public HttpEntity resendUserValidationEmail(@PathParam("email")
                                                     @ApiParam(value = "E-mail usado pelo usuário ao criar a conta")
                                                     @PathVariable final String email) {
-        return userService.resendUserValidationEmail(email);
+        userService.resendUserValidationEmail(email);
+        return ResponseEntity.ok().build();
     }
 
     @GetMapping("/forget-password/request/{email}")
@@ -64,13 +66,15 @@ public class OAuthController {
     public HttpEntity forgetPasswordRequest(@PathParam("email")
                                                 @ApiParam(value = "E-mail usado pelo usuário ao criar a conta")
                                                 @PathVariable final String email) {
-        return userService.userForgetPassword(email);
+        userService.recoveryUserPassword(email);
+        return ResponseEntity.ok().build();
     }
 
     @PutMapping("/forget-password/confirm")
     @ApiOperation(value = "Redefine a senha do usuário cadastrado", authorizations = @Authorization("OAuth"))
     public HttpEntity forgetPasswordConfirm(@Valid @RequestBody final UserChangePassRequest userChangePassRequest) {
-        return userService.userForgetPassword(userChangePassRequest);
+        userService.changeUserPassword(userChangePassRequest);
+        return ResponseEntity.ok().build();
     }
 
 }

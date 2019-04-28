@@ -96,6 +96,7 @@ public class EmailService {
             throw new EmailCannotBeSent(e);
         }
     }
+
 }
 
 

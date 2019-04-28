@@ -10,4 +10,5 @@ public class AccessTokenResponse {
     private String token;
 
     private LocalDateTime expiresAt;
+
 }

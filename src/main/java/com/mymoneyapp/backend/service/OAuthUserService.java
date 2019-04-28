@@ -17,7 +17,7 @@ public class OAuthUserService implements UserDetailsService {
     public User loadUserByUsername(final String email) {
         log.info("C=OAuthUserService, M=loadUserByUsername, T=Email {}", email);
 
-        return userService.retrieveUserByEmail(email);
+        return userService.retrieve(email);
     }
 
 }
