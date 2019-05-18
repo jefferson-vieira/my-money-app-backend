@@ -11,7 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -40,5 +42,12 @@ public class CardController {
     @ApiOperation(value = "Lista os cartões cadastrados do usuário", authorizations = @Authorization("OAuth"))
     public List<CardResponse> findAllByUser(@AuthenticationPrincipal final User user) {
         return cardService.findAllByUser(user);
+    }
+
+    @DeleteMapping("/{id}")
+    @ApiOperation(value = "Remove um cartão da conta bancária", authorizations = @Authorization("OAuth"))
+    public HttpEntity<?> delete(@AuthenticationPrincipal final User user, @PathVariable final Long id) {
+        cardService.delete(user, id);
+        return ResponseEntity.noContent().build();
     }
 }

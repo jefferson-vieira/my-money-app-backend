@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -44,5 +45,12 @@ public class TransactionController {
     @ApiOperation(value = "Lista as transações cadastrados do cartão", authorizations = @Authorization("OAuth"))
     public List<TransactionResponse> findAllByCaed(@PathParam("id") @PathVariable final Long id) {
         return transactionService.findAllByCardId(id);
+    }
+
+    @DeleteMapping("/{id}")
+    @ApiOperation(value = "Remove uma transação do cartão", authorizations = @Authorization("OAuth"))
+    public HttpEntity<?> delete(@AuthenticationPrincipal final User user, @PathVariable final Long id) {
+        transactionService.delete(user, id);
+        return ResponseEntity.noContent().build();
     }
 }

@@ -50,7 +50,7 @@ public class CardService {
 
     @Transactional(readOnly = true)
     protected Card retrieveById(final Long id) {
-        log.info("C=CardService, M=retrieveAllById, T=CardId {}", id);
+        log.info("C=CardService, M=retrieveById, T=CardId {}", id);
 
         return cardRepository.findById(id).orElseThrow(CardNotFoundException::new);
     }
@@ -82,5 +82,14 @@ public class CardService {
         log.info("C=CardService, M=persist, T=Card {}", card);
 
         return cardRepository.save(card);
+    }
+
+    @Transactional
+    public void delete(final User user, final Long id) {
+        log.info("C=CardService, M=delete, U={}, T=ID {}", user, id);
+
+        this.retrieveById(id);
+
+        cardRepository.deleteById(id);
     }
 }

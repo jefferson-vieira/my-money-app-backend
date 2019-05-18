@@ -4,6 +4,8 @@ import com.mymoneyapp.backend.domain.BankingAccount;
 import com.mymoneyapp.backend.domain.Card;
 import com.mymoneyapp.backend.domain.Transaction;
 import com.mymoneyapp.backend.domain.User;
+import com.mymoneyapp.backend.exception.CardNotFoundException;
+import com.mymoneyapp.backend.exception.TransactionNotFoundException;
 import com.mymoneyapp.backend.mapper.CardMapper;
 import com.mymoneyapp.backend.mapper.TransactionMapper;
 import com.mymoneyapp.backend.repository.CardRepository;
@@ -52,6 +54,13 @@ public class TransactionService {
     }
 
     @Transactional(readOnly = true)
+    protected Transaction retrieveById(final Long id) {
+        log.info("C=TransactionService, M=retrieveById, T=CarId {}", id);
+
+        return transactionRepository.findById(id).orElseThrow(TransactionNotFoundException::new);
+    }
+
+    @Transactional(readOnly = true)
     protected List<Transaction> retrieveAllByCard(final Card card) {
         log.info("C=TransactionService, M=retrieveAllByCard, T=Card {}", card);
 
@@ -77,5 +86,14 @@ public class TransactionService {
         log.info("C=CardService, M=persist, T=Card {}", transaction);
 
         return transactionRepository.save(transaction);
+    }
+
+    @Transactional
+    public void delete(final User user, final Long id) {
+        log.info("C=TransactionService, M=delete, U={}, T=ID {}", user, id);
+
+        this.retrieveById(id);
+
+        transactionRepository.deleteById(id);
     }
 }
