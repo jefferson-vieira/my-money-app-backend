@@ -19,6 +19,7 @@ public interface BankingAccountMapper {
             @Mapping(target = "createdAt", ignore = true),
             @Mapping(target = "enabled", ignore = true),
             @Mapping(target = "user", ignore = true),
+            @Mapping(target = "cards", ignore = true),
     })
     BankingAccount requestToBankingAccount(BankingAccountRequest bankingAccountRequest);
 

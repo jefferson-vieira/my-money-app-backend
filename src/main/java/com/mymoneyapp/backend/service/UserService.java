@@ -3,9 +3,9 @@ package com.mymoneyapp.backend.service;
 import com.mymoneyapp.backend.domain.AccessToken;
 import com.mymoneyapp.backend.domain.User;
 import com.mymoneyapp.backend.exception.PasswordsNotMatchException;
-import com.mymoneyapp.backend.exception.UserAlreadyRegistered;
-import com.mymoneyapp.backend.exception.UserAlreadyValidatedEmail;
-import com.mymoneyapp.backend.exception.UserIsAccountLocked;
+import com.mymoneyapp.backend.exception.UserAlreadyRegisteredException;
+import com.mymoneyapp.backend.exception.UserAlreadyValidatedEmailException;
+import com.mymoneyapp.backend.exception.UserIsAccountLockedException;
 import com.mymoneyapp.backend.exception.UserNotFoundException;
 import com.mymoneyapp.backend.mapper.UserMapper;
 import com.mymoneyapp.backend.model.EmailType;
@@ -53,7 +53,7 @@ public class UserService {
         this.checkIfPasswordMatchConfirmPassword(userRequest);
 
         if (this.checkIfAlreadyHasUserByEmail(userRequest.getEmail())) {
-            throw new UserAlreadyRegistered();
+            throw new UserAlreadyRegisteredException();
         }
 
         User toPersist = userMapper.requestToUser(userRequest);
@@ -122,7 +122,7 @@ public class UserService {
             emailService.sendEmail(EmailType.EMAIL_VALIDATION, user);
             return ResponseEntity.ok("");
         }
-        throw new UserAlreadyValidatedEmail();
+        throw new UserAlreadyValidatedEmailException();
     }
 
     public HttpEntity userForgetPassword(final String email) {
@@ -133,7 +133,7 @@ public class UserService {
             emailService.sendEmail(EmailType.FORGET_PÀSSWORD, user);
             return ResponseEntity.ok("");
         }
-        throw new UserIsAccountLocked();
+        throw new UserIsAccountLockedException();
     }
 
     public HttpEntity userForgetPassword(final UserChangePassRequest userChangePassRequest) {
@@ -145,7 +145,7 @@ public class UserService {
         User toPersist = accessToken.getUser();
 
         if (!toPersist.isAccountNonLocked()) {
-            throw new UserIsAccountLocked();
+            throw new UserIsAccountLockedException();
         }
 
         toPersist.setPassword(passwordEncoder.encode(userChangePassRequest.getPassword()));

@@ -2,7 +2,7 @@ package com.mymoneyapp.backend.service;
 
 import com.mymoneyapp.backend.domain.AccessToken;
 import com.mymoneyapp.backend.domain.User;
-import com.mymoneyapp.backend.exception.EmailCannotBeSent;
+import com.mymoneyapp.backend.exception.EmailCannotBeSentException;
 import com.mymoneyapp.backend.model.Email;
 import com.mymoneyapp.backend.model.EmailForgetPassword;
 import com.mymoneyapp.backend.model.EmailType;
@@ -93,7 +93,7 @@ public class EmailService {
             helper.setText(htmlContent, true);
             return message;
         } catch (Exception e) {
-            throw new EmailCannotBeSent(e);
+            throw new EmailCannotBeSentException(e);
         }
     }
 }

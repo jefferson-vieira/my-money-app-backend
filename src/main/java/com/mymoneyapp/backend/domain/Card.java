@@ -1,11 +1,11 @@
 package com.mymoneyapp.backend.domain;
 
+import com.mymoneyapp.backend.model.CardType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.Column;
@@ -13,13 +13,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Set;
 
 @Data
 @Entity
@@ -27,39 +26,41 @@ import java.util.Set;
 @AllArgsConstructor
 @Builder
 @Where(clause = "flg_active <> false")
-@SQLDelete(sql = "update banking_account set flg_active = false where id = ?")
-@Table(uniqueConstraints = {
-        @UniqueConstraint(columnNames = {"agency", "number", "digit"})
-})
-public class BankingAccount {
+public class Card {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false)
-    private String bankName;
+    private String cardNumber;
 
     @Column(nullable = false)
-    private String agency;
+    private String CardFlag;
 
     @Column(nullable = false)
-    private String number;
+    private String cardOwnerName;
 
     @Column(nullable = false)
-    private String digit;
+    private short cardCode;
+
+    @Column(nullable = false)
+    private LocalDate cardExpiration;
+
+    @Column(nullable = false)
+    private CardType cardType;
+
+    @ManyToOne(optional = false)
+    @JoinColumn(name="bankingAccount_id")
+    private BankingAccount bankingAccount;
+
+    @OneToMany(mappedBy = "card")
+    private List<Transaction> transactions;
 
     @CreationTimestamp
     private LocalDateTime createdAt;
 
-    @ManyToOne(optional = false)
-    private User user;
-
-    @OneToMany(mappedBy = "bankingAccount")
-    private Set<Card> cards;
-
     @Builder.Default
     @Column(name = "flg_Active")
     private boolean enabled = true;
-
 }
