@@ -20,7 +20,7 @@ public class CardRequest {
 
     @NotBlank(message = "A bandeira do cartão precisa ser informado")
     @Size(max = 25, message = "A bandeira do cartão precisa ter 25 caracteres no maáximo")
-    @Pattern(regexp = "^[\\d]*$", message = "Há caracteres inválidos na bandeira do cartão ")
+    @Pattern(regexp = "^[a-zA-ZÀ-ÿ ]+$", message = "Há caracteres inválidos na bandeira do cartão ")
     private String CardFlag;
 
     @NotBlank(message = "O nome impresso no cartão precisa ser informado")

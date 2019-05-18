@@ -46,7 +46,7 @@ public class TransactionService {
 
     @Transactional(readOnly = true)
     public List<TransactionResponse> findAllByCardId(final Long id) {
-        log.info("C=TransactionService, M=findAll, U={}", id);
+        log.info("C=TransactionService, M=findAll, CardId={}", id);
 
         return transactionMapper.transactionsToResponses((retrieveAllByCardId(id)));
     }

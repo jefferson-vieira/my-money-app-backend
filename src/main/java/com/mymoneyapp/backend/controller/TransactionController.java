@@ -14,6 +14,7 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,7 +26,7 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping("/transactios")
+@RequestMapping("/transactions")
 public class TransactionController {
 
     @Autowired
@@ -41,7 +42,7 @@ public class TransactionController {
 
     @GetMapping("/card/{id}")
     @ApiOperation(value = "Lista as transações cadastrados do cartão", authorizations = @Authorization("OAuth"))
-    public List<TransactionResponse> findAllByCaed(@PathParam("id") final Long id) {
+    public List<TransactionResponse> findAllByCaed(@PathParam("id") @PathVariable final Long id) {
         return transactionService.findAllByCardId(id);
     }
 }
