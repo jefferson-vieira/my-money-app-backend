@@ -10,6 +10,8 @@ import com.mymoneyapp.backend.request.PaymentCycleRequest;
 import com.mymoneyapp.backend.response.PaymentCycleResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -43,18 +45,20 @@ public class PaymentCycleService {
     }
 
     @Transactional(readOnly = true)
-    public List<PaymentCycleResponse> findAll(final User user) {
+    public Page<PaymentCycleResponse> findAll(final User user,
+                                              final Pageable pageable) {
         log.info("C=PaymentCycleService, M=findAll, U={}", user);
 
-        return paymentCycleMapper.paymentCyclesToResponses(retrieveAllByUser(user));
+        return paymentCycleMapper.paymentCyclesToResponses(retrieveAllByUser(user, pageable));
     }
 
     @Transactional(readOnly = true)
-    protected List<PaymentCycle> retrieveAllByUser(final User user) {
+    protected Page<PaymentCycle> retrieveAllByUser(final User user,
+                                                   final Pageable pageable) {
         log.info("C=PaymentCycleService, M=retrieveAllByUser, U={}", user);
 
         List<BankingAccount> bankingAccounts = bankingAccountService.retrieveAllByUser(user);
-        return retrieveAllByBankingAccountIn(bankingAccounts);
+        return retrieveAllByBankingAccountIn(bankingAccounts,  pageable);
     }
 
     @Transactional(readOnly = true)
@@ -69,6 +73,14 @@ public class PaymentCycleService {
         log.info("C=PaymentCycleService, M=retrieveAllByBankingAccountIn, T=BankingAccounts {}", bankingAccounts);
 
         return paymentCycleRepository.findAllByBankingAccountIn(bankingAccounts);
+    }
+
+    @Transactional(readOnly = true)
+    protected Page<PaymentCycle> retrieveAllByBankingAccountIn(final List<BankingAccount> bankingAccounts,
+                                                               final Pageable pageable) {
+        log.info("C=PaymentCycleService, M=retrieveAllByBankingAccountIn, T=BankingAccounts {}", bankingAccounts);
+
+        return paymentCycleRepository.findAllByBankingAccountIn(bankingAccounts, pageable);
     }
 
     @Transactional

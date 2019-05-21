@@ -7,6 +7,8 @@ import org.mapstruct.InheritConfiguration;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 
 import java.util.List;
 
@@ -29,6 +31,11 @@ public interface PaymentCycleMapper {
     PaymentCycleResponse paymentCycleToResponse(PaymentCycle paymentCycle);
 
     @InheritConfiguration
-    List<PaymentCycleResponse> paymentCyclesToResponses(Iterable<PaymentCycle> paymentCycle);
+    List<PaymentCycleResponse> paymentCyclesToResponses(Iterable<PaymentCycle> paymentCycles);
+
+    default Page<PaymentCycleResponse> paymentCyclesToResponses(Page<PaymentCycle> paymentCycles) {
+        List<PaymentCycleResponse> paymentCyclesResponses = paymentCyclesToResponses(paymentCycles.getContent());
+        return new PageImpl<>(paymentCyclesResponses, paymentCycles.getPageable(), paymentCycles.getTotalElements());
+    }
 
 }
