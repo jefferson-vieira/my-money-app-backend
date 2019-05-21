@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import springfox.documentation.annotations.ApiIgnore;
 
 import javax.validation.Valid;
 import java.net.URI;
@@ -31,7 +32,7 @@ public class PaymentCycleController {
 
     @PostMapping
     @ApiOperation(value = "Cadastra um ciclo de pagamento", authorizations = @Authorization("OAuth"))
-    public HttpEntity save(@AuthenticationPrincipal final User user,
+    public HttpEntity save(@ApiIgnore @AuthenticationPrincipal final User user,
                            @Valid @RequestBody final PaymentCycleRequest paymentCycleRequest) {
         Long paymentCycleId = paymentCycleService.save(user, paymentCycleRequest);
         return ResponseEntity.created(URI.create("/payment-cycles/" + paymentCycleId)).build();
@@ -39,7 +40,7 @@ public class PaymentCycleController {
 
     @GetMapping
     @ApiOperation(value = "Lista os ciclos de pagamentos cadastrados do usuário", authorizations = @Authorization("OAuth"))
-    public Page<PaymentCycleResponse> findAll(@AuthenticationPrincipal final User user,
+    public Page<PaymentCycleResponse> findAll(@ApiIgnore @AuthenticationPrincipal final User user,
                                               @PageableDefault(sort = {"date", "description"}) final Pageable pageable) {
         return paymentCycleService.findAll(user, pageable);
     }

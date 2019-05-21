@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import springfox.documentation.annotations.ApiIgnore;
 
 import javax.validation.Valid;
 import javax.ws.rs.PathParam;
@@ -32,7 +33,7 @@ public class OAuthController {
 
     @GetMapping("/me")
     @ApiOperation(value = "Retorna o usuário logado", authorizations = @Authorization("OAuth"))
-    public User principal(@AuthenticationPrincipal final User user) {
+    public User principal(@ApiIgnore @AuthenticationPrincipal final User user) {
         return user;
     }
 

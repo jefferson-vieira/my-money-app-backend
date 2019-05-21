@@ -1,5 +1,6 @@
 package com.mymoneyapp.backend.response;
 
+import com.mymoneyapp.backend.domain.BankingAccount;
 import lombok.Data;
 
 import java.time.LocalDate;
@@ -9,6 +10,8 @@ import java.util.List;
 public class PaymentCycleResponse {
 
     private Long id;
+
+    private BankingAccountResponse bankingAccount;
 
     private String description;
 

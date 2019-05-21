@@ -13,6 +13,7 @@ import org.springframework.data.domain.PageImpl;
 import java.util.List;
 
 @Mapper(componentModel = "spring", uses = {
+        BankingAccountMapper.class,
         CreditMapper.class,
         DebitMapper.class,
 })
