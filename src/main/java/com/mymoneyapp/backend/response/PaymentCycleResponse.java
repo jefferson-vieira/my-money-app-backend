@@ -1,6 +1,5 @@
 package com.mymoneyapp.backend.response;
 
-import com.mymoneyapp.backend.domain.BankingAccount;
 import lombok.Data;
 
 import java.time.LocalDate;

@@ -6,6 +6,7 @@ import com.mymoneyapp.backend.response.PaymentCycleResponse;
 import org.mapstruct.InheritConfiguration;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
 import org.mapstruct.Mappings;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -38,5 +39,9 @@ public interface PaymentCycleMapper {
         List<PaymentCycleResponse> paymentCyclesResponses = paymentCyclesToResponses(paymentCycles.getContent());
         return new PageImpl<>(paymentCyclesResponses, paymentCycles.getPageable(), paymentCycles.getTotalElements());
     }
+
+    @InheritConfiguration
+    void updatePaymentCycleFromRequest(@MappingTarget PaymentCycle paymentCycle,
+                                       PaymentCycleRequest paymentCycleRequest);
 
 }
