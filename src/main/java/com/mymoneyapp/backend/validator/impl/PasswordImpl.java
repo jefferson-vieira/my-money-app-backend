@@ -8,11 +8,12 @@ import javax.validation.ConstraintValidatorContext;
 public class PasswordImpl implements ConstraintValidator<Password, String> {
 
     @Override
-    public void initialize(Password password) {
+    @SuppressWarnings("PMD")
+    public void initialize(final Password password) {
     }
 
     @Override
-    public boolean isValid(String value, ConstraintValidatorContext cxt) {
+    public boolean isValid(final String value, final ConstraintValidatorContext cxt) {
         return value != null
                 && value.matches("^[^\\s]+$")
                 && value.matches("\\W+")

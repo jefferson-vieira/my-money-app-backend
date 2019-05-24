@@ -8,11 +8,12 @@ import javax.validation.ConstraintValidatorContext;
 public class AlphabeticImpl implements ConstraintValidator<Alphabetic, String> {
 
     @Override
-    public void initialize(Alphabetic alphabetic) {
+    @SuppressWarnings("PMD")
+    public void initialize(final Alphabetic alphabetic) {
     }
 
     @Override
-    public boolean isValid(String value, ConstraintValidatorContext cxt) {
+    public boolean isValid(final String value, final ConstraintValidatorContext cxt) {
         return value != null
                 && !value.isEmpty()
                 && value.matches("^[a-zA-ZÀ-ÿ ]+$");
