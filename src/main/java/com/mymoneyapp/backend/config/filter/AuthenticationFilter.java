@@ -1,6 +1,7 @@
 package com.mymoneyapp.backend.config.filter;
 
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.InternalAuthenticationServiceException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.preauth.PreAuthenticatedAuthenticationToken;
@@ -42,7 +43,7 @@ public class AuthenticationFilter extends GenericFilterBean {
             }
 
             if (authenticateResult == null || !authenticateResult.isAuthenticated()) {
-                throw new RuntimeException("Internal Authentication Service Error");
+                throw new InternalAuthenticationServiceException("Internal Authentication Service Error");
             }
 
             SecurityContextHolder.getContext().setAuthentication(authenticateResult);
