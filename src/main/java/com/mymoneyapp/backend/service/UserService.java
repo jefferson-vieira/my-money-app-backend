@@ -3,9 +3,9 @@ package com.mymoneyapp.backend.service;
 import com.mymoneyapp.backend.domain.AccessToken;
 import com.mymoneyapp.backend.domain.User;
 import com.mymoneyapp.backend.exception.PasswordsNotMatchException;
-import com.mymoneyapp.backend.exception.UserAlreadyRegistered;
-import com.mymoneyapp.backend.exception.UserAlreadyValidatedEmail;
-import com.mymoneyapp.backend.exception.UserIsAccountLocked;
+import com.mymoneyapp.backend.exception.UserAccountLockedException;
+import com.mymoneyapp.backend.exception.UserAccountNonLockedException;
+import com.mymoneyapp.backend.exception.UserAlreadyRegisteredException;
 import com.mymoneyapp.backend.exception.UserNotFoundException;
 import com.mymoneyapp.backend.mapper.UserMapper;
 import com.mymoneyapp.backend.model.EmailType;
@@ -18,8 +18,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -52,9 +50,7 @@ public class UserService {
 
         this.checkIfPasswordMatchConfirmPassword(userRequest);
 
-        if (this.checkIfAlreadyHasUserByEmail(userRequest.getEmail())) {
-            throw new UserAlreadyRegistered();
-        }
+        this.checkIfUserAlreadyRegistered(userRequest.getEmail());
 
         User toPersist = userMapper.requestToUser(userRequest);
         toPersist.setPassword(passwordEncoder.encode(toPersist.getPassword()));
@@ -67,90 +63,72 @@ public class UserService {
 
     @Transactional(readOnly = true)
     public Page<UserResponse> findAll(final UserSpecification userSpecification, final Pageable pageable) {
-        log.info("C=UserService, M=findAll, T=UserSpecification {}; Pageable {}", userSpecification, pageable);
+        log.info("C=UserService, M=findAll");
 
         Page<User> users = userRepository.findAll(userSpecification, pageable);
         return userMapper.usersToResponses(users);
     }
 
-    @Transactional
-    protected HttpEntity unlockUser(final String token) {
-        log.info("C=UserService, M=unlockUser, T=Token {}", token);
+    @Transactional(readOnly = true)
+    public void activateUserAccount(final String token) {
+        log.info("C=UserService, M=validationUserEmail, P=Token {}", token);
 
-        final AccessToken accessToken = accessTokenService.retrieveAccessTokenByToken(token);
-        User user = this.retrieveUserByEmail(accessToken.getUser().getEmail());
-        user.setAccountNonLocked(true);
-        this.persist(user);
+        String email = hashService.decryptHash(token);
+        AccessToken accessToken = accessTokenService.retrieveByUserEmail(email);
+        User toPersist = retrieve(accessToken.getUser().getEmail());
+        toPersist.setAccountNonLocked(true);
+        persist(toPersist);
+    }
 
-        return ResponseEntity.ok("");
+    public void resendUserValidationEmail(final String email) {
+        log.info("C=UserService, M=resendUserValidationEmail, P=Email {}", email);
+
+        User user = retrieve(email);
+
+        this.checkIfUserAccountLocked(user);
+
+        emailService.sendEmail(EmailType.EMAIL_VALIDATION, user);
+    }
+
+    public void recoveryUserPassword(final String email) {
+        log.info("C=UserService, M=recoveryUserPassword, P=Email {}", email);
+
+        User user = retrieve(email);
+
+        this.checkIfUserAccountNonLocked(user);
+
+        emailService.sendEmail(EmailType.FORGET_PÀSSWORD, user);
+    }
+
+    public void changeUserPassword(final UserChangePassRequest changeUserPasswordRequest) {
+        log.info("C=UserService, M=changeUserPassword");
+
+        this.checkIfPasswordMatchConfirmPassword(changeUserPasswordRequest);
+
+        String email = hashService.decryptHash(changeUserPasswordRequest.getToken());
+        AccessToken accessToken = accessTokenService.retrieveByUserEmail(email);
+        User toPersist = accessToken.getUser();
+
+        this.checkIfUserAccountNonLocked(toPersist);
+
+
+        toPersist.setPassword(passwordEncoder.encode(changeUserPasswordRequest.getPassword()));
+        persist(toPersist);
     }
 
     @Transactional(readOnly = true)
-    protected User retrieveUserByEmail(final String email) {
-        log.info("C=UserService, M=retrieveUserByEmail, T=Email {}", email);
+    public User retrieve(final String email) {
+        log.info("C=UserService, M=retrieveUserByEmail, P=Email {}", email);
 
         return userRepository.findByEmail(email)
                 .orElseThrow(UserNotFoundException::new);
     }
 
-    @Transactional(readOnly = true)
-    protected boolean checkIfAlreadyHasUserByEmail(final String email) {
-        log.info("C=UserService, M=checkAlreadyHasUserByEmail, T=Email {}", email);
-
-        return userRepository.findByEmail(email).orElse(null) != null;
-    }
-
     @Transactional
-    protected User persist(final User user) {
-        log.info("C=UserService, M=persist, T=User {}", user);
+    public User persist(final User user) {
+        log.info("C=UserService, M=persist");
 
         return userRepository.save(user);
-    }
-
-    public HttpEntity userValidationEmail(final String token) {
-        log.info("C=UserService, M=validationUserEmail, T=TokenBase64 {}", token);
-
-        final String email = hashService.decryptHash(token);
-        return this.unlockUser(email);
-    }
-
-    public HttpEntity resendUserValidationEmail(final String email) {
-        log.info("C=UserService, M=resendUserValidationEmail, T=Email {}", email);
-
-        final User user = this.retrieveUserByEmail(email);
-        if (!user.isAccountNonLocked()) {
-            emailService.sendEmail(EmailType.EMAIL_VALIDATION, user);
-            return ResponseEntity.ok("");
-        }
-        throw new UserAlreadyValidatedEmail();
-    }
-
-    public HttpEntity userForgetPassword(final String email) {
-        log.info("C=UserService, M=userForgetPassword, T=Email {}", email);
-
-        final User user = this.retrieveUserByEmail(email);
-        if (user.isAccountNonLocked()) {
-            emailService.sendEmail(EmailType.FORGET_PÀSSWORD, user);
-            return ResponseEntity.ok("");
-        }
-        throw new UserIsAccountLocked();
-    }
-
-    public HttpEntity userForgetPassword(final UserChangePassRequest userChangePassRequest) {
-        log.info("C=UserService, M=userForgetPassword");
-
-        this.checkIfPasswordMatchConfirmPassword(userChangePassRequest);
-
-        final AccessToken accessToken = accessTokenService.retrieveAccessTokenByToken(hashService.decryptHash(userChangePassRequest.getToken()));
-        User toPersist = accessToken.getUser();
-
-        if (!toPersist.isAccountNonLocked()) {
-            throw new UserIsAccountLocked();
-        }
-
-        toPersist.setPassword(passwordEncoder.encode(userChangePassRequest.getPassword()));
-        this.persist(toPersist);
-        return ResponseEntity.ok("");
     }
 
     private void checkIfPasswordMatchConfirmPassword(final UserRequest userRequest) {
@@ -159,9 +137,28 @@ public class UserService {
         }
     }
 
-    private void checkIfPasswordMatchConfirmPassword(final UserChangePassRequest userChangePassRequest) {
-        if (!userChangePassRequest.getPassword().equals(userChangePassRequest.getConfirmPassword())) {
+    private void checkIfPasswordMatchConfirmPassword(final UserChangePassRequest changeUserPasswordRequest) {
+        if (!changeUserPasswordRequest.getPassword().equals(changeUserPasswordRequest.getConfirmPassword())) {
             throw new PasswordsNotMatchException();
+        }
+    }
+
+    @Transactional(readOnly = true)
+    private void checkIfUserAlreadyRegistered(final String email) {
+        if (userRepository.findByEmail(email).isPresent()) {
+            throw new UserAlreadyRegisteredException();
+        }
+    }
+
+    private void checkIfUserAccountLocked(final User user) {
+        if (user.isAccountNonLocked()) {
+            throw new UserAccountNonLockedException();
+        }
+    }
+
+    private void checkIfUserAccountNonLocked(final User user) {
+        if (!user.isAccountNonLocked()) {
+            throw new UserAccountLockedException();
         }
     }
 
