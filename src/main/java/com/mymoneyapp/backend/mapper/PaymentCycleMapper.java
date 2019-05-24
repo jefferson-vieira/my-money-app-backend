@@ -23,7 +23,7 @@ public interface PaymentCycleMapper {
     @Mappings({
             @Mapping(target = "id", ignore = true),
             @Mapping(target = "enabled", ignore = true),
-            @Mapping(target = "bankingAccount.id", source = "bankingAccountId"),
+            @Mapping(target = "bankingAccount.id", source = "bankingAccount"),
     })
     PaymentCycle requestToPaymentCycle(PaymentCycleRequest paymentCycleRequest);
 

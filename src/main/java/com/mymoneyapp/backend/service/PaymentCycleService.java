@@ -37,7 +37,7 @@ public class PaymentCycleService {
 
         this.checkIfPaymentCycleRequestHasCreditsOrDebits(paymentCycleRequest);
 
-        BankingAccount bankingAccount = bankingAccountService.retrieveByIdAndUser(paymentCycleRequest.getBankingAccountId(), user);
+        BankingAccount bankingAccount = bankingAccountService.retrieveByIdAndUser(paymentCycleRequest.getBankingAccount(), user);
 
         PaymentCycle toPersist = paymentCycleMapper.requestToPaymentCycle(paymentCycleRequest);
         toPersist.setBankingAccount(bankingAccount);
@@ -51,6 +51,15 @@ public class PaymentCycleService {
         log.info("C=PaymentCycleService, M=findAll, U={}", user);
 
         return paymentCycleMapper.paymentCyclesToResponses(retrieveAllByUser(user, pageable));
+    }
+
+    @Transactional(readOnly = true)
+    public PaymentCycleResponse findById(final User user, final Long id) {
+        log.info("C=PaymentCycleService, M=findById, U={}, T=ID ", user, id);
+
+        List<BankingAccount> bankingAccounts = bankingAccountService.retrieveAllByUser(user);
+
+        return paymentCycleMapper.paymentCycleToResponse(retrieveByIdAndBankingAccountIn(id, bankingAccounts));
     }
 
     @Transactional

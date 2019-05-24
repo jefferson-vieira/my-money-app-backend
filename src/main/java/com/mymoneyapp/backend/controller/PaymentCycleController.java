@@ -40,6 +40,13 @@ public class PaymentCycleController {
         return paymentCycleService.findAll(user, pageable);
     }
 
+    @GetMapping("/{id}")
+    @ApiOperation(value = "Busca um ciclo de pagamento pelo ID", authorizations = @Authorization("OAuth"))
+    public PaymentCycleResponse findById(@ApiIgnore @AuthenticationPrincipal final User user,
+                                         @PathVariable final Long id) {
+        return paymentCycleService.findById(user, id);
+    }
+
     @PostMapping
     @ApiOperation(value = "Cadastra um ciclo de pagamento", authorizations = @Authorization("OAuth"))
     public HttpEntity save(@ApiIgnore @AuthenticationPrincipal final User user,
