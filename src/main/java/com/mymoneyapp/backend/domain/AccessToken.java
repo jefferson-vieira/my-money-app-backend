@@ -39,6 +39,6 @@ public class AccessToken {
     private User user;
 
     @Builder.Default
-    @Column(name = "flg_Active")
+    @Column(name = "flg_active")
     private boolean enabled = true;
 }
