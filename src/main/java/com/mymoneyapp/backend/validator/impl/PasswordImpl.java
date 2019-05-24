@@ -15,10 +15,10 @@ public class PasswordImpl implements ConstraintValidator<Password, String> {
     @Override
     public boolean isValid(final String value, final ConstraintValidatorContext cxt) {
         return value != null
-                && value.matches("^[^\\s]+$")
-                && value.matches("\\W+")
-                && value.matches("\\d+")
-                && value.matches("[^\\W\\d]+")
+                && !value.isEmpty()
+                && value.matches(".*\\W+.*")
+                && value.matches(".*\\d+.*")
+                && value.matches(".*[^\\W\\d]+.*")
                 && (value.length() > 7)
                 && (value.length() < 17);
     }
