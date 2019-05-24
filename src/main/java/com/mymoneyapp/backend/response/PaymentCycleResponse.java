@@ -10,6 +10,8 @@ public class PaymentCycleResponse {
 
     private Long id;
 
+    private BankingAccountResponse bankingAccount;
+
     private String description;
 
     private LocalDate date;
