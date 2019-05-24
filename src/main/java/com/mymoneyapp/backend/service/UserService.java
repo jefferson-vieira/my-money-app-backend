@@ -111,7 +111,6 @@ public class UserService {
 
         this.checkIfUserAccountNonLocked(toPersist);
 
-
         toPersist.setPassword(passwordEncoder.encode(changeUserPasswordRequest.getPassword()));
         persist(toPersist);
     }

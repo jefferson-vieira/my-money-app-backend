@@ -4,7 +4,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mymoneyapp.backend.exception.UserNotFoundException;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.*;
+import org.springframework.security.authentication.AccountExpiredException;
+import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.CredentialsExpiredException;
+import org.springframework.security.authentication.DisabledException;
+import org.springframework.security.authentication.LockedException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -43,7 +48,9 @@ public class LoginAuthenticationProvider implements AuthenticationProvider {
 
         Jwt jwt = JwtHelper.encode(objectMapper.writeValueAsString(userDetails), rsaSigner);
 
-        UsernamePasswordAuthenticationToken user = new UsernamePasswordAuthenticationToken(userDetails, userDetails.getPassword(), userDetails.getAuthorities());
+        UsernamePasswordAuthenticationToken user = new UsernamePasswordAuthenticationToken(userDetails,
+                userDetails.getPassword(), userDetails.getAuthorities());
+
         user.setDetails(jwt.getEncoded());
 
         return user;
@@ -54,7 +61,7 @@ public class LoginAuthenticationProvider implements AuthenticationProvider {
         return authentication.equals(UsernamePasswordAuthenticationToken.class);
     }
 
-    private void checkIfAccountCanBeAuthenticated(UserDetails userDetails) {
+    private void checkIfAccountCanBeAuthenticated(final UserDetails userDetails) {
 
         if (!userDetails.isEnabled()) {
             throw new DisabledException("Essa conta foi desativada");
