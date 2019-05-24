@@ -36,9 +36,6 @@ public class UserService {
     private AccessTokenService accessTokenService;
 
     @Autowired
-    private HashService hashService;
-
-    @Autowired
     private UserMapper userMapper;
 
     @Autowired
@@ -69,12 +66,11 @@ public class UserService {
         return userMapper.usersToResponses(users);
     }
 
-    @Transactional(readOnly = true)
+    @Transactional
     public void activateUserAccount(final String token) {
         log.info("C=UserService, M=validationUserEmail, P=Token {}", token);
 
-        String email = hashService.decryptHash(token);
-        AccessToken accessToken = accessTokenService.retrieveByUserEmail(email);
+        AccessToken accessToken = accessTokenService.retrieveByToken(token);
         User toPersist = retrieve(accessToken.getUser().getEmail());
         toPersist.setAccountNonLocked(true);
         persist(toPersist);
@@ -105,8 +101,7 @@ public class UserService {
 
         this.checkIfPasswordMatchConfirmPassword(changeUserPasswordRequest);
 
-        String email = hashService.decryptHash(changeUserPasswordRequest.getToken());
-        AccessToken accessToken = accessTokenService.retrieveByUserEmail(email);
+        AccessToken accessToken = accessTokenService.retrieveByToken(changeUserPasswordRequest.getToken());
         User toPersist = accessToken.getUser();
 
         this.checkIfUserAccountNonLocked(toPersist);
